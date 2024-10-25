@@ -12,7 +12,8 @@ public class Examen extends Actividad {
     // Constructor
     public Examen(String nombre, String descripcion, String objetivo, String nivelDificultad, 
                   String duracionEstimada, Date fechaLimite, String resultado, String id, 
-                  List<Pregunta> preguntas) {
+                  List<Pregunta> preguntas) 
+    {
         super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, fechaLimite, resultado, id);
         this.preguntas = preguntas;
         this.estadoCalificacion = "";
