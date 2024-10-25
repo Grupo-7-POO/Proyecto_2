@@ -1,17 +1,24 @@
 package modelo.preguntas;
 
-import java.util.List;
-
-
 public class PreguntaAbierta extends Pregunta
 {
 	private boolean esCorrecta;
 	
 	
-	public PreguntaAbierta()
+	public PreguntaAbierta(String enunciado, String explicacion, String id)
 	{
-		super();
+		super(enunciado, explicacion, id);
+		this.esCorrecta = false;
+	}
 
+	public boolean getEsCorrecta()
+	{
+		return this.esCorrecta;
+	}
+
+	public void setEsCorrecta( boolean estado)
+	{
+		this.esCorrecta = estado;
 	}
 	
 }

@@ -1,8 +1,5 @@
 package modelo.preguntas;
 
-import java.util.List;
-
-
 public class Opcion
 {
 	private String texto;
@@ -10,9 +7,20 @@ public class Opcion
 	private boolean esCorrecta;
 	
 	
-	public Opcion()
+	public Opcion( String texto, boolean esCorrecta)
 	{
+		this.texto = texto;
+		this.esCorrecta = esCorrecta;
+	}
 
+	public String getTexto()
+	{
+		return this.texto;
+	}
+
+	public boolean getEsCorrecta()
+	{
+		return this.esCorrecta;
 	}
 	
 }

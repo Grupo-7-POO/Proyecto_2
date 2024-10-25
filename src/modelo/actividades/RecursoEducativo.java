@@ -2,25 +2,25 @@ package modelo.actividades;
 
 import java.util.List;
 import java.util.Date;
-import modelo.preguntas.PreguntaCerrada;
 
 public class RecursoEducativo extends Actividad {
     private String tipoRecurso;
     private String urlRecurso;
     private String titulo;
-    private String descripcion;
+    private String descripcionRecurso;
     private boolean completado;
 
     // Constructor
-    public RecursoEducativo(String nombre, String descripcion, String objetivo, String nivelDificultad, 
-                            String duracionEstimada, Date fechaLimite, String resultado, String id, 
-                            String tipoRecurso, String urlRecurso, String titulo, boolean completado) 
-                            {
-        super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, fechaLimite, resultado, id);
+    public RecursoEducativo(String nombre, String descripcion, String objetivo, 
+                            String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
+                            Actividad seguimiento, Date fechaLimite,String id, String tipoRecurso, String urlRecurso, String titulo,
+                            String descripcionRecurso, boolean completado) 
+    {
+        super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, preRequisitos, seguimiento, fechaLimite, id);
         this.tipoRecurso = tipoRecurso;
         this.urlRecurso = urlRecurso;
         this.titulo = titulo;
-        this.descripcion = descripcion;
+        this.descripcionRecurso = descripcionRecurso;
         this.completado = completado;
     }
 
@@ -50,11 +50,11 @@ public class RecursoEducativo extends Actividad {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return descripcionRecurso;
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcionRecurso = descripcion;
     }
 
     public boolean isCompletado() {

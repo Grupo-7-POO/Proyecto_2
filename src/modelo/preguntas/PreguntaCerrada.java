@@ -1,18 +1,24 @@
 package modelo.preguntas;
 
 import java.util.List;
-import modelo.preguntas.Opcion;
-
 
 public class PreguntaCerrada extends Pregunta
 {
 	private List<Opcion> opciones;
 	
-	
-	public PreguntaCerrada()
+	public PreguntaCerrada(String enunciado, String explicacion, String id, List<Opcion> opciones)
 	{
-		super();
-
+		super(enunciado, explicacion, id);
 	}
-	
+
+	public List<Opcion> getOpciones()
+	{
+		return this.opciones;
+	}
+
+	public boolean seleccionarOpcion( int i)
+	{
+		Opcion respuesta = this.opciones.get(i);
+		return respuesta.getEsCorrecta();
+	}
 }

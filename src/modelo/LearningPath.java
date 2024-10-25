@@ -1,6 +1,5 @@
 package modelo;
 
-import java.io.BufferedReader;
 import java.util.List;
 
 import modelo.usuarios.Estudiante;

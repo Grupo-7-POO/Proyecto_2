@@ -9,22 +9,23 @@ import modelo.preguntas.PreguntaAbierta;
 
 public class Examen extends Actividad {
     private String estadoCalificacion;
+    private List<PreguntaAbierta> preguntas;
 
     // Constructor
-    public Examen(String nombre, String descripcion, String objetivo, String nivelDificultad, 
-                  String duracionEstimada, Date fechaLimite, String resultado, String id, 
-<<<<<<< HEAD
-                  List<Pregunta> preguntas) 
+    public Examen(String nombre, String descripcion, String objetivo, 
+    String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
+    Actividad seguimiento, Date fechaLimite,String id, List<PreguntaAbierta> preguntas)
     {
-=======
-                  List<PreguntaAbierta> preguntas) {
->>>>>>> Estudiante-3-STG
-        super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, fechaLimite, resultado, id);
+        super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, preRequisitos, seguimiento, fechaLimite, id);
         this.preguntas = preguntas;
         this.estadoCalificacion = "";
     }
 
     // Getters and Setters
+    public List<PreguntaAbierta> getPreguntas()
+    {
+        return this.preguntas;
+    }
     public String getEstadoCalificacion() {
         return estadoCalificacion;
     }

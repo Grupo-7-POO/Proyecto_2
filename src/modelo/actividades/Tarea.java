@@ -2,7 +2,6 @@ package modelo.actividades;
 
 import java.util.List;
 import java.util.Date;
-import modelo.preguntas.PreguntaAbierta;
 
 
 public class Tarea extends Actividad {
@@ -10,11 +9,13 @@ public class Tarea extends Actividad {
     private String estadoEnvio;
 
     // Constructor
-    public Tarea(String nombre, String descripcion, String objetivo, String nivelDificultad, 
-                 String duracionEstimada, Date fechaLimite, String resultado, String id, 
-                 String motivoEntrega, String estadoEnvio) {
-        super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, fechaLimite, resultado, id);
-        this.motivoEntrega = motivoEntrega;
+    public Tarea(String nombre, String descripcion, String objetivo, 
+                String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
+                Actividad seguimiento, Date fechaLimite,String id,
+                 String motivoEntrega, String estadoEnvio) 
+
+    {
+        super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, preRequisitos, seguimiento, fechaLimite, id);        this.motivoEntrega = motivoEntrega;
         this.estadoEnvio = estadoEnvio;
     }
 
