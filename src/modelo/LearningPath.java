@@ -5,6 +5,7 @@ import java.util.List;
 
 import modelo.usuarios.Estudiante;
 import modelo.usuarios.Profesor;
+import modelo.actividades.Actividad;
 
 public class LearningPath{
 	
@@ -97,5 +98,4 @@ public class LearningPath{
 		return profesor;
 	}
 	
-		
 }

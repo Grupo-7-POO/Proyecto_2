@@ -21,6 +21,35 @@ public class Reseña
 		this.creador = creador;
 		this.fechaReseña = new Date();
 	}
-	
+
+	public String getComentario()
+	{
+		return comentario;
+	}
+
+	public Date getFechaReseña()
+	{
+		return fechaReseña;
+	}
+
+	public double getRating()
+	{
+		return rating;
+	}
+
+	public Estudiante getCreador()
+	{
+		return creador;
+	}
+
+	public void editarComentario( String nuevoComentario)
+	{
+		this.comentario = nuevoComentario;
+	}
+
+	public void editarRating( double nuevoRating)
+	{
+		this.rating = nuevoRating;
+	}
 	
 }
