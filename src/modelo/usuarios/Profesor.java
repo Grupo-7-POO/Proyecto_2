@@ -1,7 +1,6 @@
 package modelo.usuarios;
 
 import modelo.LearningPath;
-import modelo.Reseña;
 import modelo.actividades.Actividad;
 
 import java.util.LinkedList;
