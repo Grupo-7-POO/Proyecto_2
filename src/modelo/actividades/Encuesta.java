@@ -1,10 +1,9 @@
 package modelo.actividades;
 
 import java.util.List;
+import java.util.Date;
 import modelo.preguntas.PreguntaAbierta;
 import java.util.Date;
-
-import java.util.List;
 
 public class Encuesta extends Actividad {
     private boolean estadoCompletado;

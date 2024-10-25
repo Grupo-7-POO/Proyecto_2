@@ -1,6 +1,7 @@
 package modelo.actividades;
 
 import java.util.List;
+import java.util.Date;
 import modelo.preguntas.PreguntaAbierta;
 
 
