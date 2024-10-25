@@ -1,6 +1,7 @@
 package modelo.actividades;
 
 import java.util.List;
+import java.util.Date;
 import modelo.preguntas.PreguntaCerrada;
 
 public class RecursoEducativo extends Actividad {
@@ -13,8 +14,8 @@ public class RecursoEducativo extends Actividad {
     // Constructor
     public RecursoEducativo(String nombre, String descripcion, String objetivo, String nivelDificultad, 
                             String duracionEstimada, Date fechaLimite, String resultado, String id, 
-                            String tipoRecurso, String urlRecurso, String titulo, 
-                            String descripcion, boolean completado) {
+                            String tipoRecurso, String urlRecurso, String titulo, boolean completado) 
+                            {
         super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, fechaLimite, resultado, id);
         this.tipoRecurso = tipoRecurso;
         this.urlRecurso = urlRecurso;

@@ -1,10 +1,9 @@
 package modelo.actividades;
 
 import java.util.List;
+import java.util.Date;
 import modelo.preguntas.PreguntaAbierta;
 
-
-import java.util.List;
 
 public class Encuesta extends Actividad {
     private boolean estadoCompletado;
@@ -12,7 +11,7 @@ public class Encuesta extends Actividad {
     // Constructor
     public Encuesta(String nombre, String descripcion, String objetivo, String nivelDificultad, 
                     String duracionEstimada, Date fechaLimite, String resultado, String id, 
-                    List<Pregunta> preguntas) {
+                    List<PreguntaAbierta> preguntas) {
         super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, fechaLimite, resultado, id);
         this.preguntas = preguntas;
         this.estadoCompletado = false;

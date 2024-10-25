@@ -13,7 +13,7 @@ public class CentralPersistencia
     /**
      * La cadena utilizada para identificar a los archivos en texto plano
      */
-    public static final String PLAIN = "PlainText";
+
     
     public CentralPersistencia()
     {
@@ -29,12 +29,10 @@ public class CentralPersistencia
      * @return El objeto que debería usarse para cargar y salvar la información
      * @throws TipoInvalidoException Se lanza esta excepción si se utiliza un tipo de archivo que no es válido
      */
-    public static IPersistenciaAerolinea getPersistenciaAerolinea( String tipoArchivo ) throws TipoInvalidoException
+    public static IPersistenciaLearningPaths getPersistenciaLearningPaths( String tipoArchivo ) throws TipoInvalidoException
     {
     	if( JSON.equals( tipoArchivo ) )
-            return new PersistenciaAerolineaJson( );
-    	else if (PLAIN.equals( tipoArchivo) )
-    		return new PersistenciaAerolineaPlaintext();
+            return new PersistenciaLearningPathsJson();
     	else
             throw new TipoInvalidoException( tipoArchivo );
     }
