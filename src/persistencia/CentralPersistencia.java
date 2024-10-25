@@ -46,10 +46,10 @@ public class CentralPersistencia
      * @return  El objeto que debería usarse para cargar y salvar la información
      * @throws TipoInvalidoException Se lanza esta excepción si se utiliza un tipo de archivo que no es válido
      */
-    public static IPersistenciaTiquetes getPersistenciaTiquetes( String tipoArchivo ) throws TipoInvalidoException
+    public static IPersistenciaUsuarios getPersistenciaUsuarios( String tipoArchivo ) throws TipoInvalidoException
     {
         if( JSON.equals( tipoArchivo ) )
-            return new PersistenciaTiquetesJson( );
+            return new UsuariosJson();
         else
             throw new TipoInvalidoException( tipoArchivo );
     }
