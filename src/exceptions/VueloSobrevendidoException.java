@@ -1,4 +1,4 @@
-package uniandes.dpoo.aerolinea.exceptions;
+package exceptions;
 
 import uniandes.dpoo.aerolinea.modelo.Vuelo;
 

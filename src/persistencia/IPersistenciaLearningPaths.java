@@ -22,7 +22,7 @@ public interface IPersistenciaLearningPaths
 	 * @throws AeropuertoDuplicadoException 
 	 * @throws JSONException 
 	 */
-	public void cargarLearningPath(String archivo, LearningPath LearningPath) throws IOException, InformacionInconsistenteException, JSONException, AeropuertoDuplicadoException;
+	public void cargarLearningPath(String archivo, LearningPath LearningPath) throws IOException, InformacionInconsistenteException, JSONException, LearningPathDuplicadoException;
 	/**
 	 * Salva en un archivo la información de todos los elementos de una aerolínea, excepto los clientes y tiquetes
 		Parameters:
