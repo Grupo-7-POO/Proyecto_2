@@ -12,9 +12,9 @@ public class Reseña
 	
 	private Date fechaReseña;
 	
-	private Estudiante creador;
+	private String creador;
 	
-	public Reseña(String comentario, double rating, Estudiante creador)
+	public Reseña(String comentario, double rating, String creador)
 	{
 		this.comentario = comentario;
 		this.rating = rating;
@@ -37,7 +37,7 @@ public class Reseña
 		return rating;
 	}
 
-	public Estudiante getCreador()
+	public String getCreador()
 	{
 		return creador;
 	}

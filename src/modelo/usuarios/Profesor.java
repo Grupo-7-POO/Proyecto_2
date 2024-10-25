@@ -3,28 +3,31 @@ package modelo.usuarios;
 import modelo.LearningPath;
 import modelo.Reseña;
 import modelo.actividades.Actividad;
+
+import java.util.LinkedList;
 import java.util.List;
 
 
 
 public  class Profesor extends Usuario
 {
-	private List<LearningPath> learningPathsCreados;
-	
-	private List<Reseña> reseñasRecibidas;
-	
-	private double rating;
+	private List<LearningPath> learningPathsCreados;	
 	
 	public Profesor(String nombre, String email, String login, String contrasena)
 	{
 		super( nombre, email, login, contrasena);
+		learningPathsCreados = new LinkedList<LearningPath>();
 	}
-	
-	public LearningPath crearLearningPath()
+
+	public List<LearningPath> getLearningPathsCreados()
 	{
-		return LearningPath;
+		return this.learningPathsCreados;
 	}
 	
-	
+	public void crearLearningPath()
+	{
+		LearningPath learningPath = new LearningPath();
+		learningPathsCreados.add(learningPath);
+	}
 	
 }

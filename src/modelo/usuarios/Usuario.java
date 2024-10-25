@@ -22,4 +22,25 @@ public abstract class Usuario
 	{
 		return this.nombre;
 	}
+
+	public String getEmail()
+	{
+		return this.email;
+	}
+
+	public String getLogin()
+	{
+		return this.login;
+	}
+
+	public void changePassword( String password)
+	{
+		this.contrasena = password;
+	}
+
+	public String getPassword()
+	{
+		return contrasena;
+	}
+
 }
