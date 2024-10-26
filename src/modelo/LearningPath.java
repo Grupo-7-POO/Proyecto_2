@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import org.json.JSONException;
+import java.util.Date;
+import java.util.LinkedList;
 
 import modelo.usuarios.Estudiante;
 import modelo.usuarios.Profesor;
@@ -28,9 +30,9 @@ public class LearningPath{
 	
 	private double rating;
 	
-	private String fechaCreacion;
+	private Date fechaCreacion;
 	
-	private String fechaModificacion;
+	private Date fechaModificacion;
 	
 	private String version;
 	
@@ -40,11 +42,23 @@ public class LearningPath{
 	
 	private List<Estudiante> estudiantesCompletado;
 	
-	private Profesor profesor;
+	private String loginProfesor;
 	
-	public LearningPath( )
+	public LearningPath( String titulo, String descripcion, String nivelDificultad, int duracion, 
+						List<Actividad> actividades, String profesor )
 	{
-		
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.nivelDificultad = nivelDificultad;
+		this.duracion = duracion;
+		this.rating = 0;
+		this.fechaCreacion = new Date();
+		this.fechaModificacion = new Date();
+		this.version = "1.0";
+		this.actividades = actividades;
+		this.estudiantesCursando = new LinkedList<Estudiante>();
+		this.estudiantesCompletado = new LinkedList<Estudiante>();
+		this.loginProfesor = profesor;
 	}
 	
 	public String getTitulo()
@@ -62,7 +76,7 @@ public class LearningPath{
 		return nivelDificultad;
 	}
 	
-	public int getDuracion()
+	public double getDuracion()
 	{
 		return duracion;
 	}
@@ -72,12 +86,12 @@ public class LearningPath{
 		return rating;
 	}
 	
-	public String getFechaCreacion()
+	public Date getFechaCreacion()
 	{
 		return fechaCreacion;
 	}
 	
-	public String getFechaModificacion()
+	public Date getFechaModificacion()
 	{
 		return fechaModificacion;
 	}
@@ -102,9 +116,9 @@ public class LearningPath{
 		return estudiantesCompletado;
 	}
 	
-	public Profesor getProfesor()
+	public String getProfesor()
 	{
-		return profesor;
+		return loginProfesor;
 	}
 	
 
