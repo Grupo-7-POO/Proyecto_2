@@ -7,11 +7,13 @@ public class Opcion
 	private boolean esCorrecta;
 	
 	
-	public Opcion( String texto, boolean esCorrecta)
+	public Opcion( String texto)
 	{
-		this.texto = texto;
-		this.esCorrecta = esCorrecta;
+		this.texto = null;
+		this.esCorrecta = false;
 	}
+
+	// GETTERS
 
 	public String getTexto()
 	{
@@ -21,6 +23,13 @@ public class Opcion
 	public boolean getEsCorrecta()
 	{
 		return this.esCorrecta;
+	}
+
+	// SETTERS
+	
+	public void setEsCorrecta()
+	{
+		this.esCorrecta = true;
 	}
 	
 }

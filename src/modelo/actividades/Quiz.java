@@ -5,9 +5,6 @@ import java.util.Date;
 
 import modelo.preguntas.PreguntaCerrada;
 
-
-
-
 public class Quiz extends Actividad {
     private String estadoCalificacion;
     private List<PreguntaCerrada> preguntas;

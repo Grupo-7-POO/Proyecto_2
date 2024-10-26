@@ -2,8 +2,6 @@ package modelo;
 
 import java.util.Date;
 
-import modelo.usuarios.Estudiante;
-
 public class Reseña
 {
 	private String comentario;
