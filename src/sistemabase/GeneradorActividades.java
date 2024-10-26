@@ -1,9 +1,7 @@
 package sistemabase;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -14,36 +12,89 @@ import modelo.actividades.Quiz;
 import modelo.actividades.RecursoEducativo;
 import modelo.actividades.Tarea;
 
-import modelo.preguntas.Pregunta;
 import modelo.preguntas.PreguntaAbierta;
 import modelo.preguntas.PreguntaCerrada;
 
 
-public class GeneradorActividades
+public class GeneradorActividades <E,F>
 {
     private static Map<String, Actividad> actividades = new HashMap<String, Actividad>( );	
 
-    public static String generarCodigo()
+    public static String generarCodigoActividades()
     {
-        int numero = ( int ) ( Math.random( ) * 10e7 );
+        int numero = ( int ) ( Math.random( ) * 10e8 );
         String codigo = "" + numero;
         while( actividades.containsKey( codigo ) )
         {
-            numero = ( int ) ( Math.random( ) * 10e7 );
+            numero = ( int ) ( Math.random( ) * 10e8 );
             codigo = "" + numero;
         }
 
-        while( codigo.length( ) < 7 )
+        while( codigo.length( ) < 8 )
             codigo = "0" + codigo;
         
         return codigo;
     }
 
-    public static Encuesta generarEncuesta( String nombre, String descripcion, String obejtivo, 
-                                            String nivelDificultad, String duracionEstimada, String preRequisitos, String seguimiento, String fechaLimite, PreguntaAbierta preguntaAbierta)
+    public static Encuesta generarEncuesta( String nombre, String descripcion, String objetivo, 
+                                            String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos, 
+                                            Actividad seguimiento, Date fechaLimite, List<PreguntaAbierta> preguntas )
     {
-        String codigo = generarCodigo();
-        return new Encuesta(nombre, descripcion, obejtivo, nivelDificultad, duracionEstimada, preRequisitos, seguimiento, fechaLimite, codigo, null);
+        String codigo = generarCodigoActividades();
+        Encuesta nuevaEncuesta = new Encuesta( nombre,  descripcion,  objetivo, 
+                                                 nivelDificultad,  duracionEstimada, preRequisitos,  
+                                                 seguimiento,  fechaLimite, codigo, preguntas);
+        actividades.put(codigo, nuevaEncuesta);
+        return nuevaEncuesta;
+    }
 
+    public static Examen generarExamen(String nombre, String descripcion, String objetivo, 
+                                        String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
+                                        Actividad seguimiento, Date fechaLimite, List<PreguntaAbierta> preguntas)
+    {
+        String codigo = generarCodigoActividades();
+        Examen nuevoExamen = new Examen( nombre,  descripcion,  objetivo, 
+                                         nivelDificultad,  duracionEstimada, preRequisitos,  
+                                         seguimiento,  fechaLimite, codigo, preguntas);
+        actividades.put(codigo, nuevoExamen);
+        return nuevoExamen;
+    }
+
+    public static Quiz generarQuiz(String nombre, String descripcion, String objetivo, 
+                                    String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
+                                    Actividad seguimiento, Date fechaLimite,String id, List<PreguntaCerrada> preguntas)
+    {
+        String codigo = generarCodigoActividades();
+        Quiz nuevoQuiz = new Quiz(  nombre,  descripcion,  objetivo, 
+                                 nivelDificultad,  duracionEstimada,  preRequisitos,  
+                                 seguimiento,  fechaLimite, codigo, preguntas);
+        actividades.put(codigo, nuevoQuiz);
+        return nuevoQuiz;
+    }
+
+    public static RecursoEducativo generarRecursoEducativo(String nombre, String descripcion, String objetivo, 
+                                                            String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
+                                                            Actividad seguimiento, Date fechaLimite, String tipoRecurso, String urlRecurso, String titulo,
+                                                            String descripcionRecurso)
+    {
+        String codigo = generarCodigoActividades();
+        RecursoEducativo nuevoRecursoEducativo = new RecursoEducativo(nombre,  descripcion,  objetivo, 
+                                                                    nivelDificultad,  duracionEstimada,  preRequisitos,  
+                                                                    seguimiento,  fechaLimite, codigo,  tipoRecurso,  urlRecurso,  titulo, descripcionRecurso);
+        actividades.put(codigo, nuevoRecursoEducativo);
+        return nuevoRecursoEducativo;
+    }
+
+    public static Tarea generarTarea(String nombre, String descripcion, String objetivo, 
+                                    String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
+                                    Actividad seguimiento, Date fechaLimite, String motivoEntrega, String estadoEnvio)
+    {
+        String codigo = generarCodigoActividades();
+        Tarea nuevaTarea = new Tarea( nombre,  descripcion,  objetivo, 
+                                                                     nivelDificultad,  duracionEstimada, preRequisitos,  
+                                                                     seguimiento,  fechaLimite, codigo,
+                                                                     motivoEntrega, estadoEnvio);
+        actividades.put(codigo, nuevaTarea);
+        return nuevaTarea;
     }
 }

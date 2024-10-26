@@ -101,4 +101,5 @@ public abstract class Actividad
 	{
 		return this.reseñas;
 	}
+
 }

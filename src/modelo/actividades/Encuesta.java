@@ -31,4 +31,5 @@ public class Encuesta extends Actividad {
     public void setEstadoCompletado(boolean estadoCompletado) {
         this.estadoCompletado = estadoCompletado;
     }
+
 }
