@@ -2,13 +2,13 @@ package modelo.usuarios;
 
 public abstract class Usuario
 {
-	private String nombre;
+	protected String nombre;
 	
-	private String email;
+	protected String email;
 	
-	private String login;
+	protected String login;
 	
-	private String contrasena;
+	protected String contrasena;
 		
 	public Usuario(String nombre, String email, String login, String contrasena)
 	{

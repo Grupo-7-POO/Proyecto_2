@@ -16,10 +16,26 @@ import modelo.preguntas.PreguntaAbierta;
 import modelo.preguntas.PreguntaCerrada;
 
 
-public class GeneradorActividades <E,F>
+public class GeneradorActividades
 {
     private static Map<String, Actividad> actividades = new HashMap<String, Actividad>( );	
 
+    public static Map<String, Actividad> getActividades()
+    {
+        return actividades;
+    }
+
+    public static Actividad getActividad( String codigo)
+    {
+        return actividades.get(codigo);
+    }
+
+    public static boolean validarActividad( String codigo )
+    {
+        return actividades.containsKey(codigo);
+    }
+
+    // GENERADORES DE ACTIVIDADES
     public static String generarCodigoActividades()
     {
         int numero = ( int ) ( Math.random( ) * 10e8 );
