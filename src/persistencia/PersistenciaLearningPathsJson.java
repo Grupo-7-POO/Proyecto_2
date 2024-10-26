@@ -5,18 +5,35 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 
+import exceptions.InformacionInconsistenteException;
+import exceptions.LearningPathDuplicadoException;
+import exceptions.InformacionInconsistenteUserException;
+import exceptions.TipoInvalidoException;
+import exceptions.UserRepetidoException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import modelo.LearningPath;
-import uniandes.dpoo.aerolinea.exceptions.AeropuertoDuplicadoException;
-import uniandes.dpoo.aerolinea.exceptions.InformacionInconsistenteException;
-import uniandes.dpoo.aerolinea.modelo.Aerolinea;
-import uniandes.dpoo.aerolinea.modelo.Ruta;
-import uniandes.dpoo.aerolinea.modelo.Vuelo;
-import uniandes.dpoo.aerolinea.modelo.Avion;
-import uniandes.dpoo.aerolinea.modelo.Aeropuerto;
+import modelo.Reseña;
+import modelo.usuarios.Estudiante;
+import modelo.usuarios.Profesor;
+import modelo.usuarios.Usuario;
+import modelo.preguntas.Opcion;
+import modelo.preguntas.Pregunta;
+import modelo.preguntas.PreguntaAbierta;
+import modelo.preguntas.PreguntaCerrada;
+import modelo.actividades.Actividad;
+import modelo.actividades.Encuesta;
+import modelo.actividades.Examen;
+import modelo.actividades.Quiz;
+import modelo.actividades.RecursoEducativo;
+import modelo.actividades.Tarea;
+
+import sistemabase.EstadoGlobal;
+import sistemabase.GeneradorActividades;
+import sistemabase.GeneradorPreguntas;
 
 public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
 {
@@ -109,7 +126,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
 	}
 
 	@Override
-	public void salvarAerolinea(String archivo, Aerolinea aerolinea) throws IOException {
+	public void salvarLearningPath(String archivo, LearningPath learningPath) throws IOException {
 		// TODO Auto-generated method stub
 		JSONObject jobject = new JSONObject( );
 

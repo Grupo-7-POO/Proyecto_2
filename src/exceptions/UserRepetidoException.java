@@ -4,7 +4,7 @@ package exceptions;
  * Esta excepción se usa para indicar que se encontraron dos clientes con el mismo identificador, lo cual nunca debería ocurrir.
  */
 @SuppressWarnings("serial")
-public class ClienteRepetidoException extends InformacionInconsistenteException
+public class UserRepetidoException extends InformacionInconsistenteException
 {
     /**
      * El tipo de cliente que se estaba creando cuando se detectó el problema
@@ -16,7 +16,7 @@ public class ClienteRepetidoException extends InformacionInconsistenteException
      */
     private String identificador;
 
-    public ClienteRepetidoException( String tipoCliente, String identificador )
+    public UserRepetidoException( String tipoCliente, String identificador )
     {
         super( "" );
         this.tipoCliente = tipoCliente;
