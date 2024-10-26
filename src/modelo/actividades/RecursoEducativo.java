@@ -14,14 +14,14 @@ public class RecursoEducativo extends Actividad {
     public RecursoEducativo(String nombre, String descripcion, String objetivo, 
                             String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
                             Actividad seguimiento, Date fechaLimite,String id, String tipoRecurso, String urlRecurso, String titulo,
-                            String descripcionRecurso, boolean completado) 
+                            String descripcionRecurso) 
     {
         super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, preRequisitos, seguimiento, fechaLimite, id);
         this.tipoRecurso = tipoRecurso;
         this.urlRecurso = urlRecurso;
         this.titulo = titulo;
         this.descripcionRecurso = descripcionRecurso;
-        this.completado = completado;
+        this.completado = false;
     }
 
     // Getters and Setters

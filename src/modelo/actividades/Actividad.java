@@ -1,7 +1,9 @@
 package modelo.actividades;
 
 import java.util.List;
+import java.util.LinkedList;
 import java.util.Date;
+import modelo.Reseña;
 
 public abstract class Actividad
 {
@@ -24,6 +26,8 @@ public abstract class Actividad
 	private String resultado;
 	
 	private String id;
+
+	private List<Reseña> reseñas;
 	
 	
 	public Actividad(String nombre, String descripcion, String obejtivo, 
@@ -40,8 +44,9 @@ public abstract class Actividad
 		this.fechaLimite = fechaLimite;
 		this.resultado = null;
 		this.id = id;
+		this.reseñas = new LinkedList<Reseña>();
 	}
-	// SETTERS
+	// GETTERS
 	public String getNombre()
 	{
 		return this.nombre;
@@ -91,4 +96,10 @@ public abstract class Actividad
 	{
 		return this.id;
 	}
+
+	public List<Reseña> getReseñas()
+	{
+		return this.reseñas;
+	}
+
 }
