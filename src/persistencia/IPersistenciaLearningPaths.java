@@ -31,5 +31,5 @@ public interface IPersistenciaLearningPaths
 		Throws:
 		java.io.IOException - Se lanza esta excepción si hay problemas escribiendo el archivo
 	 */
-	public void salvarLEarningPath(String archivo, LearningPath LearningPath) throws IOException;
+	public void salvarLearningPath(String archivo, LearningPath LearningPath) throws IOException;
 }

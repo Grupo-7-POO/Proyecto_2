@@ -1,4 +1,4 @@
-package uniandes.dpoo.aerolinea.consola;
+package consola;
 
 import java.io.BufferedReader;
 import java.io.IOException;

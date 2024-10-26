@@ -1,14 +1,36 @@
 package sistemabase;
 
-import java.util.List;
+import java.util.HashMap;
 import modelo.LearningPath;
-import modelo.actividades.Actividad;
-import modelo.usuarios.Estudiante;
-import modelo.usuarios.Profesor;
+import modelo.usuarios.Usuario;
+import java.util.Map;
+
 
 public class EstadoGlobal
 {
-	private List<Estudiante> estudiantes;
-	private List<Profesor> profesores;
-	private List<LearningPath> learningPaths;;
+	private static Map<String, Usuario> usuarios = new HashMap<String, Usuario>();
+	private static Map<String, LearningPath> learningPaths = new HashMap<String, LearningPath>();
+
+
+	public Map<String, Usuario> getUsuarios()
+	{
+		return usuarios;
+	}
+
+	public Map<String, LearningPath> getLearningPaths()
+	{
+		return learningPaths;
+	}
+
+	public boolean valirdarUsuario( String login, String password)
+	{
+
+		if ( usuarios.containsKey(login) )
+		{
+			Usuario usuarioactual = usuarios.get(login);
+			if (usuarioactual.getPassword() == password){ return true; }
+			else { return false;}
+		}
+		else { return false;}
+	}
 }
