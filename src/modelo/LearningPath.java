@@ -13,9 +13,8 @@ import persistencia.IPersistenciaLearningPaths;
 import persistencia.IPersistenciaUsuarios;
 import modelo.actividades.Actividad;
 import exceptions.LearningPathDuplicadoException;
-import exceptions.InformacionInconsistenteUserException;
 import exceptions.TipoInvalidoException;
-import exceptions.UserRepetidoException;
+
 
 public class LearningPath{
 	
