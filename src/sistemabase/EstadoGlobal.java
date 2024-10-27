@@ -90,11 +90,11 @@ public class EstadoGlobal
 
 		switch (opcion)
 		{
-		case 1: CrearLearningPathProfesor( profesor );
-		case 2: EditarLearningPathProfesor( profesor );
-		case 3: CrearActividadProfesor( profesor );
-		case 4: EditarActividadProfesor( profesor );
-		case 5: ClonarActividadProfesor( profesor );
+		case 1: crearLearningPathProfesor( profesor );
+		case 2: editarLearningPathProfesor( profesor );
+		case 3: crearActividadProfesor( profesor );
+		case 4: editarActividadProfesor( profesor );
+		case 5: clonarActividadProfesor( profesor );
 		case 6:
 				escaner.close();
 				System.exit(0);
@@ -105,7 +105,7 @@ public class EstadoGlobal
 		}
 	}
 
-	public static void CrearLearningPathProfesor( Profesor profesor )
+	public static void crearLearningPathProfesor( Profesor profesor )
 	{
 		List<Actividad> actividades = new LinkedList<Actividad>();
 
@@ -124,6 +124,7 @@ public class EstadoGlobal
 		while ( check )
 		{
 			System.out.println("Escoja el ID de las actividades, escoja 0 para detenerse.");
+			System.out.println("Escoja el ID de las actividades, 8 numeros.");
 			String codigo = escaner.nextLine();
 			if (codigo == "0") 
 			{ 
@@ -136,27 +137,131 @@ public class EstadoGlobal
 				else { System.out.println("Actividad no encontrada"); }
 			}
 		}
-		profesor.crearLearningPath(titulo, descripcion, nivelDificultad, duracion, actividades);
+		LearningPath learningPathCreado = profesor.crearLearningPath(titulo, descripcion, nivelDificultad, duracion, actividades); // FALTA AÑADIR LEARNING PATH A BASE DE DATOS GENERAL
+		learningPaths.put( learningPathCreado.getTitulo()+"_"+learningPathCreado.getVersion() , learningPathCreado);
+	}
+	public static LearningPath escogerLearningPath( Profesor profesor)
+	{
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Ingrese el titulo del Learning Path deseado:");
+		String titulo = escaner.nextLine();
+		escaner.close();
+		System.exit(0);
+
+		return profesor.getLearningPathbyNombre( titulo );
 	}
 
-	public static void EditarLearningPathProfesor( Profesor profesor )
+	public static void editarLearningPathProfesor( Profesor profesor )
 	{
-		profesor.crearLearningPath();
+		LearningPath learningPath = escogerLearningPath( profesor );
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Selecciona una opción:");
+		System.out.println("1. Editar Titulo:");
+		System.out.println("2. Editar Descripcion");
+		System.out.println("3. Editar Nivel de Dificultad:");
+		System.out.println("4. Editar Duracion:");
+		System.out.println("5. Editar Actividad:");
+		System.out.println("6. Salir:");
+
+		System.out.print("Opción: ");
+		int opcion = escaner.nextInt();
+
+		switch(opcion)
+		{
+		case 1: editarTituloProfesor(learningPath);
+		case 2: editarDescripcionProfesor( learningPath );
+		case 3: editarNivelDificultadProfesor( learningPath );
+		case 4: editarDuracionProfesor( learningPath );
+		case 5: editarActividadesProfesor( learningPath );
+		case 6:
+				escaner.close();
+				System.exit(0);
+				break;
+		default:
+				System.out.println("Opción no válida");
+				break;
+		}
 	}
 
-	public static void CrearActividadProfesor( Profesor profesor )
+	public static void editarTituloProfesor( LearningPath learningPath )
 	{
-		profesor.crearLearningPath();
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Escriba un nuevo titulo:");
+		String titulo = escaner.nextLine();
+		learningPath.setTitulo( titulo );
+		learningPath.actualizacionRealizada();
+		escaner.close();
+		System.exit(0);
 	}
 
-	public static void EditarActividadProfesor( Profesor profesor )
+	public static void editarDescripcionProfesor( LearningPath learningPath )
 	{
-		profesor.crearLearningPath();
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Escriba una nueva descripcion:");
+		String descripcion = escaner.nextLine();
+		learningPath.setDescripcion( descripcion );
+		learningPath.actualizacionRealizada();
+		escaner.close();
+		System.exit(0);
 	}
 
-	public static void ClonarActividadProfesor( Profesor profesor )
+	public static void editarNivelDificultadProfesor( LearningPath learningPath )
 	{
-		profesor.crearLearningPath();
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Escoja un nivel de Dificultad:");
+		System.out.println("1. Principiante");
+		System.out.println("2. Intermedio");
+		System.out.println("3. Avanzado");
+		int nivel = escaner.nextInt();
+		String dificultad = null;
+
+		switch (nivel) {
+			case 1: dificultad = "Principiante";
+			case 2: dificultad = "Intermedio";
+			case 3: dificultad = "Avanzado";
+			default: System.out.println("Opcion no valida");
+		}
+
+		if ( dificultad != null)
+		{
+			learningPath.setNivelDificultad( dificultad );
+			learningPath.actualizacionRealizada();
+		}
+		escaner.close();
+		System.exit(0);
+	}
+
+	public static void editarDuracionProfesor( LearningPath learningPath )
+	{
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Escoja una nueva duracion en minutos:");
+		int duracion = escaner.nextInt();
+		learningPath.setDuracion( duracion );
+		learningPath.actualizacionRealizada();
+		escaner.close();
+		System.exit(0);
+	}
+
+	public static void editarActividadesProfesor( LearningPath learningPath )
+	{
+		List<Actividad> actividades = learningPath.getActividades();
+		
+		learningPath.actualizacionRealizada();
+	}
+
+	public static void crearActividadProfesor( Profesor profesor )
+	{
+		profesor.crearActividad();
+	}
+
+	public static void editarActividadProfesor( Profesor profesor )
+	{
+		profesor.editarActividad();
+	}
+
+	public static void clonarActividadProfesor( Profesor profesor )
+	{
+		profesor.clonarActividad();
 	}
 
 	public static void menuEstudiante( Estudiante estudiante )
@@ -167,7 +272,6 @@ public class EstadoGlobal
 	
     public static void main( String[] args )
     {
-        
         while (true)
         {
             String login = menuLogin();

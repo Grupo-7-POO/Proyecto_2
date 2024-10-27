@@ -23,15 +23,27 @@ public  class Profesor extends Usuario
 		return this.learningPathsCreados;
 	}
 
+	public LearningPath getLearningPathbyNombre( String titulo )
+	{
+		LearningPath match = null;
+		for ( int i = 0; i < this.learningPathsCreados.size(); i++ )
+		{
+			LearningPath learningPathActual = this.learningPathsCreados.get(i);
+			if ( learningPathActual.getTitulo() == titulo ) { match =  learningPathActual; }
+		}
+		return match;
+	}
+
 	public List<Actividad> getActividadesCreadas()
 	{
 		return this.actividadesCreadas;
 	}
 	
-	public void crearLearningPath( String titulo, String descripcion, String nivelDificultad, int duracion, List<Actividad> actividades)
+	public LearningPath crearLearningPath( String titulo, String descripcion, String nivelDificultad, int duracion, List<Actividad> actividades)
 	{
 		LearningPath learningPath = new LearningPath( titulo,  descripcion,  nivelDificultad,  duracion, actividades, this.nombre);
 		learningPathsCreados.add(learningPath);
-	}
-	
+		return learningPath;
+	} 
+
 }
