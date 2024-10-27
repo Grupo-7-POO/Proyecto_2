@@ -28,6 +28,8 @@ public abstract class Actividad
 	private String id;
 
 	private List<Reseña> reseñas;
+
+	private double rating;
 	
 	
 	public Actividad(String nombre, String descripcion, String obejtivo, 
@@ -45,6 +47,7 @@ public abstract class Actividad
 		this.resultado = null;
 		this.id = id;
 		this.reseñas = new LinkedList<Reseña>();
+		this.rating = 0;
 	}
 	// GETTERS
 	public String getNombre()
@@ -100,6 +103,11 @@ public abstract class Actividad
 	public List<Reseña> getReseñas()
 	{
 		return this.reseñas;
+	}
+
+	public double getRating()
+	{
+		return this.rating;
 	}
 
 }

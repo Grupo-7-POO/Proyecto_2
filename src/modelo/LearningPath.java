@@ -9,11 +9,12 @@ import java.util.LinkedList;
 
 import modelo.usuarios.Estudiante;
 import modelo.usuarios.Profesor;
+import modelo.actividades.Actividad;
+
 import exceptions.InformacionInconsistenteException;
 import persistencia.CentralPersistencia;
 import persistencia.IPersistenciaLearningPaths;
 import persistencia.IPersistenciaUsuarios;
-import modelo.actividades.Actividad;
 import exceptions.LearningPathDuplicadoException;
 import exceptions.TipoInvalidoException;
 
@@ -34,7 +35,7 @@ public class LearningPath{
 	
 	private Date fechaModificacion;
 	
-	private String version;
+	private Double version;
 	
 	private List<Actividad> actividades;
 	
@@ -54,13 +55,13 @@ public class LearningPath{
 		this.rating = 0;
 		this.fechaCreacion = new Date();
 		this.fechaModificacion = new Date();
-		this.version = "1.0";
+		this.version = 1.0;
 		this.actividades = actividades;
 		this.estudiantesCursando = new LinkedList<Estudiante>();
 		this.estudiantesCompletado = new LinkedList<Estudiante>();
 		this.loginProfesor = profesor;
 	}
-	
+	// GETTERS
 	public String getTitulo()
 	{
 		return titulo;
@@ -96,7 +97,7 @@ public class LearningPath{
 		return fechaModificacion;
 	}
 	
-	public String getVersion()
+	public Double getVersion()
 	{
 		return version;
 	}
@@ -120,7 +121,45 @@ public class LearningPath{
 	{
 		return loginProfesor;
 	}
+
+	// SETTERS
+
+	public void setTitulo( String titulo)
+	{
+		this.titulo = titulo;
+	}
 	
+	public void setDescripcion( String descripcion)
+	{
+		this.descripcion = descripcion;
+	}
+
+	public void setNivelDificultad( String nivelDificultad)
+	{
+		this.nivelDificultad = nivelDificultad;
+	}
+
+	public void setDuracion( int duracion)
+	{
+		this.duracion = duracion;
+	}
+
+	public void actualizarRating()
+	{
+		double suma = 0;
+		for (int i = 0; i < this.actividades.size(); i++)
+		{
+			Actividad actividad = this.actividades.get(i);
+			suma = suma + actividad.getRating();
+		}
+		this.rating = suma/this.actividades.size();
+	}
+
+	public void actualizacionRealizada()
+	{
+		Double nuevaVersion = this.version + 0.1;
+		this.version = nuevaVersion;
+	}
 
 	 /**
      * Salva la información de la aerlínea en un archivo
