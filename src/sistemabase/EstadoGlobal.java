@@ -160,7 +160,7 @@ public class EstadoGlobal
 		System.out.println("2. Editar Descripcion");
 		System.out.println("3. Editar Nivel de Dificultad:");
 		System.out.println("4. Editar Duracion:");
-		System.out.println("5. Editar Actividad:");
+		System.out.println("5. Editar Actividades:");
 		System.out.println("6. Salir:");
 
 		System.out.print("Opción: ");

@@ -109,5 +109,6 @@ public abstract class Actividad
 	{
 		return this.rating;
 	}
+	// SETTERS
 
 }
