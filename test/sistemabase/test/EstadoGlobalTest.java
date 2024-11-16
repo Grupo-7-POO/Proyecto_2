@@ -6,18 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import sistemabase.EstadoGlobal;
 import modelo.usuarios.Usuario;
 import modelo.usuarios.Profesor;
 import modelo.LearningPath;
+import modelo.actividades.Actividad;
 import modelo.usuarios.Estudiante;
 
 class EstadoGlogalTest {
@@ -27,8 +31,8 @@ class EstadoGlogalTest {
         EstadoGlobal.getUsuarios().clear();
         EstadoGlobal.getLearningPaths().clear();
 
-        Usuario profesor = new Profesor("profesor1", "1234");
-        Usuario estudiante = new Estudiante("estudiante1", "abcd");
+        Usuario profesor = new Profesor("profesor1", "1234", null, null);
+        Usuario estudiante = new Estudiante("estudiante1", "abcd", null, null);
 
         EstadoGlobal.getUsuarios().put("profesor1", profesor);
         EstadoGlobal.getUsuarios().put("estudiante1", estudiante);
