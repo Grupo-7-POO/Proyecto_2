@@ -1,6 +1,6 @@
 package sistemabase;
 
-import java.sql.Array;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,12 +20,9 @@ import modelo.actividades.Tarea;
 import modelo.usuarios.Estudiante;
 import modelo.usuarios.Profesor;
 import modelo.usuarios.Usuario;
-import sistemabase.GeneradorActividades;
-import sistemabase.GeneradorPreguntas;
 import modelo.preguntas.Opcion;
 import modelo.preguntas.PreguntaAbierta;
 import modelo.preguntas.PreguntaCerrada;
-import modelo.Reseña;
 
 
 public class EstadoGlobal 
@@ -171,18 +168,27 @@ public class EstadoGlobal
 		System.out.println("4. Editar Actividad:");
 		System.out.println("5. Clonar Actividad:");
 		System.out.println("6. Salir:");
-
 		System.out.print("Opción: ");
 			
 		int opcion = escaner.nextInt();
 
 		switch (opcion)
 		{
-		case 1: crearLearningPathProfesor( profesor );
-		case 2: editarLearningPathProfesor( profesor );
-		case 3: crearActividadProfesor( profesor );
-		case 4: editarActividadProfesor( profesor );
-		case 5: clonarActividadProfesor( profesor );
+		case 1: 
+				crearLearningPathProfesor( profesor );
+				break;
+		case 2: 
+				editarLearningPathProfesor( profesor );
+				break;
+		case 3: 
+				crearActividadProfesor( profesor );
+				break;	
+		case 4: 
+				editarActividadProfesor( profesor );
+				break;
+		case 5: 
+				clonarActividadProfesor( profesor );
+				break;
 		case 6:
 				escaner.close();
 				System.exit(0);
@@ -425,7 +431,13 @@ public class EstadoGlobal
 		System.out.println("Escriba la fecha limite recomendada para la actividad en formato dd-MMM-yyyy");
 		String date = escaner.nextLine(); // convertir a date
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-		Date fechaLimite = formatter.parse(date);
+		Date fechaLimite = null;
+		try {
+			fechaLimite = formatter.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		System.out.println("Escoja las actividades que son Pre Requisitos");
 
@@ -570,7 +582,7 @@ public class EstadoGlobal
 					opciones.add(opcionActual);
 				}
 
-				PreguntaCerrada preguntaNueva = GeneradorPreguntas.generadorPreguntasCerradas(enunciado, explicacion, opciones);
+				PreguntaCerrada preguntaNueva = GeneradorPreguntas.generarPreguntaCerrada(enunciado, explicacion, opciones);
 				preguntas.add(preguntaNueva);
 				System.out.println("Escriba 00 para terminar de generar preguntas.");
 			}
@@ -584,15 +596,36 @@ public class EstadoGlobal
 		return preguntas;
 	}
 
+	public static void clonarActividadProfesor( Profesor profesor )
+	{
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Ingresa el codigo de la Actividad a clonar");
+		String idActividad = escaner.nextLine();
+		Actividad actividadClonada = null;;
+		if ( GeneradorActividades.validarActividad(idActividad) == true)
+		{
+			Actividad actividadClonar = GeneradorActividades.getActividad(idActividad);
+
+			if ( actividadClonar instanceof Encuesta ){ actividadClonada = GeneradorActividades.clonarEncuesta(idActividad); }
+			else if ( actividadClonar instanceof Examen ){ actividadClonada = GeneradorActividades.clonarExamen(idActividad); }
+			else if ( actividadClonar instanceof Quiz ){ actividadClonada = GeneradorActividades.clonarQuiz(idActividad); }
+			else if ( actividadClonar instanceof RecursoEducativo ){ actividadClonada = GeneradorActividades.clonarRecursoEducativo(idActividad); }
+			else if ( actividadClonar instanceof Tarea ){ actividadClonada = GeneradorActividades.clonarTarea(idActividad); }
+
+			String nuevoCodigo = actividadClonada.getID();
+			System.out.println("El codigo ID de la actividad clonada es"+nuevoCodigo);
+			profesor.añadirActividadCreada(actividadClonada);
+		} 
+		else 
+		{ 
+			System.out.println("Ingresa el codigo de la Actividad a clonar");
+		}
+		escaner.close();
+	}
 
 	public static void editarActividadProfesor( Profesor profesor )
 	{
-		profesor.editarActividad();
-	}
-
-	public static void clonarActividadProfesor( Profesor profesor )
-	{
-		profesor.clonarActividad();
+		//profesor.editarActividad();
 	}
 
 	public static void menuEstudiante( Estudiante estudiante )
@@ -617,7 +650,7 @@ public class EstadoGlobal
 				if (  usuario instanceof Profesor ) 
 				{
 					Profesor profesor = (Profesor) usuario; 
-					menuProfesor(profesor );
+					menuProfesor( profesor );
 				}
 				else if ( usuario instanceof Estudiante)
 				{

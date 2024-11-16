@@ -64,6 +64,17 @@ public class GeneradorActividades
         return nuevaEncuesta;
     }
 
+    public static Encuesta clonarEncuesta( String codigo)
+    {
+        Encuesta encuestaClonar = (Encuesta) actividades.get(codigo);;
+        String codigoNuevo = generarCodigoActividades();
+        Encuesta nuevaEncuesta = new Encuesta( encuestaClonar.getNombre(), encuestaClonar.getDescripcion(), encuestaClonar.getObjetivo(), 
+                                               encuestaClonar.getNivelDificultad(),  encuestaClonar.getDuracionEstimada(), encuestaClonar.getPreRequisitos(),  
+                                               encuestaClonar.getSeguimiento(), encuestaClonar.getFechaLimite(), codigoNuevo, encuestaClonar.getPreguntas());
+        actividades.put(codigo, nuevaEncuesta);
+        return nuevaEncuesta;
+    }
+
     public static Examen generarExamen(String nombre, String descripcion, String objetivo, 
                                         String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
                                         Actividad seguimiento, Date fechaLimite, List<PreguntaAbierta> preguntas)
@@ -76,6 +87,17 @@ public class GeneradorActividades
         return nuevoExamen;
     }
 
+    public static Examen clonarExamen( String codigo)
+    {
+        Examen examenClonar = (Examen) actividades.get(codigo);;
+        String codigoNuevo = generarCodigoActividades();
+        Examen nuevoExamen = new Examen( examenClonar.getNombre(), examenClonar.getDescripcion(), examenClonar.getObjetivo(), 
+                                               examenClonar.getNivelDificultad(),  examenClonar.getDuracionEstimada(), examenClonar.getPreRequisitos(),  
+                                               examenClonar.getSeguimiento(), examenClonar.getFechaLimite(), codigoNuevo, examenClonar.getPreguntas());
+        actividades.put(codigo, nuevoExamen);
+        return nuevoExamen;
+    }
+
     public static Quiz generarQuiz(String nombre, String descripcion, String objetivo, 
                                     String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
                                     Actividad seguimiento, Date fechaLimite, List<PreguntaCerrada> preguntas)
@@ -84,6 +106,17 @@ public class GeneradorActividades
         Quiz nuevoQuiz = new Quiz(  nombre,  descripcion,  objetivo, 
                                  nivelDificultad,  duracionEstimada,  preRequisitos,  
                                  seguimiento,  fechaLimite, codigo, preguntas);
+        actividades.put(codigo, nuevoQuiz);
+        return nuevoQuiz;
+    }
+
+    public static Quiz clonarQuiz( String codigo)
+    {
+        Quiz quizClonar = (Quiz) actividades.get(codigo);;
+        String codigoNuevo = generarCodigoActividades();
+        Quiz nuevoQuiz = new Quiz( quizClonar.getNombre(), quizClonar.getDescripcion(), quizClonar.getObjetivo(), 
+                                               quizClonar.getNivelDificultad(),  quizClonar.getDuracionEstimada(), quizClonar.getPreRequisitos(),  
+                                               quizClonar.getSeguimiento(), quizClonar.getFechaLimite(), codigoNuevo, quizClonar.getPreguntas());
         actividades.put(codigo, nuevoQuiz);
         return nuevoQuiz;
     }
@@ -101,6 +134,18 @@ public class GeneradorActividades
         return nuevoRecursoEducativo;
     }
 
+    public static RecursoEducativo clonarRecursoEducativo( String codigo)
+    {
+        RecursoEducativo recursoClonar = (RecursoEducativo) actividades.get(codigo);;
+        String codigoNuevo = generarCodigoActividades();
+        RecursoEducativo nuevoRecursoEducativo = new RecursoEducativo(recursoClonar.getNombre(), recursoClonar.getDescripcion(), recursoClonar.getObjetivo(), 
+                                                                      recursoClonar.getNivelDificultad(), recursoClonar.getDuracionEstimada(),  recursoClonar.getPreRequisitos(),  
+                                                                      recursoClonar.getSeguimiento(), recursoClonar.getFechaLimite(), codigoNuevo, recursoClonar.getTipoRecurso(),  
+                                                                      recursoClonar.getUrlRecurso(), recursoClonar.getTitulo(), recursoClonar.getDescripcionRecurso());
+        actividades.put(codigo, nuevoRecursoEducativo);
+        return nuevoRecursoEducativo;
+    }
+
     public static Tarea generarTarea(String nombre, String descripcion, String objetivo, 
                                     String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
                                     Actividad seguimiento, Date fechaLimite, String motivoEntrega, String estadoEnvio)
@@ -110,6 +155,18 @@ public class GeneradorActividades
                                                                      nivelDificultad,  duracionEstimada, preRequisitos,  
                                                                      seguimiento,  fechaLimite, codigo,
                                                                      motivoEntrega, estadoEnvio);
+        actividades.put(codigo, nuevaTarea);
+        return nuevaTarea;
+    }
+
+    public static Tarea clonarTarea( String codigo)
+    {
+        Tarea tareaClonar = (Tarea) actividades.get(codigo);;
+        String codigoNuevo = generarCodigoActividades();
+        Tarea nuevaTarea = new Tarea( tareaClonar.getNombre(),  tareaClonar.getDescripcion(),  tareaClonar.getObjetivo(), 
+                                      tareaClonar.getNivelDificultad(), tareaClonar.getDuracionEstimada(), tareaClonar.getPreRequisitos(),  
+                                      tareaClonar.getSeguimiento(), tareaClonar.getFechaLimite(), codigoNuevo,
+                                      tareaClonar.getMotivoEntrega(), tareaClonar.getEstadoEnvio());
         actividades.put(codigo, nuevaTarea);
         return nuevaTarea;
     }
