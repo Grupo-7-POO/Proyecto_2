@@ -1,8 +1,11 @@
 package sistemabase;
 
 import java.sql.Array;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
@@ -13,11 +16,13 @@ import modelo.actividades.Encuesta;
 import modelo.actividades.Examen;
 import modelo.actividades.Quiz;
 import modelo.actividades.RecursoEducativo;
+import modelo.actividades.Tarea;
 import modelo.usuarios.Estudiante;
 import modelo.usuarios.Profesor;
 import modelo.usuarios.Usuario;
 import sistemabase.GeneradorActividades;
 import sistemabase.GeneradorPreguntas;
+import modelo.preguntas.Opcion;
 import modelo.preguntas.PreguntaAbierta;
 import modelo.preguntas.PreguntaCerrada;
 import modelo.Reseña;
@@ -409,12 +414,19 @@ public class EstadoGlobal
 		String descripcion = escaner.nextLine();
 		System.out.println("Escriba el objetivo nombre de la actividad");
 		String objetivo = escaner.nextLine();
+
 		System.out.println("Escriba la duracion estimada de la actividad");
-		String duracionEstimada = escaner.nextLine(); // convertir a double
+		String value = escaner.nextLine(); // convertir a double
+		double duracionEstimada = Double.parseDouble(value);
+
 		System.out.println("Escriba el nivel de dificultad de la actividad");
 		String nivelDificultad = escaner.nextLine();
-		System.out.println("Escriba la fecha limite recomendada para la actividad");
-		String fechaLimite = escaner.nextLine(); // convertir a date
+
+		System.out.println("Escriba la fecha limite recomendada para la actividad en formato dd-MMM-yyyy");
+		String date = escaner.nextLine(); // convertir a date
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+		Date fechaLimite = formatter.parse(date);
+
 		System.out.println("Escoja las actividades que son Pre Requisitos");
 
 		boolean check1 = true;
@@ -424,7 +436,7 @@ public class EstadoGlobal
 			System.out.println("Escoja el ID de las actividades, escoja 0 para detenerse.");
 			System.out.println("Escoja el ID de las actividades, 8 numeros.");
 			String codigo = escaner.nextLine();
-			if (codigo == "0") 
+			if (codigo.equals("0")) 
 			{ 
 				check1 = false;
 				escaner.close();
@@ -436,7 +448,7 @@ public class EstadoGlobal
 			}
 		}
 		boolean check2 = true;
-		Actividad actividadSeguimiento;
+		Actividad actividadSeguimiento = null;
 		while ( check2 )
 		{
 			System.out.println("Escoja la actividad de seguimiento");
@@ -449,9 +461,6 @@ public class EstadoGlobal
 			}
 			else { System.out.println("Actividad no encontrada"); }
 		}
-
-
-		
 		// Campos diferentes dependiendo de actividad
 		switch(opcion)
 		{
@@ -472,13 +481,23 @@ public class EstadoGlobal
 				profesor.añadirActividadCreada(quizNuevo);
 				break;
 		case 4: 
-				System.out.println("Escriba el nombre de la actividad");
-				String nombre = escaner.nextLine();
-				System.out.println("Escriba la descripcion de la actividad");
-				String descripcion = escaner.nextLine();
-				RecursoEducativo recursoEducativoNuevo = GeneradorActividades.generarRecursoEducativo(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, null, , , , );
-				editarDuracionProfesor( learningPath );
-		case 5: editarActividadesLPProfesor( learningPath );
+				System.out.println("Escriba el tipo de Recurso");
+				String tipoRecurso = escaner.nextLine();
+				System.out.println("Escriba el URL del Recurso");
+				String urlRecurso = escaner.nextLine();
+				System.out.println("Escriba el titulo del Recurso");
+				String titulo = escaner.nextLine();
+				System.out.println("Escriba la descripcion del Recurso");
+				String descripcionRecurso = escaner.nextLine();
+				RecursoEducativo recursoEducativoNuevo = GeneradorActividades.generarRecursoEducativo(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, fechaLimite, tipoRecurso, urlRecurso, titulo, descripcionRecurso);
+				profesor.añadirActividadCreada(recursoEducativoNuevo);
+				break;
+		case 5: 
+				System.out.println("Escriba el motivo de entrega");
+				String motivoEntrega = escaner.nextLine();
+				Tarea tareaNueva = GeneradorActividades.generarTarea(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, motivoEntrega, "No Entregado" );
+				profesor.añadirActividadCreada(tareaNueva);
+				break;
 		case 6:
 				escaner.close();
 				System.exit(0);
@@ -487,6 +506,82 @@ public class EstadoGlobal
 				System.out.println("Opción no válida");
 				break;
 		}
+	}
+
+	public static List<PreguntaAbierta> generadorPreguntasAbiertas() // El ususario escribe las preguntas que desea hasta 
+	{
+		List<PreguntaAbierta> preguntas = new LinkedList<>();
+		boolean check = true;
+		Scanner escaner = new Scanner(System.in);
+		while ( check )
+		{
+			System.out.println("Escriba el enunciado de la pregunta: ");
+			String enunciado = escaner.nextLine();
+			if ( enunciado.equals("00") == false ) 
+			{ 
+				System.out.println("Escriba la explicacion de la pregunta: ");
+				String explicacion = escaner.nextLine();
+				PreguntaAbierta preguntaNueva = GeneradorPreguntas.generarPreguntaAbierta(enunciado, explicacion);
+				preguntas.add(preguntaNueva);
+				System.out.println("Escriba 00 para terminar de generar preguntas.");
+			}
+			else 
+			{ 
+				System.out.println("Se han generado"+preguntas.size()+"preguntas abiertas"); 
+				check = false;
+			}
+		}
+		escaner.close();
+		return preguntas;
+	}
+
+	public static List<PreguntaCerrada> generadorPreguntasCerradas() // El ususario escribe las preguntas que desea hasta 
+	{
+		List<PreguntaCerrada> preguntas = new LinkedList<>();
+		boolean check = true;
+		
+		Scanner escaner = new Scanner(System.in);
+		while ( check )
+		{
+			boolean checkCorrecta = false;
+			System.out.println("Escriba el enunciado de la pregunta: ");
+			String enunciado = escaner.nextLine();
+			if ( enunciado.equals("00") == false ) 
+			{ 
+				System.out.println("Escriba la explicacion de la pregunta: ");
+				String explicacion = escaner.nextLine();
+
+				List<Opcion> opciones = new LinkedList<>();
+
+				for (int i = 0; i < 4; i++)
+				{
+					System.out.println("Escriba el enunciado de la opcion" + (i+1));
+					String texto = escaner.nextLine();
+					Opcion opcionActual = new Opcion(texto);
+					System.out.println("Es la respuesta correcta? S/N");
+					String esCorrecta = escaner.nextLine();
+					if ( (esCorrecta.equals("S")) && (checkCorrecta = false) )
+					{
+						opcionActual.setEsCorrecta();
+						checkCorrecta = true;
+						System.out.println("Se ha escogido como la opcion correcta");
+					}
+					else{System.out.println("No se ha escogido como la opcion correcta");}
+					opciones.add(opcionActual);
+				}
+
+				PreguntaCerrada preguntaNueva = GeneradorPreguntas.generadorPreguntasCerradas(enunciado, explicacion, opciones);
+				preguntas.add(preguntaNueva);
+				System.out.println("Escriba 00 para terminar de generar preguntas.");
+			}
+			else 
+			{ 
+				System.out.println("Se han generado"+preguntas.size()+"preguntas abiertas"); 
+				check = false;
+			}
+		}
+		escaner.close();
+		return preguntas;
 	}
 
 
