@@ -78,7 +78,7 @@ public class GeneradorActividades
 
     public static Quiz generarQuiz(String nombre, String descripcion, String objetivo, 
                                     String nivelDificultad, double duracionEstimada, List<Actividad> preRequisitos,  
-                                    Actividad seguimiento, Date fechaLimite,String id, List<PreguntaCerrada> preguntas)
+                                    Actividad seguimiento, Date fechaLimite, List<PreguntaCerrada> preguntas)
     {
         String codigo = generarCodigoActividades();
         Quiz nuevoQuiz = new Quiz(  nombre,  descripcion,  objetivo, 

@@ -1,5 +1,6 @@
 package sistemabase;
 
+import java.sql.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedList;
@@ -8,11 +9,18 @@ import java.util.Scanner;
 
 import modelo.LearningPath;
 import modelo.actividades.Actividad;
+import modelo.actividades.Encuesta;
+import modelo.actividades.Examen;
+import modelo.actividades.Quiz;
+import modelo.actividades.RecursoEducativo;
 import modelo.usuarios.Estudiante;
 import modelo.usuarios.Profesor;
 import modelo.usuarios.Usuario;
 import sistemabase.GeneradorActividades;
 import sistemabase.GeneradorPreguntas;
+import modelo.preguntas.PreguntaAbierta;
+import modelo.preguntas.PreguntaCerrada;
+import modelo.Reseña;
 
 
 public class EstadoGlobal 
@@ -57,21 +65,96 @@ public class EstadoGlobal
 
 	public static String menuLogin()
     {
+		String login;
+		String password;
+
         Scanner escaner = new Scanner(System.in);
-        System.out.print("Inicie Sesion");
-        System.out.print("Ingrese su login:");
-        String login = escaner.nextLine();
-		System.out.print(login); 
-        System.out.print("Ingrese su contraseña:");
-        String password = escaner.nextLine();
+        System.out.println("1. Iniciar Sesion");
+		System.out.println("2. Crear Usuario");
+		System.out.println("Opción: ");
+			
+		int opcion = escaner.nextInt();
+
+		switch (opcion)
+		{
+		case 1:
+				System.out.println("Ingrese su login: ");
+				login = escaner.nextLine();
+				System.out.print(login); 
+				System.out.println("Ingrese su contraseña:");
+				password = escaner.nextLine();
+				break;
+
+		case 2: 
+				String[] usuarioCreado = crearUsuarioConsola();
+				login = usuarioCreado[0];
+				password = usuarioCreado[1];
+				break;
+		default:
+				System.out.println("Opción no válida");
+				escaner.close();
+				System.exit(0);
+				return "error";
+		}
 		escaner.close();
+
 
         if ( validarLogin(login, password) ) 
 		{
 			return login;
 		}
 		else { return "error"; }
+		
     }
+
+	public static String[] crearUsuarioConsola()
+	{
+		Usuario usuarioCreado;
+		Scanner escaner = new Scanner(System.in);
+
+		System.out.println("Ingrese su Nombre:");
+		String nombre = escaner.nextLine();
+		System.out.println("Ingrese su email: ");
+		String email = escaner.nextLine();
+		System.out.println("Ingrese su login: ");
+		String login = escaner.nextLine();
+		if ( usuarios.containsKey(login) == true )
+		{
+			System.out.print("Login ya existe");
+			escaner.close();
+			System.exit(0);
+		}
+		System.out.println("Ingrese su contraseña: ");
+		String contrasena = escaner.nextLine();
+
+		System.out.println("Selecciona una opción:");
+		System.out.println("1. Usuario Profesor");
+		System.out.println("2. Usuario Estudiante");
+
+		System.out.print("Opción: ");
+			
+		int opcion = escaner.nextInt();
+
+		switch (opcion)
+		{
+			case 1: 
+					usuarioCreado = new Profesor(nombre, email, login, contrasena);
+					usuarios.put( login, usuarioCreado );
+					break;
+			case 2: 
+					usuarioCreado = new Estudiante(nombre, email, login, contrasena);
+					usuarios.put( login, usuarioCreado );
+					break;
+			default:
+					System.out.println("Opción no válida");
+					escaner.close();
+					System.exit(0);
+					break; // POSIBLE AÑADIR EXDCEPTION DE TIPO DE USUARIO NO VALIDO
+		}
+		escaner.close();
+		return new String[] {login, contrasena};
+
+	}
 
 	public static void menuProfesor( Profesor profesor)
 	{
@@ -146,7 +229,6 @@ public class EstadoGlobal
 		System.out.println("Ingrese el titulo del Learning Path deseado:");
 		String titulo = escaner.nextLine();
 		escaner.close();
-		System.exit(0);
 
 		return profesor.getLearningPathbyNombre( titulo );
 	}
@@ -172,7 +254,7 @@ public class EstadoGlobal
 		case 2: editarDescripcionProfesor( learningPath );
 		case 3: editarNivelDificultadProfesor( learningPath );
 		case 4: editarDuracionProfesor( learningPath );
-		case 5: editarActividadesProfesor( learningPath );
+		case 5: editarActividadesLPProfesor( learningPath );
 		case 6:
 				escaner.close();
 				System.exit(0);
@@ -191,7 +273,6 @@ public class EstadoGlobal
 		learningPath.setTitulo( titulo );
 		learningPath.actualizacionRealizada();
 		escaner.close();
-		System.exit(0);
 	}
 
 	public static void editarDescripcionProfesor( LearningPath learningPath )
@@ -202,7 +283,6 @@ public class EstadoGlobal
 		learningPath.setDescripcion( descripcion );
 		learningPath.actualizacionRealizada();
 		escaner.close();
-		System.exit(0);
 	}
 
 	public static void editarNivelDificultadProfesor( LearningPath learningPath )
@@ -228,7 +308,6 @@ public class EstadoGlobal
 			learningPath.actualizacionRealizada();
 		}
 		escaner.close();
-		System.exit(0);
 	}
 
 	public static void editarDuracionProfesor( LearningPath learningPath )
@@ -239,20 +318,177 @@ public class EstadoGlobal
 		learningPath.setDuracion( duracion );
 		learningPath.actualizacionRealizada();
 		escaner.close();
-		System.exit(0);
 	}
 
-	public static void editarActividadesProfesor( LearningPath learningPath )
+	public static void editarActividadesLPProfesor( LearningPath learningPath )
 	{
-		List<Actividad> actividades = learningPath.getActividades();
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Selecciona una opción:");
+		System.out.println("1. Añadir Actividad:");
+		System.out.println("2. Eliminar Actividad");
+		System.out.print("Opción: ");
+		int opcion = escaner.nextInt();
+
+		switch(opcion)
+		{
+		case 1: añadirActividadLPProfesor(learningPath);
+		case 2: eliminarActividadLPProfesor( learningPath );
+		default:
+				System.out.println("Opción no válida");
+				break;
+		}
+		escaner.close();
+	}
+
+	public static void añadirActividadLPProfesor ( LearningPath learningPath )
+	{
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Inserte el codigo de la actividad que desea añadir:");
+		String idBuscado = escaner.nextLine();
 		
-		learningPath.actualizacionRealizada();
+		if (idBuscado.length() == 8)
+		{
+			Actividad actividadBuscada = GeneradorActividades.getActividad(idBuscado);
+			List<Actividad> actividades = learningPath.getActividades();
+	
+			if ( actividades.contains(actividadBuscada) == true) { System.out.println("La actividad ya se encuentra dentro del LearningPath"); }
+			else
+			{
+				actividades.add(actividadBuscada);
+				learningPath.actualizacionRealizada();
+			}
+		}
+		else 
+		{ System.out.println("Recuerde que los ID de las actividades son de 8 digitos"); }
+		escaner.close();
+	}
+
+	public static void eliminarActividadLPProfesor ( LearningPath learningPath )
+	{
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Inserte el codigo de la actividad que desea eliminar:");
+		String idBuscado = escaner.nextLine();
+		
+		if (idBuscado.length() == 8)
+		{
+			Actividad actividadBuscada = GeneradorActividades.getActividad(idBuscado);
+			List<Actividad> actividades = learningPath.getActividades();
+	
+			if ( actividades.contains(actividadBuscada) == true) 
+			{
+				actividades.remove(actividadBuscada);
+				learningPath.actualizacionRealizada();
+			}
+			else
+			{
+				System.out.println("La actividad no se encuentra dentro del LearningPath");
+			}
+		}
+		else 
+		{ System.out.println("Recuerde que los ID de las actividades son de 8 digitos"); }
+		escaner.close();
 	}
 
 	public static void crearActividadProfesor( Profesor profesor )
 	{
-		profesor.crearActividad();
+		Scanner escaner = new Scanner(System.in);
+		System.out.println("Selecciona el tipo de  Actividad");
+		System.out.println("1. Encuesta");
+		System.out.println("2. Examen");
+		System.out.println("3. Quiz");
+		System.out.println("4. Recurso Educativo");
+		System.out.println("5. Tarea");
+		System.out.println("6. Salir:");
+
+		System.out.print("Opción: ");
+		int opcion = escaner.nextInt();
+		// Campos en comun de todas las actividades
+		System.out.println("Escriba el nombre de la actividad");
+		String nombre = escaner.nextLine();
+		System.out.println("Escriba la descripcion de la actividad");
+		String descripcion = escaner.nextLine();
+		System.out.println("Escriba el objetivo nombre de la actividad");
+		String objetivo = escaner.nextLine();
+		System.out.println("Escriba la duracion estimada de la actividad");
+		String duracionEstimada = escaner.nextLine(); // convertir a double
+		System.out.println("Escriba el nivel de dificultad de la actividad");
+		String nivelDificultad = escaner.nextLine();
+		System.out.println("Escriba la fecha limite recomendada para la actividad");
+		String fechaLimite = escaner.nextLine(); // convertir a date
+		System.out.println("Escoja las actividades que son Pre Requisitos");
+
+		boolean check1 = true;
+		List<Actividad> actividadesPre = new LinkedList<Actividad>();
+		while ( check1 )
+		{
+			System.out.println("Escoja el ID de las actividades, escoja 0 para detenerse.");
+			System.out.println("Escoja el ID de las actividades, 8 numeros.");
+			String codigo = escaner.nextLine();
+			if (codigo == "0") 
+			{ 
+				check1 = false;
+				escaner.close();
+			}
+			else 
+			{
+				if ( GeneradorActividades.validarActividad(codigo) ) { actividadesPre.add(GeneradorActividades.getActividad(codigo)); }
+				else { System.out.println("Actividad no encontrada"); }
+			}
+		}
+		boolean check2 = true;
+		Actividad actividadSeguimiento;
+		while ( check2 )
+		{
+			System.out.println("Escoja la actividad de seguimiento");
+			System.out.println("Escoja el ID de las actividad, 8 numeros.");
+			String codigo = escaner.nextLine();
+			if ( GeneradorActividades.validarActividad(codigo) ) 
+			{ 
+				actividadSeguimiento = GeneradorActividades.getActividad(codigo); 
+				check2 = false;
+			}
+			else { System.out.println("Actividad no encontrada"); }
+		}
+
+
+		
+		// Campos diferentes dependiendo de actividad
+		switch(opcion)
+		{
+		case 1:
+				List<PreguntaAbierta> preguntasEncuesta = generadorPreguntasAbiertas();
+				Encuesta encuestaNueva = GeneradorActividades.generarEncuesta(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, fechaLimite, preguntasEncuesta);
+				profesor.añadirActividadCreada(encuestaNueva);
+				break;
+		case 2: 
+				List<PreguntaAbierta> preguntasExamen = generadorPreguntasAbiertas();
+				Examen examenNuevo = GeneradorActividades.generarExamen(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, fechaLimite, preguntasExamen);
+				profesor.añadirActividadCreada(examenNuevo);
+				break;
+
+		case 3: 
+				List<PreguntaCerrada> preguntasQuiz = generadorPreguntasCerradas();
+				Quiz quizNuevo = GeneradorActividades.generarQuiz(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, fechaLimite, preguntasQuiz);
+				profesor.añadirActividadCreada(quizNuevo);
+				break;
+		case 4: 
+				System.out.println("Escriba el nombre de la actividad");
+				String nombre = escaner.nextLine();
+				System.out.println("Escriba la descripcion de la actividad");
+				String descripcion = escaner.nextLine();
+				RecursoEducativo recursoEducativoNuevo = GeneradorActividades.generarRecursoEducativo(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, null, , , , );
+				editarDuracionProfesor( learningPath );
+		case 5: editarActividadesLPProfesor( learningPath );
+		case 6:
+				escaner.close();
+				System.exit(0);
+				break;
+		default:
+				System.out.println("Opción no válida");
+				break;
+		}
 	}
+
 
 	public static void editarActividadProfesor( Profesor profesor )
 	{
@@ -286,12 +522,12 @@ public class EstadoGlobal
 				if (  usuario instanceof Profesor ) 
 				{
 					Profesor profesor = (Profesor) usuario; 
-					menuProfesor(profesor);
+					menuProfesor(profesor );
 				}
 				else if ( usuario instanceof Estudiante)
 				{
 					Estudiante estudiante = (Estudiante) usuario;
-					menuEstudiante( estudiante);
+					menuEstudiante( estudiante );
 				}
 			}
         }
