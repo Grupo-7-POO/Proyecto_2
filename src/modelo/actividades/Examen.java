@@ -5,8 +5,6 @@ import java.util.Date;
 import modelo.preguntas.PreguntaAbierta;
 
 
-
-
 public class Examen extends Actividad {
     private String estadoCalificacion;
     private List<PreguntaAbierta> preguntas;
