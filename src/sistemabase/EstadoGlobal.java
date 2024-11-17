@@ -528,10 +528,11 @@ public class EstadoGlobal
 	{
 		List<PreguntaCerrada> preguntas = new LinkedList<>();
 		boolean check = true;
+		boolean checkCorrecta;
 		
 		while ( check )
 		{
-			boolean checkCorrecta = false;
+			checkCorrecta = false;
 			System.out.println("Escriba el enunciado de la pregunta: ");
 			String enunciado = escaner.nextLine();
 			if ( enunciado.equals("00") == false ) 
@@ -617,6 +618,7 @@ public class EstadoGlobal
 			} 	
 
 			System.out.println("Selecciona una opción:");
+			System.out.println("0. Salir");
 			System.out.println("1. Editar Nombre");
 			System.out.println("2. Editar Descripcion");
 			System.out.println("3. Editar Objetivo");
@@ -630,18 +632,14 @@ public class EstadoGlobal
 			if ( actividadEditar instanceof Encuesta )
 			{ 
 				System.out.println("10. Editar Preguntas");
-				System.out.println("11. Salir");
-
 			}
 			else if ( actividadEditar instanceof Examen )
 			{
 				System.out.println("10. Editar Preguntas");
-				System.out.println("11. Salir");
 			}
 			else if ( actividadEditar instanceof Quiz )
 			{
 				System.out.println("10. Editar Preguntas");
-				System.out.println("11. Salir");
 			}
 			else if ( actividadEditar instanceof RecursoEducativo )
 			{ 
@@ -649,13 +647,11 @@ public class EstadoGlobal
 				System.out.println("11. Editar URL del Recurso");
 				System.out.println("12. Editar titulo del Recurso");
 				System.out.println("13. Editar descripcion del Recurso");
-				System.out.println("14. Salir");
 			}
 			else if ( actividadEditar instanceof Tarea )
 			{ 
 				System.out.println("10. Editar motivo de Entrega");
 				System.out.println("11. Editar Estado Envio");
-				System.out.println("12. Salir");
 			}
 
 			System.out.print("Opción: ");
@@ -664,6 +660,9 @@ public class EstadoGlobal
 
 			switch(opcion)
 			{
+			case 0:
+					System.exit(0);
+					break;
 			case 1:
 					System.out.println("Ingrese el nuevo Nombre de la Actividad: ");
 					String nuevoNombre = escaner.nextLine();
@@ -783,28 +782,75 @@ public class EstadoGlobal
 					{ 
 						System.out.println("Ingrese las nuevas preguntas de la Encuesta");
 						List<PreguntaAbierta> nuevasPreguntas = generadorPreguntasAbiertas();
+						((Encuesta)actividadEditar).setPreguntas(nuevasPreguntas);
 					}
 					else if ( actividadEditar instanceof Examen )
 					{ 
-						actividadClonada = GeneradorActividades.clonarExamen(idActividad); 
+						System.out.println("Ingrese las nuevas preguntas del Examen");
+						List<PreguntaAbierta> nuevasPreguntas = generadorPreguntasAbiertas();
+						((Examen)actividadEditar).setPreguntas(nuevasPreguntas); 
 					}
 					else if ( actividadEditar instanceof Quiz )
 					{ 
-						actividadClonada = GeneradorActividades.clonarQuiz(idActividad); 
+						System.out.println("Ingrese las nuevas preguntas del Quiz");
+						List<PreguntaCerrada> nuevasPreguntas = generadorPreguntasCerradas();
+						((Quiz)actividadEditar).setPreguntas(nuevasPreguntas); 
 					}
 					else if ( actividadEditar instanceof RecursoEducativo )
-					{ 
-						actividadClonada = GeneradorActividades.clonarRecursoEducativo(idActividad); 
+					{
+						System.out.println("Ingrese el nuevo tipo de Recurso");
+						String tipoRecursoNuevo = escaner.nextLine();
+						((RecursoEducativo)actividadEditar).setTipoRecurso(tipoRecursoNuevo); 
 					}
 					else if ( actividadEditar instanceof Tarea )
 					{ 
-						actividadClonada = GeneradorActividades.clonarTarea(idActividad); 
+						System.out.println("Ingrese el nuevo motivo de Entrega");
+						String motivoEntregaNuevo = escaner.nextLine();
+						((Tarea)actividadEditar).setMotivoEntrega(motivoEntregaNuevo); 
 					}
 					break;
 			case 11:
+					if ( actividadEditar instanceof RecursoEducativo )
+					{
+						System.out.println("Ingrese el nuevo URL del Recurso");
+						String urlRecursoNuevo = escaner.nextLine();
+						((RecursoEducativo)actividadEditar).setUrlRecurso(urlRecursoNuevo); 
+					}
+					else if ( actividadEditar instanceof Tarea )
+					{
+						System.out.println("Ingrese el nuevo Estado Envio");
+						String estadoEnvioNuevo = escaner.nextLine();
+						((Tarea)actividadEditar).setEstadoEnvio(estadoEnvioNuevo);
+					}
+					else
+					{
+						System.exit(0);
+						break;
+					}
 			case 12:
+					if ( actividadEditar instanceof RecursoEducativo )
+					{
+						System.out.println("Ingrese el nuevo titulo del Recurso");
+						String tituloNuevo = escaner.nextLine();
+						((RecursoEducativo)actividadEditar).setTitulo(tituloNuevo); 
+					}
+					else
+					{
+						System.exit(0);
+						break;
+					}
 			case 13:
-			case 14:
+					if ( actividadEditar instanceof RecursoEducativo )
+					{
+						System.out.println("Ingrese la nueva descripcion del Recurso");
+						String descripcionRecursoNuevo = escaner.nextLine();
+						((RecursoEducativo)actividadEditar).setTitulo(descripcionRecursoNuevo); 
+					}
+					else
+					{
+						System.exit(0);
+						break;
+					}
 			default:
 					System.out.println("Opción no válida");
 					break;
@@ -814,6 +860,22 @@ public class EstadoGlobal
 
 	public static void menuEstudiante( Estudiante estudiante )
 	{
+		System.out.println("Selecciona una opción:");
+		System.out.println("1. Crear Learning Path:");
+		System.out.println("2. Editar Learning Path");
+		System.out.println("3. Crear Actividad:");
+		System.out.println("4. Editar Actividad:");
+		System.out.println("5. Clonar Actividad:");
+		System.out.println("6. Salir:");
+
+		System.out.print("Opción: ");
+		String opcionIn = escaner.nextLine();
+		int opcion = Integer.parseInt(opcionIn);
+		
+		switch (opcion)
+		{
+			
+		}
 		
 	}
 
@@ -840,7 +902,7 @@ public class EstadoGlobal
 				{
 					Estudiante estudiante = (Estudiante) usuario;
 					menuEstudiante( estudiante );
-				}
+   				}
 			}
         }
     }
