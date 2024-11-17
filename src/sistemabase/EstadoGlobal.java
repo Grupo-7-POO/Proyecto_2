@@ -29,6 +29,7 @@ public class EstadoGlobal
 {
 	private static Map<String, Usuario> usuarios = new HashMap<String, Usuario>();
 	private static Map<String, LearningPath> learningPaths = new HashMap<String, LearningPath>();
+	private static Scanner escaner = new Scanner(System.in);
 
 	public static Map<String, Usuario> getUsuarios()
 	{
@@ -70,12 +71,12 @@ public class EstadoGlobal
 		String login;
 		String password;
 
-        Scanner escaner = new Scanner(System.in);
         System.out.println("1. Iniciar Sesion");
 		System.out.println("2. Crear Usuario");
 		System.out.println("Opción: ");
 			
-		int opcion = escaner.nextInt();
+		String opcionIn = escaner.nextLine();
+		int opcion = Integer.parseInt(opcionIn);
 
 		switch (opcion)
 		{
@@ -94,12 +95,9 @@ public class EstadoGlobal
 				break;
 		default:
 				System.out.println("Opción no válida");
-				escaner.close();
 				System.exit(0);
 				return "error";
 		}
-		escaner.close();
-
 
         if ( validarLogin(login, password) ) 
 		{
@@ -112,7 +110,6 @@ public class EstadoGlobal
 	public static String[] crearUsuarioConsola()
 	{
 		Usuario usuarioCreado;
-		Scanner escaner = new Scanner(System.in);
 
 		System.out.println("Ingrese su Nombre:");
 		String nombre = escaner.nextLine();
@@ -123,7 +120,6 @@ public class EstadoGlobal
 		if ( usuarios.containsKey(login) == true )
 		{
 			System.out.print("Login ya existe");
-			escaner.close();
 			System.exit(0);
 		}
 		System.out.println("Ingrese su contraseña: ");
@@ -135,7 +131,8 @@ public class EstadoGlobal
 
 		System.out.print("Opción: ");
 			
-		int opcion = escaner.nextInt();
+		String opcionIn = escaner.nextLine();
+		int opcion = Integer.parseInt(opcionIn);
 
 		switch (opcion)
 		{
@@ -149,18 +146,14 @@ public class EstadoGlobal
 					break;
 			default:
 					System.out.println("Opción no válida");
-					escaner.close();
 					System.exit(0);
 					break; // POSIBLE AÑADIR EXDCEPTION DE TIPO DE USUARIO NO VALIDO
 		}
-		escaner.close();
 		return new String[] {login, contrasena};
-
 	}
 
 	public static void menuProfesor( Profesor profesor)
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Selecciona una opción:");
 		System.out.println("1. Crear Learning Path:");
 		System.out.println("2. Editar Learning Path");
@@ -168,10 +161,11 @@ public class EstadoGlobal
 		System.out.println("4. Editar Actividad:");
 		System.out.println("5. Clonar Actividad:");
 		System.out.println("6. Salir:");
-		System.out.print("Opción: ");
-			
-		int opcion = escaner.nextInt();
 
+		System.out.print("Opción: ");
+		String opcionIn = escaner.nextLine();
+		int opcion = Integer.parseInt(opcionIn);
+		
 		switch (opcion)
 		{
 		case 1: 
@@ -190,7 +184,6 @@ public class EstadoGlobal
 				clonarActividadProfesor( profesor );
 				break;
 		case 6:
-				escaner.close();
 				System.exit(0);
 				break;
 		default:
@@ -203,7 +196,6 @@ public class EstadoGlobal
 	{
 		List<Actividad> actividades = new LinkedList<Actividad>();
 
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Escriba un titulo para el Learning Path");
 		String titulo = escaner.nextLine();
 		System.out.println("Escriba una descripcion para el Learning Path");
@@ -211,7 +203,8 @@ public class EstadoGlobal
 		System.out.println("Escriba el nivel de dificultad");
 		String nivelDificultad = escaner.nextLine();
 		System.out.println("Escriba la duracion estimada en minutos");
-		int duracion = escaner.nextInt();
+		String duracionLine = escaner.nextLine();
+		int duracion = Integer.parseInt(duracionLine);
 		System.out.println("Escoja las actividades que haran parte del Learning Path");
 		
 		boolean check = true;
@@ -223,7 +216,6 @@ public class EstadoGlobal
 			if (codigo == "0") 
 			{ 
 				check = false;
-				escaner.close();
 			}
 			else 
 			{
@@ -236,10 +228,8 @@ public class EstadoGlobal
 	}
 	public static LearningPath escogerLearningPath( Profesor profesor)
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Ingrese el titulo del Learning Path deseado:");
 		String titulo = escaner.nextLine();
-		escaner.close();
 
 		return profesor.getLearningPathbyNombre( titulo );
 	}
@@ -247,7 +237,7 @@ public class EstadoGlobal
 	public static void editarLearningPathProfesor( Profesor profesor )
 	{
 		LearningPath learningPath = escogerLearningPath( profesor );
-		Scanner escaner = new Scanner(System.in);
+
 		System.out.println("Selecciona una opción:");
 		System.out.println("1. Editar Titulo:");
 		System.out.println("2. Editar Descripcion");
@@ -257,7 +247,8 @@ public class EstadoGlobal
 		System.out.println("6. Salir:");
 
 		System.out.print("Opción: ");
-		int opcion = escaner.nextInt();
+		String opcionIn = escaner.nextLine();
+		int opcion = Integer.parseInt(opcionIn);
 
 		switch(opcion)
 		{
@@ -267,7 +258,6 @@ public class EstadoGlobal
 		case 4: editarDuracionProfesor( learningPath );
 		case 5: editarActividadesLPProfesor( learningPath );
 		case 6:
-				escaner.close();
 				System.exit(0);
 				break;
 		default:
@@ -278,32 +268,30 @@ public class EstadoGlobal
 
 	public static void editarTituloProfesor( LearningPath learningPath )
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Escriba un nuevo titulo:");
 		String titulo = escaner.nextLine();
 		learningPath.setTitulo( titulo );
 		learningPath.actualizacionRealizada();
-		escaner.close();
 	}
 
 	public static void editarDescripcionProfesor( LearningPath learningPath )
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Escriba una nueva descripcion:");
 		String descripcion = escaner.nextLine();
 		learningPath.setDescripcion( descripcion );
 		learningPath.actualizacionRealizada();
-		escaner.close();
 	}
 
 	public static void editarNivelDificultadProfesor( LearningPath learningPath )
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Escoja un nivel de Dificultad:");
 		System.out.println("1. Principiante");
 		System.out.println("2. Intermedio");
 		System.out.println("3. Avanzado");
-		int nivel = escaner.nextInt();
+
+		String nivelLine = escaner.nextLine();
+		int nivel = Integer.parseInt(nivelLine);
+		
 		String dificultad = null;
 
 		switch (nivel) {
@@ -318,27 +306,25 @@ public class EstadoGlobal
 			learningPath.setNivelDificultad( dificultad );
 			learningPath.actualizacionRealizada();
 		}
-		escaner.close();
 	}
 
 	public static void editarDuracionProfesor( LearningPath learningPath )
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Escoja una nueva duracion en minutos:");
-		int duracion = escaner.nextInt();
+		String duracionLine = escaner.nextLine();
+		int duracion = Integer.parseInt(duracionLine);
 		learningPath.setDuracion( duracion );
 		learningPath.actualizacionRealizada();
-		escaner.close();
 	}
 
 	public static void editarActividadesLPProfesor( LearningPath learningPath )
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Selecciona una opción:");
 		System.out.println("1. Añadir Actividad:");
 		System.out.println("2. Eliminar Actividad");
 		System.out.print("Opción: ");
-		int opcion = escaner.nextInt();
+		String opcionIn = escaner.nextLine();
+		int opcion = Integer.parseInt(opcionIn);
 
 		switch(opcion)
 		{
@@ -348,12 +334,10 @@ public class EstadoGlobal
 				System.out.println("Opción no válida");
 				break;
 		}
-		escaner.close();
 	}
 
 	public static void añadirActividadLPProfesor ( LearningPath learningPath )
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Inserte el codigo de la actividad que desea añadir:");
 		String idBuscado = escaner.nextLine();
 		
@@ -371,12 +355,10 @@ public class EstadoGlobal
 		}
 		else 
 		{ System.out.println("Recuerde que los ID de las actividades son de 8 digitos"); }
-		escaner.close();
 	}
 
 	public static void eliminarActividadLPProfesor ( LearningPath learningPath )
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Inserte el codigo de la actividad que desea eliminar:");
 		String idBuscado = escaner.nextLine();
 		
@@ -397,12 +379,10 @@ public class EstadoGlobal
 		}
 		else 
 		{ System.out.println("Recuerde que los ID de las actividades son de 8 digitos"); }
-		escaner.close();
 	}
 
 	public static void crearActividadProfesor( Profesor profesor )
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Selecciona el tipo de  Actividad");
 		System.out.println("1. Encuesta");
 		System.out.println("2. Examen");
@@ -412,7 +392,8 @@ public class EstadoGlobal
 		System.out.println("6. Salir:");
 
 		System.out.print("Opción: ");
-		int opcion = escaner.nextInt();
+		String opcionIn = escaner.nextLine();
+		int opcion = Integer.parseInt(opcionIn);
 		// Campos en comun de todas las actividades
 		System.out.println("Escriba el nombre de la actividad");
 		String nombre = escaner.nextLine();
@@ -451,7 +432,6 @@ public class EstadoGlobal
 			if (codigo.equals("0")) 
 			{ 
 				check1 = false;
-				escaner.close();
 			}
 			else 
 			{
@@ -511,7 +491,6 @@ public class EstadoGlobal
 				profesor.añadirActividadCreada(tareaNueva);
 				break;
 		case 6:
-				escaner.close();
 				System.exit(0);
 				break;
 		default:
@@ -524,7 +503,6 @@ public class EstadoGlobal
 	{
 		List<PreguntaAbierta> preguntas = new LinkedList<>();
 		boolean check = true;
-		Scanner escaner = new Scanner(System.in);
 		while ( check )
 		{
 			System.out.println("Escriba el enunciado de la pregunta: ");
@@ -543,7 +521,6 @@ public class EstadoGlobal
 				check = false;
 			}
 		}
-		escaner.close();
 		return preguntas;
 	}
 
@@ -552,7 +529,6 @@ public class EstadoGlobal
 		List<PreguntaCerrada> preguntas = new LinkedList<>();
 		boolean check = true;
 		
-		Scanner escaner = new Scanner(System.in);
 		while ( check )
 		{
 			boolean checkCorrecta = false;
@@ -592,16 +568,14 @@ public class EstadoGlobal
 				check = false;
 			}
 		}
-		escaner.close();
 		return preguntas;
 	}
 
 	public static void clonarActividadProfesor( Profesor profesor )
 	{
-		Scanner escaner = new Scanner(System.in);
 		System.out.println("Ingresa el codigo de la Actividad a clonar");
 		String idActividad = escaner.nextLine();
-		Actividad actividadClonada = null;;
+		Actividad actividadClonada = null;
 		if ( GeneradorActividades.validarActividad(idActividad) == true)
 		{
 			Actividad actividadClonar = GeneradorActividades.getActividad(idActividad);
@@ -620,12 +594,222 @@ public class EstadoGlobal
 		{ 
 			System.out.println("Ingresa el codigo de la Actividad a clonar");
 		}
-		escaner.close();
 	}
 
 	public static void editarActividadProfesor( Profesor profesor )
 	{
-		//profesor.editarActividad();
+		System.out.println("Ingresa el codigo de la Actividad a clonar");
+		String idActividad = escaner.nextLine();
+		if ( GeneradorActividades.validarActividad(idActividad) == true)
+		{
+			Actividad actividadEditar = GeneradorActividades.getActividad(idActividad);
+			if ( profesor.getActividadesCreadas().contains(actividadEditar) == false)
+			{ 
+				System.out.println("Esa actividad no le pertenece, se ha creado una copia para editar"); 
+				Actividad actividadClonada = null;
+				if ( actividadEditar instanceof Encuesta ){ actividadClonada = GeneradorActividades.clonarEncuesta(idActividad); }
+				else if ( actividadEditar instanceof Examen ){ actividadClonada = GeneradorActividades.clonarExamen(idActividad); }
+				else if ( actividadEditar instanceof Quiz ){ actividadClonada = GeneradorActividades.clonarQuiz(idActividad); }
+				else if ( actividadEditar instanceof RecursoEducativo ){ actividadClonada = GeneradorActividades.clonarRecursoEducativo(idActividad); }
+				else if ( actividadEditar instanceof Tarea ){ actividadClonada = GeneradorActividades.clonarTarea(idActividad); }
+
+				actividadEditar = actividadClonada;
+			} 	
+
+			System.out.println("Selecciona una opción:");
+			System.out.println("1. Editar Nombre");
+			System.out.println("2. Editar Descripcion");
+			System.out.println("3. Editar Objetivo");
+			System.out.println("4. Editar Nivel de Dificultad");
+			System.out.println("5. Editar duracion Estimada");
+			System.out.println("6. Editar Actividades de preRequisitos");
+			System.out.println("7. Editar Actividad de Seguimiento");
+			System.out.println("8. Editar Fecha Limite de Actividad");
+			System.out.println("9. Editar Resultado");
+
+			if ( actividadEditar instanceof Encuesta )
+			{ 
+				System.out.println("10. Editar Preguntas");
+				System.out.println("11. Salir");
+
+			}
+			else if ( actividadEditar instanceof Examen )
+			{
+				System.out.println("10. Editar Preguntas");
+				System.out.println("11. Salir");
+			}
+			else if ( actividadEditar instanceof Quiz )
+			{
+				System.out.println("10. Editar Preguntas");
+				System.out.println("11. Salir");
+			}
+			else if ( actividadEditar instanceof RecursoEducativo )
+			{ 
+				System.out.println("10. Editar tipo de Recurso");
+				System.out.println("11. Editar URL del Recurso");
+				System.out.println("12. Editar titulo del Recurso");
+				System.out.println("13. Editar descripcion del Recurso");
+				System.out.println("14. Salir");
+			}
+			else if ( actividadEditar instanceof Tarea )
+			{ 
+				System.out.println("10. Editar motivo de Entrega");
+				System.out.println("11. Editar Estado Envio");
+				System.out.println("12. Salir");
+			}
+
+			System.out.print("Opción: ");
+			String opcionIn = escaner.nextLine();
+			int opcion = Integer.parseInt(opcionIn);
+
+			switch(opcion)
+			{
+			case 1:
+					System.out.println("Ingrese el nuevo Nombre de la Actividad: ");
+					String nuevoNombre = escaner.nextLine();
+					actividadEditar.setNombre(nuevoNombre);
+					break;
+			case 2: 
+					System.out.println("Ingrese la nueva Descripcion de la Actividad: ");
+					String nuevaDescripcion = escaner.nextLine();
+					actividadEditar.setDescripcion(nuevaDescripcion);
+					break;
+
+			case 3: 
+					System.out.println("Ingrese el nuevo Objetivo de la Actividad: ");
+					String nuevoObejtivo = escaner.nextLine();
+					actividadEditar.setObjetivo(nuevoObejtivo);
+					break;
+			case 4: 
+					System.out.println("Escoja un nivel de Dificultad:");
+					System.out.println("1. Principiante");
+					System.out.println("2. Intermedio");
+					System.out.println("3. Avanzado");
+
+					String nivelLine = escaner.nextLine();
+					int nivel = Integer.parseInt(nivelLine);
+
+					String dificultad = null;
+					switch (nivel) 
+					{
+						case 1: dificultad = "Principiante";
+						case 2: dificultad = "Intermedio";
+						case 3: dificultad = "Avanzado";
+						default: System.out.println("Opcion no valida");
+					}
+					if ( dificultad != null) { actividadEditar.setNivelDificultad( dificultad ); }
+					break;
+			case 5: 
+					System.out.println("Ingrese la nueva duracion Estimada");
+					String value = escaner.nextLine();
+					double nuevaDuracion = Double.parseDouble(value);
+					actividadEditar.setDuracionEstimada(nuevaDuracion);
+					break;
+			case 6:
+					System.out.println("Escoja una accion:");
+					System.out.println("1. Añadir PreRequisito");
+					System.out.println("2. Eliminar PreRequisito");
+					System.out.println("3. Eliminar todos los PreRequisitos");
+
+					String accionLine = escaner.nextLine();
+					int accionPR = Integer.parseInt(accionLine);
+					String codigoPR = null;
+					switch (accionPR) 
+					{
+						case 1:
+								System.out.println("Ingrese el codigo de la Actividad que desea añadir");
+								codigoPR = escaner.nextLine();
+								if ( GeneradorActividades.validarActividad(codigoPR) ) { actividadEditar.añadirActividadesPrerequisitos( GeneradorActividades.getActividad(codigoPR) ); }
+								else { System.out.println("No se encontro la actividad"); }
+								break;
+						case 2:
+								System.out.println("Ingrese el codigo de la Actividad que desea eliminar");
+								codigoPR = escaner.nextLine();
+								if ( GeneradorActividades.validarActividad(codigoPR) ) 
+								{ 
+									actividadEditar.eliminarActividadPrerequisitos( GeneradorActividades.getActividad(codigoPR) ); 
+								}
+								else { System.out.println("No se encontro la actividad"); }
+								break;
+						case 3:
+								actividadEditar.eliminarPrerequisitos();
+								break;
+						default: 
+								System.out.println("Opcion no valida");
+					}
+					break;
+			case 7:
+					System.out.println("Escoja una accion:");
+					System.out.println("1. Cambiar Actividad de Seguimiento");
+					System.out.println("2. Eliminar Actividad de Seguimiento");
+
+					String accionCaso7 = escaner.nextLine();
+					int accionSeguimiento = Integer.parseInt(accionCaso7);
+
+					switch (accionSeguimiento) 
+					{
+						case 1:
+								System.out.println("Ingrese el codigo de la Actividad por la que desea reemplazar el Seguimiento");
+								String codigoSeguimiento = escaner.nextLine();
+								if ( GeneradorActividades.validarActividad(codigoSeguimiento) ) { actividadEditar.añadirActividadesPrerequisitos( GeneradorActividades.getActividad(codigoSeguimiento) ); }
+								else { System.out.println("No se encontro la actividad"); }
+								break;
+						case 2:
+								actividadEditar.eliminarActividadSeguimiento();	
+								System.out.println("Se ha eliminado la actividad de seguimiento");
+								break;
+						default: 
+								System.out.println("Opcion no valida");
+					}
+					break;
+			case 8:
+					System.out.println("Ingrese la nueva Fecha Limite de la Actividad en formato dd-MMM-yyyy");
+					String date = escaner.nextLine(); // convertir a date
+					try {
+						SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+						Date fechaLimite = formatter.parse(date);
+						actividadEditar.setFechaLimite(fechaLimite);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					break;
+			case 9:
+					System.out.println("Ingrese el resultado deseado");
+					String resultado = escaner.nextLine();
+					actividadEditar.setResultado(resultado);
+					break;
+			case 10:
+					if ( actividadEditar instanceof Encuesta )
+					{ 
+						System.out.println("Ingrese las nuevas preguntas de la Encuesta");
+						List<PreguntaAbierta> nuevasPreguntas = generadorPreguntasAbiertas();
+					}
+					else if ( actividadEditar instanceof Examen )
+					{ 
+						actividadClonada = GeneradorActividades.clonarExamen(idActividad); 
+					}
+					else if ( actividadEditar instanceof Quiz )
+					{ 
+						actividadClonada = GeneradorActividades.clonarQuiz(idActividad); 
+					}
+					else if ( actividadEditar instanceof RecursoEducativo )
+					{ 
+						actividadClonada = GeneradorActividades.clonarRecursoEducativo(idActividad); 
+					}
+					else if ( actividadEditar instanceof Tarea )
+					{ 
+						actividadClonada = GeneradorActividades.clonarTarea(idActividad); 
+					}
+					break;
+			case 11:
+			case 12:
+			case 13:
+			case 14:
+			default:
+					System.out.println("Opción no válida");
+					break;
+			}
+		}
 	}
 
 	public static void menuEstudiante( Estudiante estudiante )
