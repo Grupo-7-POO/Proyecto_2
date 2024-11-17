@@ -861,11 +861,11 @@ public class EstadoGlobal
 	public static void menuEstudiante( Estudiante estudiante )
 	{
 		System.out.println("Selecciona una opción:");
-		System.out.println("1. Crear Learning Path:");
-		System.out.println("2. Editar Learning Path");
+		System.out.println("1. Registrarse a un Learning Path:");
+		System.out.println("2. Realizar Actividad");
 		System.out.println("3. Crear Actividad:");
 		System.out.println("4. Editar Actividad:");
-		System.out.println("5. Clonar Actividad:");
+		System.out.println("5. Crear Reseña");
 		System.out.println("6. Salir:");
 
 		System.out.print("Opción: ");
@@ -874,7 +874,7 @@ public class EstadoGlobal
 		
 		switch (opcion)
 		{
-			
+
 		}
 		
 	}

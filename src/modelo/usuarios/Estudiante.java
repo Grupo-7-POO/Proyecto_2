@@ -9,6 +9,7 @@ import modelo.Reseña;
 import modelo.actividades.Actividad;
 
 public class Estudiante extends Usuario {
+    
     private LearningPath lPInscrito;
     private List<LearningPath> lPCompletados;
     private Map<LearningPath, Actividad> actividadesCompletadas;
