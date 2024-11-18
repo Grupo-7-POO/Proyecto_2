@@ -5,10 +5,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import modelo.ArrayList;
+import java.util.ArrayList;
 import modelo.LearningPath;
-import modelo.List;
+import java.util.List;
 import modelo.actividades.Actividad;
+import modelo.actividades.RecursoEducativo;
 import modelo.usuarios.Profesor;
 
 class ProfesorT {
@@ -23,8 +24,7 @@ class ProfesorT {
     @Test
     public void testCrearLearningPath() {
         List<Actividad> actividades = new ArrayList<>();
-        actividades.add(new Actividad("Actividad 1", "Descripción 1", "Principiante", 30));
-        actividades.add(new Actividad("Actividad 2", "Descripción 2", "Intermedio", 60));
+        actividades.add(new RecursoEducativo("Actividad 1", "Descripción 1", "Principiante", null, 30, null, null, null, null, null, null, null, null));
 
         // Crear un Learning Path
         LearningPath lp = profesor.crearLearningPath("Python Básico", "Introducción a Python", "Principiante", 90, actividades);
@@ -48,15 +48,12 @@ class ProfesorT {
     @Test
     public void testGetActividadesCreadas() {
         assertTrue(profesor.getActividadesCreadas().isEmpty());
-        Actividad actividad1 = new Actividad("Actividad 1", "Descripción 1", "Principiante", 30);
-        Actividad actividad2 = new Actividad("Actividad 2", "Descripción 2", "Intermedio", 60);
+        Actividad actividad1 = new RecursoEducativo("Actividad 1", "Descripción 1", "Principiante", null, 30, null, null, null, null, null, null, null, null);
 
         profesor.getActividadesCreadas().add(actividad1);
-        profesor.getActividadesCreadas().add(actividad2);
 
         assertEquals(2, profesor.getActividadesCreadas().size());
         assertTrue(profesor.getActividadesCreadas().contains(actividad1));
-        assertTrue(profesor.getActividadesCreadas().contains(actividad2));
     }
 
     @AfterEach

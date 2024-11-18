@@ -1,35 +1,27 @@
 package modelo.preguntas;
 
-public class Opcion
-{
-	private String texto;
-	
-	private boolean esCorrecta;
-	
-	
-	public Opcion( String texto)
-	{
-		this.texto = null;
-		this.esCorrecta = false;
-	}
+public class Opcion {
+    private String texto;
+    private boolean esCorrecta;
 
-	// GETTERS
+    public Opcion(String texto, boolean esCorrecta) {
+        this.texto = texto;
+        this.esCorrecta = esCorrecta;
+    }
 
-	public String getTexto()
-	{
-		return this.texto;
-	}
+    public String getTexto() {
+        return this.texto;
+    }
 
-	public boolean getEsCorrecta()
-	{
-		return this.esCorrecta;
-	}
+    public boolean getEsCorrecta() {
+        return this.esCorrecta;
+    }
 
-	// SETTERS
-	
-	public void setEsCorrecta()
-	{
-		this.esCorrecta = true;
-	}
-	
+    public void setEsCorrecta(boolean esCorrecta) {
+        this.esCorrecta = esCorrecta;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
 }
