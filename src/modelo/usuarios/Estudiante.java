@@ -1,9 +1,7 @@
 package modelo.usuarios;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import modelo.LearningPath;
 import modelo.Reseña;
 import modelo.actividades.Actividad;

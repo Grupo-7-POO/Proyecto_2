@@ -529,11 +529,10 @@ public class EstadoGlobal
 	{
 		List<PreguntaCerrada> preguntas = new LinkedList<>();
 		boolean check = true;
-		boolean checkCorrecta;
 		
 		while ( check )
 		{
-			checkCorrecta = false;
+			boolean checkCorrecta = false;
 			System.out.println("Escriba el enunciado de la pregunta: ");
 			String enunciado = escaner.nextLine();
 			if ( enunciado.equals("00") == false ) 
