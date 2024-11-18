@@ -6,11 +6,12 @@ import java.util.List;
 import org.json.JSONException;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.ArrayList;
+
 
 import modelo.usuarios.Estudiante;
 import modelo.actividades.Actividad;
-import modelo.usuarios.Usuario;
+
+
 
 import exceptions.InformacionInconsistenteException;
 import persistencia.CentralPersistencia;

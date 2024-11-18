@@ -2,41 +2,21 @@ package persistencia;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
 import exceptions.InformacionInconsistenteException;
-import exceptions.LearningPathDuplicadoException;
-import exceptions.InformacionInconsistenteUserException;
-import exceptions.TipoInvalidoException;
-import exceptions.UserRepetidoException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import modelo.LearningPath;
-import modelo.Reseña;
 import modelo.usuarios.Estudiante;
 import modelo.usuarios.Profesor;
 import modelo.usuarios.Usuario;
-import modelo.preguntas.Opcion;
-import modelo.preguntas.Pregunta;
-import modelo.preguntas.PreguntaAbierta;
-import modelo.preguntas.PreguntaCerrada;
 import modelo.actividades.Actividad;
-import modelo.actividades.Encuesta;
-import modelo.actividades.Examen;
-import modelo.actividades.Quiz;
-import modelo.actividades.RecursoEducativo;
-import modelo.actividades.Tarea;
-
-import sistemabase.EstadoGlobal;
-import sistemabase.GeneradorActividades;
-import sistemabase.GeneradorPreguntas;
-
 import java.util.ArrayList;
 
 public class UsuariosJson implements IPersistenciaUsuarios {
@@ -44,7 +24,6 @@ public class UsuariosJson implements IPersistenciaUsuarios {
 
     @Override
     public void salvarUsuarios(String archivo, LearningPath learningPath) throws IOException {
-        JSONObject jUsuarios = new JSONObject();
         JSONArray jArrayUsuarios = new JSONArray();
 
         for (Usuario usuario : usuarios) {
@@ -112,7 +91,6 @@ public class UsuariosJson implements IPersistenciaUsuarios {
         List<LearningPath> learningPaths = new LinkedList<>();
         for (int i = 0; i < jLearningPaths.length(); i++) {
             JSONObject jLearningPath = jLearningPaths.getJSONObject(i);
-            String id = jLearningPath.getString("id");
             String titulo = jLearningPath.getString("titulo");
             String descripcion = jLearningPath.getString("descripcion");
             String nivelDificultad = jLearningPath.getString("nivelDificultad");

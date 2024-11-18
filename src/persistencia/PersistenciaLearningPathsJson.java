@@ -22,7 +22,6 @@ import modelo.actividades.RecursoEducativo;
 import modelo.actividades.Tarea;
 import modelo.preguntas.PreguntaAbierta;
 import modelo.preguntas.PreguntaCerrada;
-import modelo.Reseña;
 import modelo.preguntas.Opcion;
 import modelo.usuarios.Estudiante;
 import modelo.usuarios.Profesor;
@@ -47,13 +46,8 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
 	private Actividad seguimiento;
 	private Date fechaLimite;
     private String nombre;
-	private String descripcion;
 	private double duracionEstimada;
 	private List<Actividad> preRequisitos;
-	private String resultado;
-	private String id;
-	private List<Reseña> reseñas;
-	private double rating;
 	
 
 

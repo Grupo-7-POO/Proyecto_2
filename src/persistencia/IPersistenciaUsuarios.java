@@ -1,11 +1,10 @@
 package persistencia;
 
 import java.io.IOException;
-import java.util.List;
 
 import exceptions.InformacionInconsistenteException;
 import modelo.LearningPath;
-import modelo.usuarios.Usuario;
+
 
 /**
  * Esta interfaz define las operaciones relacionadas con la persistencia de los tiquetes de la aerolíena (salvar y cargar)
