@@ -210,7 +210,7 @@ public class LearningPath{
     public void cargarUsuarios( String archivo, String tipoArchivo ) throws TipoInvalidoException, IOException, InformacionInconsistenteException, persistencia.TipoInvalidoException
     {
         IPersistenciaUsuarios cargador = CentralPersistencia.getPersistenciaUsuarios( tipoArchivo );
-        cargador.cargarUsuarios( archivo, new ArrayList<Usuario>(this.estudiantesCursando) );
+		cargador.cargarUsuarios( archivo, this );
     }
 
     /**
@@ -224,7 +224,7 @@ public class LearningPath{
     public void salvarUsuarios( String archivo, String tipoArchivo ) throws TipoInvalidoException, IOException, persistencia.TipoInvalidoException
     {
         IPersistenciaUsuarios cargador = CentralPersistencia.getPersistenciaUsuarios( tipoArchivo );
-		cargador.salvarUsuarios( archivo, new ArrayList<Usuario>(this.estudiantesCursando) );
+		cargador.salvarUsuarios( archivo, this);
     }
 
 
