@@ -127,6 +127,11 @@ public class LearningPath{
 	{
 		this.titulo = titulo;
 	}
+
+	public void setProfesor( String profesor)
+	{
+		this.loginProfesor = profesor;
+	}
 	
 	public void setDescripcion( String descripcion)
 	{

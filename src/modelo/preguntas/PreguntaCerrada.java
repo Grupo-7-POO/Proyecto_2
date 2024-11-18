@@ -22,6 +22,12 @@ public class PreguntaCerrada extends Pregunta
 		Opcion respuesta = this.opciones.get(i);
 		return respuesta.getEsCorrecta();
 	}
+
+	public boolean getEsCorrecta()
+	{
+		return this.esCorrecta;
+	}
+	
 	public void setEsCorrecta(boolean esCorrecta) {
 
         this.esCorrecta = esCorrecta;
