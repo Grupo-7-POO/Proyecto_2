@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.util.LinkedList;
+import java.util.List;
 
 import exceptions.InformacionInconsistenteException;
 import exceptions.LearningPathDuplicadoException;
@@ -35,20 +37,13 @@ import sistemabase.EstadoGlobal;
 import sistemabase.GeneradorActividades;
 import sistemabase.GeneradorPreguntas;
 
-public class UsuariosJson implements IPersistenciaUsuarios {
+import java.util.ArrayList;
 
-    @Override
-    public void cargarUsuarios(String archivo, LearningPath learningPath) throws IOException, JSONException, InformacionInconsistenteException {
-        // Implementation for cargarUsuarios with LearningPath parameter
-    }
+public class UsuariosJson implements IPersistenciaUsuarios {
+    private List<Usuario> usuarios = new ArrayList<>();
 
     @Override
     public void salvarUsuarios(String archivo, LearningPath learningPath) throws IOException {
-        // Implementation for salvarUsuarios with LearningPath parameter
-    }
-
-    @Override
-    public void salvarUsuarios(String archivo, List<Usuario> usuarios) throws IOException {
         JSONObject jUsuarios = new JSONObject();
         JSONArray jArrayUsuarios = new JSONArray();
 
@@ -67,18 +62,15 @@ public class UsuariosJson implements IPersistenciaUsuarios {
                 jUsuario.put("learningPaths", salvarLearningPaths(profesor.getLearningPaths()));
             }
 
-            jArrayUsuarios.put(jUsuario);
-        }
-
-        jUsuarios.put("usuarios", jArrayUsuarios);
-        Files.write(new File(archivo).toPath(), jUsuarios.toString().getBytes());
+                jArrayUsuarios.put(jUsuario);
+            }
     }
 
     private JSONArray salvarLearningPaths(List<LearningPath> learningPaths) {
         JSONArray jLearningPaths = new JSONArray();
         for (LearningPath learningPath : learningPaths) {
             JSONObject jLearningPath = new JSONObject();
-            jLearningPath.put("id", learningPath.getId());
+            jLearningPath.put("id", learningPath.getTitulo());
             jLearningPath.put("titulo", learningPath.getTitulo());
             jLearningPath.put("descripcion", learningPath.getDescripcion());
             jLearningPath.put("nivelDificultad", learningPath.getNivelDificultad());
@@ -89,7 +81,7 @@ public class UsuariosJson implements IPersistenciaUsuarios {
     }
 
     @Override
-    public void cargarUsuarios(String archivo, List<Usuario> usuarios) throws IOException, JSONException, InformacionInconsistenteException {
+    public void cargarUsuarios(String archivo,LearningPath learningPath) throws IOException, JSONException, InformacionInconsistenteException {
         String jsonCompleto = new String(Files.readAllBytes(new File(archivo).toPath()));
         JSONObject raiz = new JSONObject(jsonCompleto);
         JSONArray jArrayUsuarios = raiz.getJSONArray("usuarios");
@@ -98,18 +90,18 @@ public class UsuariosJson implements IPersistenciaUsuarios {
             JSONObject jUsuario = jArrayUsuarios.getJSONObject(i);
             String login = jUsuario.getString("login");
             String nombre = jUsuario.getString("nombre");
-            String password = jUsuario.getString("password");
             String tipo = jUsuario.getString("tipo");
-
+            String email = jUsuario.getString("email");
+            String contrasena = jUsuario.getString("contrasena");
             Usuario usuario;
             if (tipo.equals("Estudiante")) {
-                usuario = new Estudiante(login, nombre, password);
+                usuario = new Estudiante(nombre, email, login, contrasena);
                 ((Estudiante) usuario).setLearningPaths(cargarLearningPaths(jUsuario.getJSONArray("learningPaths")));
             } else if (tipo.equals("Profesor")) {
-                usuario = new Profesor(login, nombre, password);
+                usuario = new Profesor(nombre, email, login, contrasena);
                 ((Profesor) usuario).setLearningPaths(cargarLearningPaths(jUsuario.getJSONArray("learningPaths")));
             } else {
-                throw new InformacionInconsistenteException("tipo", tipo);
+                throw new InformacionInconsistenteException("Tipo de usuario inconsistente: " + tipo);
             }
 
             usuarios.add(usuario);
@@ -125,8 +117,13 @@ public class UsuariosJson implements IPersistenciaUsuarios {
             String descripcion = jLearningPath.getString("descripcion");
             String nivelDificultad = jLearningPath.getString("nivelDificultad");
             int duracion = jLearningPath.getInt("duracion");
+            List<Actividad> actividades = new LinkedList<>();
+            String loginProfesor = jLearningPath.getString("loginProfesor");
+            
 
-            LearningPath learningPath = new LearningPath(id, titulo, descripcion, nivelDificultad, duracion);
+            LearningPath learningPath = new LearningPath(titulo, descripcion, nivelDificultad, duracion, 
+            actividades,loginProfesor);
+
             learningPaths.add(learningPath);
         }
         return learningPaths;
