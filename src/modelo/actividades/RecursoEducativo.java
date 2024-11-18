@@ -49,11 +49,11 @@ public class RecursoEducativo extends Actividad {
         this.titulo = titulo;
     }
 
-    public String getDescripcion() {
+    public String getDescripcionRecurso() {
         return descripcionRecurso;
     }
 
-    public void setDescripcion(String descripcion) {
+    public void setDescripcionRecurso(String descripcion) {
         this.descripcionRecurso = descripcion;
     }
 

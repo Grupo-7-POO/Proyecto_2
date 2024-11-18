@@ -38,6 +38,11 @@ public  class Profesor extends Usuario
 	{
 		return this.actividadesCreadas;
 	}
+
+	public void añadirActividadCreada(Actividad actividadNueva)
+	{
+		this.actividadesCreadas.add(actividadNueva);
+	}
 	
 	public LearningPath crearLearningPath( String titulo, String descripcion, String nivelDificultad, int duracion, List<Actividad> actividades)
 	{
@@ -45,5 +50,4 @@ public  class Profesor extends Usuario
 		learningPathsCreados.add(learningPath);
 		return learningPath;
 	} 
-
 }

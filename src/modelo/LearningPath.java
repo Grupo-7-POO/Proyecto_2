@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.LinkedList;
 
 import modelo.usuarios.Estudiante;
-import modelo.usuarios.Profesor;
 import modelo.actividades.Actividad;
 
 import exceptions.InformacionInconsistenteException;
@@ -160,7 +159,7 @@ public class LearningPath{
 		Double nuevaVersion = this.version + 0.1;
 		this.version = nuevaVersion;
 	}
-
+	// -------------------------------------------------------------------------------------------------------------------------------
 	 /**
      * Salva la información de la aerlínea en un archivo
      * @param archivo El nombre del archivo.
