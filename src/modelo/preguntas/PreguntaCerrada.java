@@ -26,5 +26,5 @@ public class PreguntaCerrada extends Pregunta
 
         this.esCorrecta = esCorrecta;
 
-    }x
+    }
 }
