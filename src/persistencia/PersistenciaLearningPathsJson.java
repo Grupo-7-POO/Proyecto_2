@@ -42,8 +42,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
     private static final String LOGIN_PROFESOR = "loginProfesor";
 
     @Override
-    public void cargarLearningPath(String archivo, LearningPath learningPath)
-            throws IOException, InformacionInconsistenteException, JSONException, LearningPathDuplicadoException {
+    public void cargarLearningPath(String archivo, LearningPath learningPath) throws IOException, InformacionInconsistenteException, JSONException, LearningPathDuplicadoException {
         String jsonCompleto = new String(Files.readAllBytes(new File(archivo).toPath()));
         JSONObject raiz = new JSONObject(jsonCompleto);
 
@@ -57,7 +56,8 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
             JSONObject jActividad = actividades.getJSONObject(i);
             Actividad actividad = cargarActividad(jActividad);
             learningPath.getActividades().add(actividad);
-        }
+            }
+        
 
         JSONArray estudiantesCursando = raiz.getJSONArray(ESTUDIANTES_CURSANDO);
         for (int i = 0; i < estudiantesCursando.length(); i++) {
@@ -112,7 +112,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
     }
 
     return encuesta;
-}
+    }
 
     private PreguntaAbierta cargarPreguntaAbierta(JSONObject jPregunta) throws JSONException {
     String enunciado = jPregunta.getString("enunciado");
@@ -202,7 +202,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
 	
 		return pregunta;
 	}
-    }
+    
 
     @Override
 
@@ -236,7 +236,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
     Files.write(new File(archivo).toPath(), jLearningPath.toString().getBytes());
 }
 
-	private JSONObject salvarActividad(Actividad actividad) {
+private JSONObject salvarActividad(Actividad actividad) {
 		JSONObject jActividad = new JSONObject();
 		jActividad.put(ID, actividad.getId());
 		jActividad.put(TITULO, actividad.getTitulo());
@@ -261,7 +261,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
 		return jActividad;
 	}
 
-	private JSONArray salvarPreguntas(List<? extends Pregunta> preguntas) {
+private JSONArray salvarPreguntas(List<? extends Pregunta> preguntas) {
 		JSONArray jPreguntas = new JSONArray();
 		for (Pregunta pregunta : preguntas) {
 			JSONObject jPregunta = new JSONObject();
