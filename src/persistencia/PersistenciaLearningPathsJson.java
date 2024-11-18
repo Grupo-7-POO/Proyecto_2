@@ -217,7 +217,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
         List<Opcion> opciones = new ArrayList<>();
         for (int i = 0; i < jOpciones.length(); i++) {
             JSONObject jOpcion = jOpciones.getJSONObject(i);
-            Opcion opcion = new Opcion(jOpcion.getString("texto"));
+            Opcion opcion = new Opcion(jOpcion.getString("texto"), jOpcion.getBoolean("esCorrecta"));
             opciones.add(opcion);
         }
         PreguntaCerrada pregunta = new PreguntaCerrada(enunciado, explicacion, id, opciones);
