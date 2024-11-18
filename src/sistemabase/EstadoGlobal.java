@@ -861,10 +861,10 @@ public class EstadoGlobal
 	public static void menuEstudiante( Estudiante estudiante )
 	{
 		System.out.println("Selecciona una opción:");
-		System.out.println("1. Registrarse a un Learning Path:");
-		System.out.println("2. Realizar Actividad");
-		System.out.println("3. Crear Actividad:");
-		System.out.println("4. Editar Actividad:");
+		System.out.println("1. Registrarse a un Learning Path");
+		System.out.println("2. Iniciar Actividad");
+		System.out.println("3. Completar Actividad");
+		System.out.println("4. Completar Learning Path");
 		System.out.println("5. Crear Reseña");
 		System.out.println("6. Salir:");
 
@@ -874,9 +874,55 @@ public class EstadoGlobal
 		
 		switch (opcion)
 		{
-
+			case 1: 
+				registrarLearningPathEstudiante( estudiante );
+				break;
+		case 2: 
+				iniciarActividadEstudiante( estudiante );
+				break;
+		case 3: 
+				completarActividadEstudiante( estudiante );
+				break;	
+		case 4: 
+				completarLearningPathEstudiante( estudiante );
+				break;
+		case 5: 
+				crearReseñaEstudiante( estudiante );
+				break;
+		case 6:
+				System.exit(0);
+				break;
+		default:
+				System.out.println("Opción no válida");
+				break;
 		}
-		
+	}
+
+	public static void registrarLearningPathEstudiante( Estudiante estudiante )
+	{
+		System.out.println("Opción no válida");
+
+
+	}
+
+	public static void iniciarActividadEstudiante( Estudiante estudiante )
+	{
+
+	}
+
+	public static void completarActividadEstudiante( Estudiante estudiante )
+	{
+
+	}
+
+	public static void completarLearningPathEstudiante( Estudiante estudiante )
+	{
+
+	}
+
+	public static void crearReseñaEstudiante( Estudiante estudiante )
+	{
+
 	}
 
 	
