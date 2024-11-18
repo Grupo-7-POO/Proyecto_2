@@ -28,7 +28,13 @@ public class Quiz extends Actividad {
         return this.estadoCalificacion;
     }
 
-    public void setEstadoCalificacion(String estadoCalificacion) {
+    public void setEstadoCalificacion(String estadoCalificacion) 
+    {
         this.estadoCalificacion = estadoCalificacion;
+    }
+
+    public void setPreguntas( List<PreguntaCerrada> nuevasPreguntas )
+    {
+        this.preguntas = nuevasPreguntas;
     }
 }

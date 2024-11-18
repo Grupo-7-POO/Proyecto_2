@@ -31,4 +31,9 @@ public class Examen extends Actividad {
     public void setEstadoCalificacion(String estadoCalificacion) {
         this.estadoCalificacion = estadoCalificacion;
     }
+
+    public void setPreguntas( List<PreguntaAbierta> nuevasPreguntas )
+    {
+        this.preguntas = nuevasPreguntas;
+    }
 }
