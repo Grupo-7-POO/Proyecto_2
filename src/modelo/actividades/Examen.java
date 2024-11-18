@@ -5,8 +5,6 @@ import java.util.Date;
 import modelo.preguntas.PreguntaAbierta;
 
 
-
-
 public class Examen extends Actividad {
     private String estadoCalificacion;
     private List<PreguntaAbierta> preguntas;
@@ -32,5 +30,10 @@ public class Examen extends Actividad {
 
     public void setEstadoCalificacion(String estadoCalificacion) {
         this.estadoCalificacion = estadoCalificacion;
+    }
+
+    public void setPreguntas( List<PreguntaAbierta> nuevasPreguntas )
+    {
+        this.preguntas = nuevasPreguntas;
     }
 }
