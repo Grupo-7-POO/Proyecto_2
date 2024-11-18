@@ -56,7 +56,10 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
             JSONObject jActividad = actividades.getJSONObject(i);
             Actividad actividad = cargarActividad(jActividad);
             learningPath.getActividades().add(actividad);
-            }
+            } 
+
+//xd
+
         
 
         JSONArray estudiantesCursando = raiz.getJSONArray(ESTUDIANTES_CURSANDO);
