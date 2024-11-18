@@ -18,7 +18,8 @@ import exceptions.LearningPathDuplicadoException;
 import exceptions.TipoInvalidoException;
 
 
-public class LearningPath{
+public class LearningPath
+{
 	
 	private String titulo;
 	

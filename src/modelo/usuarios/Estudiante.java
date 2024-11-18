@@ -11,16 +11,18 @@ import modelo.actividades.Actividad;
 public class Estudiante extends Usuario {
     
     private LearningPath lPInscrito;
+    private Actividad actividadActual;
     private List<LearningPath> lPCompletados;
-    private Map<LearningPath, Actividad> actividadesCompletadas;
+    private List<Actividad> actividadesCompletadas;
     private double progreso;
     private List<Reseña> reseñasCreadas;
 
     public Estudiante(String nombre, String email, String login, String contrasena) {
         super(nombre, email, login, contrasena);
         this.lPInscrito = null;
+        this.actividadActual = null;
         this.lPCompletados = new LinkedList<LearningPath>();
-        this.actividadesCompletadas = new HashMap<LearningPath, Actividad>();
+        this.actividadesCompletadas = new LinkedList<Actividad>();
         this.progreso = 0;
         this.reseñasCreadas = new LinkedList<Reseña>();
     }
@@ -29,15 +31,41 @@ public class Estudiante extends Usuario {
         return lPInscrito;
     }
 
+    public Actividad getActividadActual() {
+        return actividadActual;
+    }
+
+    public void setActividadActual( Actividad actividad ){
+        this.actividadActual = actividad;
+    }
+
     public List<LearningPath> getLearningPathsCompletados() {
         return lPCompletados;
     }
 
-    public Map<LearningPath, Actividad> getActividadesCompletadas() {
+    public List<Actividad> getActividadesCompletadas() {
         return actividadesCompletadas;
     }
 
     public double getProgreso() {
+
+        LearningPath lPActual = getLearningPathInscrito();
+        List<Actividad> actividadesRealizadas = getActividadesCompletadas();
+        int conteo = 0;
+        double progresoCalculado;
+
+        if ( lPActual != null )
+        {
+            List<Actividad> actividadesLP = lPActual.getActividades();
+            for ( Actividad actividad : actividadesLP )
+            {
+                if ( actividadesRealizadas.contains(actividad) == true ) { conteo ++;}
+            }
+
+            progresoCalculado = conteo/actividadesLP.size();
+        }
+        else { progresoCalculado = 0; }
+        this.progreso = progresoCalculado;
         return progreso;
     }
 
@@ -61,8 +89,10 @@ public class Estudiante extends Usuario {
         }
     }
 
-    public String crearReseña(String comentario, double rating, Actividad actividad) {
-        if (this.actividadesCompletadas.containsValue(actividad)) {
+    public String crearReseña(String comentario, double rating, LearningPath learningPath )  
+    {
+        if ( this.lPCompletados.contains(learningPath) ) 
+        {
             String login = getLogin();
             Reseña nuevaReseña = new Reseña(comentario, rating, login);
             this.reseñasCreadas.add(nuevaReseña);
