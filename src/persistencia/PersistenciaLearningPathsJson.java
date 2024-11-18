@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,10 +21,11 @@ import modelo.actividades.RecursoEducativo;
 import modelo.actividades.Tarea;
 import modelo.preguntas.PreguntaAbierta;
 import modelo.preguntas.PreguntaCerrada;
+import modelo.preguntas.Opcion;
 import modelo.usuarios.Estudiante;
 import modelo.usuarios.Profesor;
-import src.modelo.preguntas.Pregunta;
-import src.sistemabase.EstadoGlobal;
+import modelo.preguntas.Pregunta;
+import sistemabase.EstadoGlobal;
 
 public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths {
 
@@ -71,7 +73,9 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
             learningPath.getEstudiantesGraduados().add(estudiante);
         }
 
-        learningPath.setProfesor(raiz.getString(LOGIN_PROFESOR));
+        String loginProfesor = raiz.getString(LOGIN_PROFESOR);
+        Profesor profesor = (Profesor) EstadoGlobal.getUsuarios().get(loginProfesor);
+        learningPath.setProfesor(profesor);
     }
 
     private Actividad cargarActividad(JSONObject jActividad) throws JSONException {
@@ -98,7 +102,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
     String descripcion = jActividad.getString(DESCRIPCION);
     int duracion = jActividad.getInt(DURACION);
 
-    Encuesta encuesta = new Encuesta(id, titulo, descripcion, duracion);
+    Encuesta encuesta = new Encuesta(titulo, descripcion, "", "", duracion, new ArrayList<>(), null, null, id, new ArrayList<>());
 
     JSONArray jPreguntas = jActividad.getJSONArray(PREGUNTAS);
     for (int i = 0; i < jPreguntas.length(); i++) {
@@ -110,7 +114,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
     return encuesta;
 }
 
-private PreguntaAbierta cargarPreguntaAbierta(JSONObject jPregunta) throws JSONException {
+    private PreguntaAbierta cargarPreguntaAbierta(JSONObject jPregunta) throws JSONException {
     String enunciado = jPregunta.getString("enunciado");
     String explicacion = jPregunta.getString("explicacion");
     String id = jPregunta.getString("id");
@@ -119,8 +123,8 @@ private PreguntaAbierta cargarPreguntaAbierta(JSONObject jPregunta) throws JSONE
     PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, explicacion, id);
     pregunta.setEsCorrecta(esCorrecta);
 
-    return pregunta;
-
+        return pregunta;
+    }
     private Examen cargarExamen(JSONObject jActividad) throws JSONException {
 		String id = jActividad.getString(ID);
 		String titulo = jActividad.getString(TITULO);
@@ -185,7 +189,15 @@ private PreguntaAbierta cargarPreguntaAbierta(JSONObject jPregunta) throws JSONE
 		String id = jPregunta.getString("id");
 		boolean esCorrecta = jPregunta.getBoolean("esCorrecta");
 	
-		PreguntaCerrada pregunta = new PreguntaCerrada(enunciado, explicacion, id);
+        JSONArray jOpciones = jPregunta.getJSONArray("opciones");
+
+        List<Opcion> opciones = new ArrayList<>();
+        for (int i = 0; i < jOpciones.length(); i++) {
+            JSONObject jOpcion = jOpciones.getJSONObject(i);
+            Opcion opcion = new Opcion(jOpcion.getString("texto"));
+            opciones.add(opcion);
+        }
+        PreguntaCerrada pregunta = new PreguntaCerrada(enunciado, explicacion, id, opciones);
 		pregunta.setEsCorrecta(esCorrecta);
 	
 		return pregunta;
@@ -193,35 +205,6 @@ private PreguntaAbierta cargarPreguntaAbierta(JSONObject jPregunta) throws JSONE
     }
 
     @Override
-    public void salvarLearningPath(String archivo, LearningPath learningPath) throws IOException {
-        JSONObject jLearningPath = new JSONObject();
-        jLearningPath.put(TITULO, learningPath.getTitulo());
-        jLearningPath.put(DESCRIPCION, learningPath.getDescripcion());
-        jLearningPath.put(NIVEL_DIFICULTAD, learningPath.getNivelDificultad());
-        jLearningPath.put(DURACION, learningPath.getDuracion());
-
-        JSONArray jActividades = new JSONArray();
-        for (Actividad actividad : learningPath.getActividades()) {
-            jActividades.put(salvarActividad(actividad));
-        }
-        jLearningPath.put(ACTIVIDADES, jActividades);
-
-        JSONArray jEstudiantesCursando = new JSONArray();
-        for (Estudiante estudiante : learningPath.getEstudiantesCursando()) {
-            jEstudiantesCursando.put(estudiante.getLogin());
-        }
-        jLearningPath.put(ESTUDIANTES_CURSANDO, jEstudiantesCursando);
-
-        JSONArray jEstudiantesCompletado = new JSONArray();
-        for (Estudiante estudiante : learningPath.getEstudiantesGraduados()) {
-            jEstudiantesCompletado.put(estudiante.getLogin());
-        }
-        jLearningPath.put(ESTUDIANTES_COMPLETADO, jEstudiantesCompletado);
-
-        jLearningPath.put(LOGIN_PROFESOR, learningPath.getProfesor());
-
-        Files.write(new File(archivo).toPath(), jLearningPath.toString().getBytes());
-    }
 
     public void salvarLearningPath(String archivo, LearningPath learningPath) throws IOException {
     JSONObject jLearningPath = new JSONObject();
