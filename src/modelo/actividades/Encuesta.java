@@ -28,8 +28,14 @@ public class Encuesta extends Actividad {
         return estadoCompletado;
     }
 
-    public void setEstadoCompletado(boolean estadoCompletado) {
+    public void setEstadoCompletado(boolean estadoCompletado) 
+    {
         this.estadoCompletado = estadoCompletado;
+    }
+
+    public void setPreguntas( List<PreguntaAbierta> nuevasPreguntas )
+    {
+        this.preguntas = nuevasPreguntas;
     }
 
 }

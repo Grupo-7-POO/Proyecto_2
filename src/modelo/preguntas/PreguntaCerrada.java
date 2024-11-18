@@ -5,6 +5,7 @@ import java.util.List;
 public class PreguntaCerrada extends Pregunta
 {
 	private List<Opcion> opciones;
+	private boolean esCorrecta;
 	
 	public PreguntaCerrada(String enunciado, String explicacion, String id, List<Opcion> opciones)
 	{
@@ -21,4 +22,15 @@ public class PreguntaCerrada extends Pregunta
 		Opcion respuesta = this.opciones.get(i);
 		return respuesta.getEsCorrecta();
 	}
+
+	public boolean getEsCorrecta()
+	{
+		return this.esCorrecta;
+	}
+	
+	public void setEsCorrecta(boolean esCorrecta) {
+
+        this.esCorrecta = esCorrecta;
+
+    }
 }

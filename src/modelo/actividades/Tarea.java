@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Tarea extends Actividad {
     private String motivoEntrega;
-    private String estadoEnvio;
+    private String estadoEnvio; // No entregado, entregado, exitoso, no exitoso
 
     // Constructor
     public Tarea(String nombre, String descripcion, String objetivo, 
@@ -15,7 +15,8 @@ public class Tarea extends Actividad {
                  String motivoEntrega, String estadoEnvio) 
 
     {
-        super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, preRequisitos, seguimiento, fechaLimite, id);        this.motivoEntrega = motivoEntrega;
+        super(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, preRequisitos, seguimiento, fechaLimite, id);        
+        this.motivoEntrega = motivoEntrega;
         this.estadoEnvio = estadoEnvio;
     }
 

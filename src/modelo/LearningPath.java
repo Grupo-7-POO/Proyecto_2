@@ -7,9 +7,11 @@ import org.json.JSONException;
 import java.util.Date;
 import java.util.LinkedList;
 
+
 import modelo.usuarios.Estudiante;
-import modelo.usuarios.Profesor;
 import modelo.actividades.Actividad;
+
+
 
 import exceptions.InformacionInconsistenteException;
 import persistencia.CentralPersistencia;
@@ -128,6 +130,11 @@ public class LearningPath{
 	{
 		this.titulo = titulo;
 	}
+
+	public void setProfesor( String profesor)
+	{
+		this.loginProfesor = profesor;
+	}
 	
 	public void setDescripcion( String descripcion)
 	{
@@ -160,7 +167,7 @@ public class LearningPath{
 		Double nuevaVersion = this.version + 0.1;
 		this.version = nuevaVersion;
 	}
-
+	// -------------------------------------------------------------------------------------------------------------------------------
 	 /**
      * Salva la información de la aerlínea en un archivo
      * @param archivo El nombre del archivo.
@@ -204,7 +211,7 @@ public class LearningPath{
     public void cargarUsuarios( String archivo, String tipoArchivo ) throws TipoInvalidoException, IOException, InformacionInconsistenteException, persistencia.TipoInvalidoException
     {
         IPersistenciaUsuarios cargador = CentralPersistencia.getPersistenciaUsuarios( tipoArchivo );
-        cargador.cargarUsuarios( archivo, this );
+		cargador.cargarUsuarios( archivo, this );
     }
 
     /**
@@ -218,7 +225,7 @@ public class LearningPath{
     public void salvarUsuarios( String archivo, String tipoArchivo ) throws TipoInvalidoException, IOException, persistencia.TipoInvalidoException
     {
         IPersistenciaUsuarios cargador = CentralPersistencia.getPersistenciaUsuarios( tipoArchivo );
-        cargador.salvarUsuarios( archivo, this );
+		cargador.salvarUsuarios( archivo, this);
     }
 
 

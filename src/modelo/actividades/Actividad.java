@@ -30,6 +30,8 @@ public abstract class Actividad
 	private List<Reseña> reseñas;
 
 	private double rating;
+
+	private String titulo;
 	
 	
 	public Actividad(String nombre, String descripcion, String obejtivo, 
@@ -108,6 +110,77 @@ public abstract class Actividad
 	public double getRating()
 	{
 		return this.rating;
+	
+	
+	}
+
+	public String getTitulo() {
+
+        return titulo;
+
+    }
+
+
+	// SETTERS
+
+	public void setNombre( String nuevoNombre)
+	{
+		this.nombre = nuevoNombre;
+	}
+
+	public void setDescripcion( String nuevaDescripcion )
+	{
+		this.descripcion = nuevaDescripcion;
+	}
+
+	public void setObjetivo( String nuevoObejtivo )
+	{
+		this.objetivo = nuevoObejtivo;
+	}
+
+	public void setNivelDificultad( String nuevoObejtivo )
+	{
+		this.objetivo = nuevoObejtivo;
+	}
+
+	public void setDuracionEstimada( double nuevaDuracion )
+	{
+		this.duracionEstimada = nuevaDuracion;
+	}
+
+	public void añadirActividadesPrerequisitos ( Actividad nuevaActividad )
+	{
+		this.preRequisitos.add(nuevaActividad);
+	}
+
+	public void eliminarActividadPrerequisitos ( Actividad actividad )
+	{
+		this.preRequisitos.remove(actividad);
+	}
+
+	public void eliminarPrerequisitos ( )
+	{
+		this.preRequisitos = new LinkedList<Actividad>();
+	}
+
+	public void setActividadSeguimiento ( Actividad nuevaActividad )
+	{
+		this.seguimiento = nuevaActividad;
+	}
+
+	public void eliminarActividadSeguimiento ()
+	{
+		this.seguimiento = null;
+	}
+
+	public void setFechaLimite( Date fechaNueva)
+	{
+		this.fechaLimite = fechaNueva;
+	}
+
+	public void setResultado( String resultado)
+	{
+		this.resultado = resultado;
 	}
 
 }
