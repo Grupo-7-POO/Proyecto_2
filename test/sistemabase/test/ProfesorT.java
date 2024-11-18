@@ -1,17 +1,17 @@
-package Tests;
+package sistemabase.test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
-import java.util.List;
-import java.util.ArrayList;
-import modelo.usuarios.Profesor;
-import modelo.actividades.Actividad;
-import modelo.LearningPath;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-class ProfesorTest {
+import modelo.ArrayList;
+import modelo.LearningPath;
+import modelo.List;
+import modelo.actividades.Actividad;
+import modelo.usuarios.Profesor;
+
+class ProfesorT {
 
 	private Profesor profesor;
 
@@ -63,6 +63,4 @@ class ProfesorTest {
     public void cleanup() {
         profesor = null;
     }
-}
-
 }
