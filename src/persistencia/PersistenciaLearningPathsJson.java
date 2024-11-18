@@ -131,7 +131,7 @@ public class PersistenciaLearningPathsJson implements IPersistenciaLearningPaths
 		String descripcion = jActividad.getString(DESCRIPCION);
 		int duracion = jActividad.getInt(DURACION);
 	
-		Examen examen = new Examen(id, titulo, descripcion, duracion);
+        Examen examen = new Examen(id, titulo, descripcion, duracion, new ArrayList<PreguntaCerrada>(), null, null);
 	
 		JSONArray jPreguntas = jActividad.getJSONArray(PREGUNTAS);
 		for (int i = 0; i < jPreguntas.length(); i++) {
