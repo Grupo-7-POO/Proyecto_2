@@ -63,6 +63,7 @@ public class EstadoGlobal
 
 	public static void cargarSistemaGlobal()
 	{
+		// Cargar learningPaths, Usuarios, actividades y preguntas guardadas en archivos externos
 
 	}
 
@@ -224,7 +225,7 @@ public class EstadoGlobal
 			}
 		}
 		LearningPath learningPathCreado = profesor.crearLearningPath(titulo, descripcion, nivelDificultad, duracion, actividades); // FALTA AÑADIR LEARNING PATH A BASE DE DATOS GENERAL
-		learningPaths.put( learningPathCreado.getTitulo()+"_"+learningPathCreado.getVersion() , learningPathCreado);
+		learningPaths.put( learningPathCreado.getTitulo() , learningPathCreado);
 	}
 	public static LearningPath escogerLearningPath( Profesor profesor)
 	{
@@ -863,10 +864,9 @@ public class EstadoGlobal
 		System.out.println("Selecciona una opción:");
 		System.out.println("1. Registrarse a un Learning Path");
 		System.out.println("2. Iniciar Actividad");
-		System.out.println("3. Completar Actividad");
-		System.out.println("4. Completar Learning Path");
-		System.out.println("5. Crear Reseña");
-		System.out.println("6. Salir:");
+		System.out.println("3. Completar Learning Path");
+		System.out.println("4. Crear Reseña");
+		System.out.println("5. Salir:");
 
 		System.out.print("Opción: ");
 		String opcionIn = escaner.nextLine();
@@ -881,15 +881,12 @@ public class EstadoGlobal
 				iniciarActividadEstudiante( estudiante );
 				break;
 		case 3: 
-				completarActividadEstudiante( estudiante );
-				break;	
-		case 4: 
 				completarLearningPathEstudiante( estudiante );
 				break;
-		case 5: 
+		case 4: 
 				crearReseñaEstudiante( estudiante );
 				break;
-		case 6:
+		case 5:
 				System.exit(0);
 				break;
 		default:
@@ -900,29 +897,148 @@ public class EstadoGlobal
 
 	public static void registrarLearningPathEstudiante( Estudiante estudiante )
 	{
-		System.out.println("Opción no válida");
-
-
+		if ( estudiante.getLearningPathInscrito() == null)
+		{
+			System.out.println("Escriba el nombre del Learning Path para inscribirse: ");
+			String titulo = escaner.nextLine();
+			estudiante.inscribirLearningPath(learningPaths.get(titulo));
+			if ( estudiante.getLearningPathInscrito() == null ) { System.out.println("No se ha encontrado un Learning Path con ese nombre"); }
+			else { System.out.println("Learning Path Inscrito Exitosamente");}
+		}
+		else { System.out.println("Ya tiene un Learning Path Inscrito"); }
 	}
 
 	public static void iniciarActividadEstudiante( Estudiante estudiante )
 	{
+		if ( estudiante.getLearningPathInscrito() != null)
+		{
+			System.out.println("Escriba el numero de Actividad que desea realizar");
+			System.out.println(estudiante.getLearningPathInscrito().getActividades().size()+"opciones");
+			String value = escaner.nextLine(); // convertir a double
+			int i = Integer.parseInt(value);
+			Actividad actividad = estudiante.getLearningPathInscrito().getActividades().get(i+1);
+			boolean checkPR = false;
+			for ( Actividad actividadpr : actividad.getPreRequisitos())
+			{
+				if ( estudiante.getActividadesCompletadas().contains(actividadpr) == true ) { checkPR = true; }
+				else { checkPR = false; }
+			}
+			if ( checkPR == false) { System.out.println("No ha completado todos los PreRequisitos de la habilidad"); } 
+		
+			if ( actividad instanceof Encuesta ){ iniciarEncuestaEstudiante( (Encuesta) actividad ); }
+			else if ( actividad instanceof Examen ){ iniciarExamenEstudiante( (Examen) actividad ); }
+			else if ( actividad instanceof Quiz ){ iniciarQuiz( (Quiz) actividad ); }
+			else if ( actividad instanceof RecursoEducativo ){ iniciarRecursoEducativo( (RecursoEducativo) actividad ); }
+			else if ( actividad instanceof Tarea ){ iniciarTarea( (Tarea) actividad ); }
 
+		}
+		else { System.out.println("No tiene un Learning Path Inscrito"); }
 	}
 
-	public static void completarActividadEstudiante( Estudiante estudiante )
+	public static void iniciarEncuestaEstudiante( Encuesta encuesta )
 	{
+		List<String> respuestas = new LinkedList<>();
+		for ( PreguntaAbierta pregunta: encuesta.getPreguntas() )
+		{
+			System.out.println( pregunta.getEnunciado() );
+			System.out.print("Respuesta: ");
+			String respuesta = escaner.nextLine();
+			respuestas.add(respuesta);
+		}
 
+		encuesta.setEstadoCompletado(true);
+		System.out.println("La siguiente actividad recomendada es: ");
+		System.out.print(encuesta.getSeguimiento().getNombre());
+	}
+
+	public static void iniciarExamenEstudiante( Examen examen )
+	{
+		List<String> respuestas = new LinkedList<>();
+		for ( PreguntaAbierta pregunta: examen.getPreguntas() )
+		{
+			System.out.println( pregunta.getEnunciado() );
+			System.out.print("Respuesta: ");
+			String respuesta = escaner.nextLine();
+			respuestas.add(respuesta);
+		}
+		examen.setEstadoCalificacion("Enviado");
+		System.out.println("La siguiente actividad recomendada es: ");
+		System.out.print(examen.getSeguimiento().getNombre());
+	}
+
+	public static void iniciarQuiz( Quiz quiz )
+	{
+		double contador = 0;
+		for ( PreguntaCerrada pregunta: quiz.getPreguntas() )
+		{
+			System.out.println( pregunta.getEnunciado() );
+			for ( Opcion opcion: pregunta.getOpciones() )
+			{
+				System.out.print(opcion.getTexto());
+			}
+			System.out.print("Opcion 1-4: ");
+			String respuesta = escaner.nextLine();
+			int respuestaNum = Integer.parseInt(respuesta);
+			if ( pregunta.getOpciones().get(respuestaNum).getEsCorrecta() ){ contador ++; }
+		}
+		double calificacion = contador/quiz.getPreguntas().size()*5;
+		if ( calificacion >= 3.0 ){ quiz.setEstadoCalificacion("Completado"); }
+		else { System.out.println("Quiz no completado"); }
+	}
+
+	public static void iniciarRecursoEducativo( RecursoEducativo recursoEducativo )
+	{
+		System.out.println(recursoEducativo.getTipoRecurso());
+		System.out.println(recursoEducativo.getUrlRecurso());
+		System.out.println(recursoEducativo.getTitulo());
+		System.out.println(recursoEducativo.getDescripcionRecurso());
+
+		recursoEducativo.setCompletado(true);
+		System.out.println("La siguiente actividad recomendada es: ");
+		System.out.print(recursoEducativo.getSeguimiento().getNombre());
+	}
+
+	public static void iniciarTarea( Tarea tarea )
+	{
+		System.out.println(tarea.getNombre());
+		System.out.println(tarea.getDescripcion());
+		System.out.println(tarea.getObjetivo());
+		System.out.println(tarea.getMotivoEntrega());
+		tarea.setEstadoEnvio("Enviada");
 	}
 
 	public static void completarLearningPathEstudiante( Estudiante estudiante )
 	{
+		LearningPath learningPath = estudiante.getLearningPathInscrito();
+		if ( learningPath != null)
+		{
+			double progreso = estudiante.getProgreso();
+			if ( ( int) progreso == 100)
+			{
+				System.out.println("Learning Path completado exitosamente");
+				estudiante.terminarLearningPath();
+			}
+			else { System.out.println("No tiene el progreso suficiente para terminar el Learning Path"); }
+		}
+		else { System.out.println("No tiene un Learning Path Inscrito"); }
 
 	}
 
 	public static void crearReseñaEstudiante( Estudiante estudiante )
 	{
-
+		System.out.println("Escriba el nombre del Learning Path para reseñar");
+		String titulo = escaner.nextLine();
+		LearningPath learningPath = learningPaths.get(titulo);
+		if (  learningPath != null )
+		{
+			System.out.println("Escriba el comentario:");
+			String comentario = escaner.nextLine();
+			System.out.println("Escriba la puntacion de 1-5: ");
+			String value = escaner.nextLine(); // convertir a double
+			double rating = Double.parseDouble(value);
+			System.out.println( estudiante.crearReseña(comentario, rating, learningPath) );
+		}
+		else { System.out.println("Learning Path no encontrado"); }
 	}
 
 	
