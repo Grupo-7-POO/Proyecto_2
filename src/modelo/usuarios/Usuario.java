@@ -1,5 +1,9 @@
 package modelo.usuarios;
 
+import java.util.List;
+
+import modelo.LearningPath;
+
 public abstract class Usuario
 {
 	protected String nombre;
@@ -9,6 +13,8 @@ public abstract class Usuario
 	protected String login;
 	
 	protected String contrasena;
+
+	private List<LearningPath> learningPaths;
 		
 	public Usuario(String nombre, String email, String login, String contrasena)
 	{
@@ -42,5 +48,19 @@ public abstract class Usuario
 	{
 		return contrasena;
 	}
+
+    public List<LearningPath> getLearningPaths() {
+
+        return learningPaths;
+
+    }
+
+
+
+    public void setLearningPaths(List<LearningPath> learningPaths) {
+
+        this.learningPaths = learningPaths;
+
+    }
 
 }

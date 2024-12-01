@@ -30,6 +30,8 @@ public abstract class Actividad
 	private List<Reseña> reseñas;
 
 	private double rating;
+
+	private String titulo;
 	
 	
 	public Actividad(String nombre, String descripcion, String obejtivo, 
@@ -108,7 +110,17 @@ public abstract class Actividad
 	public double getRating()
 	{
 		return this.rating;
+	
+	
 	}
+
+	public String getTitulo() {
+
+        return titulo;
+
+    }
+
+
 	// SETTERS
 
 	public void setNombre( String nuevoNombre)

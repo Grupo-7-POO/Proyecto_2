@@ -529,11 +529,10 @@ public class EstadoGlobal
 	{
 		List<PreguntaCerrada> preguntas = new LinkedList<>();
 		boolean check = true;
-		boolean checkCorrecta;
 		
 		while ( check )
 		{
-			checkCorrecta = false;
+			boolean checkCorrecta = false;
 			System.out.println("Escriba el enunciado de la pregunta: ");
 			String enunciado = escaner.nextLine();
 			if ( enunciado.equals("00") == false ) 
@@ -545,18 +544,22 @@ public class EstadoGlobal
 
 				for (int i = 0; i < 4; i++)
 				{
+					Opcion opcionActual;
 					System.out.println("Escriba el enunciado de la opcion" + (i+1));
 					String texto = escaner.nextLine();
-					Opcion opcionActual = new Opcion(texto);
 					System.out.println("Es la respuesta correcta? S/N");
 					String esCorrecta = escaner.nextLine();
 					if ( (esCorrecta.equals("S")) && (checkCorrecta = false) )
 					{
-						opcionActual.setEsCorrecta();
+						opcionActual = new Opcion(texto, true);
 						checkCorrecta = true;
 						System.out.println("Se ha escogido como la opcion correcta");
 					}
-					else{System.out.println("No se ha escogido como la opcion correcta");}
+					else
+					{
+						System.out.println("No se ha escogido como la opcion correcta");
+						opcionActual = new Opcion(texto, false);
+					}
 					opciones.add(opcionActual);
 				}
 
