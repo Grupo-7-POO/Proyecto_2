@@ -18,6 +18,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JMenu;
 import java.awt.List;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
 
 public class VisitadorLearningPath {
 
@@ -74,13 +76,6 @@ public class VisitadorLearningPath {
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE))
 		);
 		
-		JButton btnNewButton = new JButton("Actividad_x");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		scrollPane.setViewportView(btnNewButton);
-		
 		JMenu mnNewMenu = new JMenu("Actividades");
 		scrollPane.setRowHeaderView(mnNewMenu);
 		
@@ -89,6 +84,14 @@ public class VisitadorLearningPath {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Actividad");
 		mnNewMenu.add(mntmNewMenuItem);
+		
+		JPanel panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel = new JLabel("Actividad_x");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblNewLabel, BorderLayout.NORTH);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 
