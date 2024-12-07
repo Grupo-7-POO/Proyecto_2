@@ -1,0 +1,95 @@
+package gui;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.JMenu;
+import java.awt.List;
+import javax.swing.JMenuItem;
+
+public class VisitadorLearningPath {
+
+	private JFrame frame;
+	private JTextField txtVisualizadorLearningPath;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VisitadorLearningPath window = new VisitadorLearningPath();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public VisitadorLearningPath() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		txtVisualizadorLearningPath = new JTextField();
+		txtVisualizadorLearningPath.setHorizontalAlignment(SwingConstants.CENTER);
+		txtVisualizadorLearningPath.setText("Visualizador Learning Path");
+		txtVisualizadorLearningPath.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(txtVisualizadorLearningPath, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
+				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(txtVisualizadorLearningPath, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE))
+		);
+		
+		JButton btnNewButton = new JButton("Actividad_x");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		scrollPane.setViewportView(btnNewButton);
+		
+		JMenu mnNewMenu = new JMenu("Actividades");
+		scrollPane.setRowHeaderView(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Actividad");
+		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Actividad");
+		mnNewMenu.add(mntmNewMenuItem);
+		frame.getContentPane().setLayout(groupLayout);
+	}
+
+}
