@@ -92,7 +92,19 @@ public class VisitadorLearningPath {
 		JLabel lblNewLabel = new JLabel("Actividad_x");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel, BorderLayout.NORTH);
+		
+		JButton btnNewButton = new JButton("Entregar Actividad");
+		panel.add(btnNewButton, BorderLayout.SOUTH);
+		
+		JLabel lblNewLabel_1 = new JLabel("Descripción actividad:");
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
+		panel.add(lblNewLabel_1, BorderLayout.CENTER);
+		
+		JButton btnNewButton_1 = new JButton("Calificar Actividad");
+		panel.add(btnNewButton_1, BorderLayout.EAST);
+		
+		JButton btnNewButton_2 = new JButton("Calificar Learning Path");
+		scrollPane.setColumnHeaderView(btnNewButton_2);
 		frame.getContentPane().setLayout(groupLayout);
 	}
-
 }
