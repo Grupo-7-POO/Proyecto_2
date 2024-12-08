@@ -14,6 +14,7 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.FlowLayout;
 import javax.swing.SpringLayout;
 import javax.swing.JTextPane;
+import java.awt.Color;
 
 public class ActividadRecursoEducativo extends JFrame {
 
@@ -53,6 +54,7 @@ public class ActividadRecursoEducativo extends JFrame {
 		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 		
 		JButton btnNewButton = new JButton("Entregar");
+		btnNewButton.setBackground(new Color(0, 0, 255));
 		contentPane.add(btnNewButton, BorderLayout.SOUTH);
 		
 		JPanel panel = new JPanel();

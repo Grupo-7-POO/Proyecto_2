@@ -57,6 +57,7 @@ public class ActividadQuiz extends JFrame {
 		contentPane.add(comboBox, BorderLayout.WEST);
 		
 		JButton btnNewButton = new JButton("Entregar");
+		btnNewButton.setBackground(new Color(0, 0, 255));
 		contentPane.add(btnNewButton, BorderLayout.SOUTH);
 		
 		JButton btnNewButton_1 = new JButton("Calificar Quiz(Reseña)");
