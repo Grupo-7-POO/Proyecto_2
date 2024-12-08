@@ -12,11 +12,15 @@ import javax.swing.JSlider;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.Color;
+import javax.swing.JTextField;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class ReseñaActividad extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -67,6 +71,23 @@ public class ReseñaActividad extends JFrame {
 		JButton btnNewButton = new JButton("Subir reseña");
 		btnNewButton.setBackground(new Color(0, 0, 255));
 		contentPane.add(btnNewButton, BorderLayout.SOUTH);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.EAST);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_1 = new JLabel("Dificultad: ");
+		panel.add(lblNewLabel_1, BorderLayout.WEST);
+		
+		textField = new JTextField();
+		panel.add(textField, BorderLayout.CENTER);
+		textField.setColumns(10);
+		
+		Component verticalStrut = Box.createVerticalStrut(199);
+		panel.add(verticalStrut, BorderLayout.NORTH);
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(33);
+		panel.add(verticalStrut_1, BorderLayout.SOUTH);
 	}
 
 }
