@@ -65,7 +65,7 @@ public class ActividadRecursoEducativo extends JFrame {
 		sl_panel.putConstraint(SpringLayout.WEST, txtpnDescripcin, 10, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.SOUTH, txtpnDescripcin, -78, SpringLayout.SOUTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, txtpnDescripcin, -10, SpringLayout.EAST, panel);
-		txtpnDescripcin.setText("Descripción");
+		txtpnDescripcin.setText("Descripción:");
 		panel.add(txtpnDescripcin);
 		
 		JLabel lblNewLabel_1 = new JLabel("URL");

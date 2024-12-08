@@ -20,6 +20,7 @@ import java.awt.List;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
+import javax.swing.JTextPane;
 
 public class VisitadorLearningPath {
 
@@ -96,12 +97,12 @@ public class VisitadorLearningPath {
 		JButton btnNewButton = new JButton("Entregar Actividad");
 		panel.add(btnNewButton, BorderLayout.SOUTH);
 		
-		JLabel lblNewLabel_1 = new JLabel("Descripción actividad:");
-		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
-		panel.add(lblNewLabel_1, BorderLayout.CENTER);
-		
 		JButton btnNewButton_1 = new JButton("Calificar Actividad");
 		panel.add(btnNewButton_1, BorderLayout.EAST);
+		
+		JTextPane txtpnDescripcin = new JTextPane();
+		txtpnDescripcin.setText("Descripción:");
+		panel.add(txtpnDescripcin, BorderLayout.CENTER);
 		
 		JButton btnNewButton_2 = new JButton("Calificar Learning Path");
 		scrollPane.setColumnHeaderView(btnNewButton_2);

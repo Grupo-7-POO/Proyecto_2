@@ -12,6 +12,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import java.awt.Color;
 
 public class ActividadExamen extends JFrame {
 
@@ -66,12 +68,13 @@ public class ActividadExamen extends JFrame {
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel("Pregunta x");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(lblNewLabel_1, BorderLayout.NORTH);
-		
 		JTextArea textArea = new JTextArea();
 		panel_1.add(textArea, BorderLayout.CENTER);
+		
+		JTextPane txtpnPregunta = new JTextPane();
+		txtpnPregunta.setBackground(new Color(192, 192, 192));
+		txtpnPregunta.setText("Pregunta:");
+		panel_1.add(txtpnPregunta, BorderLayout.NORTH);
 	}
 
 }

@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.SpringLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextPane;
+import java.awt.Color;
 
 public class ActividadQuiz extends JFrame {
 
@@ -64,10 +66,6 @@ public class ActividadQuiz extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel("Pregunta");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel_1, BorderLayout.NORTH);
-		
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.CENTER);
 		SpringLayout sl_panel_1 = new SpringLayout();
@@ -96,5 +94,10 @@ public class ActividadQuiz extends JFrame {
 		sl_panel_1.putConstraint(SpringLayout.NORTH, btnNewButton_5, 6, SpringLayout.SOUTH, btnNewButton_4);
 		sl_panel_1.putConstraint(SpringLayout.WEST, btnNewButton_5, 0, SpringLayout.WEST, btnNewButton_2);
 		panel_1.add(btnNewButton_5);
+		
+		JTextPane txtpnPregunta = new JTextPane();
+		txtpnPregunta.setBackground(new Color(192, 192, 192));
+		txtpnPregunta.setText("Pregunta:");
+		panel.add(txtpnPregunta, BorderLayout.NORTH);
 	}
 }
