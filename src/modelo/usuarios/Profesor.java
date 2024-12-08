@@ -39,7 +39,7 @@ public  class Profesor extends Usuario
 		return this.actividadesCreadas;
 	}
 
-	public void añadirActividadCreada(Actividad actividadNueva)
+	public void aniadirActividadCreada(Actividad actividadNueva)
 	{
 		this.actividadesCreadas.add(actividadNueva);
 	}

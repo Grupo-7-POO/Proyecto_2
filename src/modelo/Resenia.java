@@ -2,32 +2,33 @@ package modelo;
 
 import java.util.Date;
 
-public class Reseña
+public class Resenia
 {
 	private String comentario;
 	
 	private double rating;
 	
-	private Date fechaReseña;
+	private Date fechaResenia;
 	
 	private String creador;
 	
-	public Reseña(String comentario, double rating, String creador)
+	public Resenia(String comentario, double rating, String creador)
 	{
 		this.comentario = comentario;
 		this.rating = rating;
 		this.creador = creador;
-		this.fechaReseña = new Date();
+		this.fechaResenia = new Date();
 	}
 
+	
 	public String getComentario()
 	{
 		return comentario;
 	}
 
-	public Date getFechaReseña()
+	public Date getFechaResenia()
 	{
-		return fechaReseña;
+		return fechaResenia;
 	}
 
 	public double getRating()

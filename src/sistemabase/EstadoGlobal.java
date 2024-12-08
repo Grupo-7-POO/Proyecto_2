@@ -85,7 +85,7 @@ public class EstadoGlobal
 				System.out.println("Ingrese su login: ");
 				login = escaner.nextLine();
 				System.out.print(login); 
-				System.out.println("Ingrese su contraseña:");
+				System.out.println("Ingrese su contrasenia:");
 				password = escaner.nextLine();
 				break;
 
@@ -123,7 +123,7 @@ public class EstadoGlobal
 			System.out.print("Login ya existe");
 			System.exit(0);
 		}
-		System.out.println("Ingrese su contraseña: ");
+		System.out.println("Ingrese su contrasenia: ");
 		String contrasena = escaner.nextLine();
 
 		System.out.println("Selecciona una opción:");
@@ -148,7 +148,7 @@ public class EstadoGlobal
 			default:
 					System.out.println("Opción no válida");
 					System.exit(0);
-					break; // POSIBLE AÑADIR EXDCEPTION DE TIPO DE USUARIO NO VALIDO
+					break; // POSIBLE AniADIR EXDCEPTION DE TIPO DE USUARIO NO VALIDO
 		}
 		return new String[] {login, contrasena};
 	}
@@ -224,7 +224,7 @@ public class EstadoGlobal
 				else { System.out.println("Actividad no encontrada"); }
 			}
 		}
-		LearningPath learningPathCreado = profesor.crearLearningPath(titulo, descripcion, nivelDificultad, duracion, actividades); // FALTA AÑADIR LEARNING PATH A BASE DE DATOS GENERAL
+		LearningPath learningPathCreado = profesor.crearLearningPath(titulo, descripcion, nivelDificultad, duracion, actividades); // FALTA AniADIR LEARNING PATH A BASE DE DATOS GENERAL
 		learningPaths.put( learningPathCreado.getTitulo() , learningPathCreado);
 	}
 	public static LearningPath escogerLearningPath( Profesor profesor)
@@ -321,7 +321,7 @@ public class EstadoGlobal
 	public static void editarActividadesLPProfesor( LearningPath learningPath )
 	{
 		System.out.println("Selecciona una opción:");
-		System.out.println("1. Añadir Actividad:");
+		System.out.println("1. Aniadir Actividad:");
 		System.out.println("2. Eliminar Actividad");
 		System.out.print("Opción: ");
 		String opcionIn = escaner.nextLine();
@@ -329,7 +329,7 @@ public class EstadoGlobal
 
 		switch(opcion)
 		{
-		case 1: añadirActividadLPProfesor(learningPath);
+		case 1: aniadirActividadLPProfesor(learningPath);
 		case 2: eliminarActividadLPProfesor( learningPath );
 		default:
 				System.out.println("Opción no válida");
@@ -337,9 +337,9 @@ public class EstadoGlobal
 		}
 	}
 
-	public static void añadirActividadLPProfesor ( LearningPath learningPath )
+	public static void aniadirActividadLPProfesor ( LearningPath learningPath )
 	{
-		System.out.println("Inserte el codigo de la actividad que desea añadir:");
+		System.out.println("Inserte el codigo de la actividad que desea aniadir:");
 		String idBuscado = escaner.nextLine();
 		
 		if (idBuscado.length() == 8)
@@ -460,18 +460,18 @@ public class EstadoGlobal
 		case 1:
 				List<PreguntaAbierta> preguntasEncuesta = generadorPreguntasAbiertas();
 				Encuesta encuestaNueva = GeneradorActividades.generarEncuesta(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, fechaLimite, preguntasEncuesta);
-				profesor.añadirActividadCreada(encuestaNueva);
+				profesor.aniadirActividadCreada(encuestaNueva);
 				break;
 		case 2: 
 				List<PreguntaAbierta> preguntasExamen = generadorPreguntasAbiertas();
 				Examen examenNuevo = GeneradorActividades.generarExamen(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, fechaLimite, preguntasExamen);
-				profesor.añadirActividadCreada(examenNuevo);
+				profesor.aniadirActividadCreada(examenNuevo);
 				break;
 
 		case 3: 
 				List<PreguntaCerrada> preguntasQuiz = generadorPreguntasCerradas();
 				Quiz quizNuevo = GeneradorActividades.generarQuiz(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, fechaLimite, preguntasQuiz);
-				profesor.añadirActividadCreada(quizNuevo);
+				profesor.aniadirActividadCreada(quizNuevo);
 				break;
 		case 4: 
 				System.out.println("Escriba el tipo de Recurso");
@@ -483,13 +483,13 @@ public class EstadoGlobal
 				System.out.println("Escriba la descripcion del Recurso");
 				String descripcionRecurso = escaner.nextLine();
 				RecursoEducativo recursoEducativoNuevo = GeneradorActividades.generarRecursoEducativo(nombre, descripcion, objetivo, nivelDificultad, opcion, actividadesPre, actividadSeguimiento, fechaLimite, tipoRecurso, urlRecurso, titulo, descripcionRecurso);
-				profesor.añadirActividadCreada(recursoEducativoNuevo);
+				profesor.aniadirActividadCreada(recursoEducativoNuevo);
 				break;
 		case 5: 
 				System.out.println("Escriba el motivo de entrega");
 				String motivoEntrega = escaner.nextLine();
 				Tarea tareaNueva = GeneradorActividades.generarTarea(nombre, descripcion, objetivo, nivelDificultad, duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, motivoEntrega, "No Entregado" );
-				profesor.añadirActividadCreada(tareaNueva);
+				profesor.aniadirActividadCreada(tareaNueva);
 				break;
 		case 6:
 				System.exit(0);
@@ -593,7 +593,7 @@ public class EstadoGlobal
 
 			String nuevoCodigo = actividadClonada.getID();
 			System.out.println("El codigo ID de la actividad clonada es"+nuevoCodigo);
-			profesor.añadirActividadCreada(actividadClonada);
+			profesor.aniadirActividadCreada(actividadClonada);
 		} 
 		else 
 		{ 
@@ -710,7 +710,7 @@ public class EstadoGlobal
 					break;
 			case 6:
 					System.out.println("Escoja una accion:");
-					System.out.println("1. Añadir PreRequisito");
+					System.out.println("1. Aniadir PreRequisito");
 					System.out.println("2. Eliminar PreRequisito");
 					System.out.println("3. Eliminar todos los PreRequisitos");
 
@@ -720,9 +720,9 @@ public class EstadoGlobal
 					switch (accionPR) 
 					{
 						case 1:
-								System.out.println("Ingrese el codigo de la Actividad que desea añadir");
+								System.out.println("Ingrese el codigo de la Actividad que desea aniadir");
 								codigoPR = escaner.nextLine();
-								if ( GeneradorActividades.validarActividad(codigoPR) ) { actividadEditar.añadirActividadesPrerequisitos( GeneradorActividades.getActividad(codigoPR) ); }
+								if ( GeneradorActividades.validarActividad(codigoPR) ) { actividadEditar.aniadirActividadesPrerequisitos( GeneradorActividades.getActividad(codigoPR) ); }
 								else { System.out.println("No se encontro la actividad"); }
 								break;
 						case 2:
@@ -754,7 +754,7 @@ public class EstadoGlobal
 						case 1:
 								System.out.println("Ingrese el codigo de la Actividad por la que desea reemplazar el Seguimiento");
 								String codigoSeguimiento = escaner.nextLine();
-								if ( GeneradorActividades.validarActividad(codigoSeguimiento) ) { actividadEditar.añadirActividadesPrerequisitos( GeneradorActividades.getActividad(codigoSeguimiento) ); }
+								if ( GeneradorActividades.validarActividad(codigoSeguimiento) ) { actividadEditar.aniadirActividadesPrerequisitos( GeneradorActividades.getActividad(codigoSeguimiento) ); }
 								else { System.out.println("No se encontro la actividad"); }
 								break;
 						case 2:
@@ -868,7 +868,7 @@ public class EstadoGlobal
 		System.out.println("1. Registrarse a un Learning Path");
 		System.out.println("2. Iniciar Actividad");
 		System.out.println("3. Completar Learning Path");
-		System.out.println("4. Crear Reseña");
+		System.out.println("4. Crear Resenia");
 		System.out.println("5. Salir:");
 
 		System.out.print("Opción: ");
@@ -887,7 +887,7 @@ public class EstadoGlobal
 				completarLearningPathEstudiante( estudiante );
 				break;
 		case 4: 
-				crearReseñaEstudiante( estudiante );
+				crearReseniaEstudiante( estudiante );
 				break;
 		case 5:
 				System.exit(0);
@@ -1027,9 +1027,9 @@ public class EstadoGlobal
 
 	}
 
-	public static void crearReseñaEstudiante( Estudiante estudiante )
+	public static void crearReseniaEstudiante( Estudiante estudiante )
 	{
-		System.out.println("Escriba el nombre del Learning Path para reseñar");
+		System.out.println("Escriba el nombre del Learning Path para reseniar");
 		String titulo = escaner.nextLine();
 		LearningPath learningPath = learningPaths.get(titulo);
 		if (  learningPath != null )
@@ -1039,7 +1039,7 @@ public class EstadoGlobal
 			System.out.println("Escriba la puntacion de 1-5: ");
 			String value = escaner.nextLine(); // convertir a double
 			double rating = Double.parseDouble(value);
-			System.out.println( estudiante.crearReseña(comentario, rating, learningPath) );
+			System.out.println( estudiante.crearResenia(comentario, rating, learningPath) );
 		}
 		else { System.out.println("Learning Path no encontrado"); }
 	}

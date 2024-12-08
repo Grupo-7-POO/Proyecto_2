@@ -3,7 +3,7 @@ package modelo.actividades;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Date;
-import modelo.Reseña;
+import modelo.Resenia;
 
 public abstract class Actividad
 {
@@ -27,7 +27,7 @@ public abstract class Actividad
 	
 	private String id;
 
-	private List<Reseña> reseñas;
+	private List<Resenia> resenias;
 
 	private double rating;
 
@@ -48,7 +48,7 @@ public abstract class Actividad
 		this.fechaLimite = fechaLimite;
 		this.resultado = null;
 		this.id = id;
-		this.reseñas = new LinkedList<Reseña>();
+		this.resenias = new LinkedList<Resenia>();
 		this.rating = 0;
 	}
 	// GETTERS
@@ -102,9 +102,9 @@ public abstract class Actividad
 		return this.id;
 	}
 
-	public List<Reseña> getReseñas()
+	public List<Resenia> getResenias()
 	{
-		return this.reseñas;
+		return this.resenias;
 	}
 
 	public double getRating()
@@ -148,7 +148,7 @@ public abstract class Actividad
 		this.duracionEstimada = nuevaDuracion;
 	}
 
-	public void añadirActividadesPrerequisitos ( Actividad nuevaActividad )
+	public void aniadirActividadesPrerequisitos ( Actividad nuevaActividad )
 	{
 		this.preRequisitos.add(nuevaActividad);
 	}
