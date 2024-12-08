@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JTextPane;
 import java.awt.Color;
+import javax.swing.JComboBox;
 
 public class VisitadorLearningPath {
 
@@ -81,11 +82,8 @@ public class VisitadorLearningPath {
 		JMenu mnNewMenu = new JMenu("Actividades");
 		scrollPane.setRowHeaderView(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Actividad");
-		mnNewMenu.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Actividad");
-		mnNewMenu.add(mntmNewMenuItem);
+		JComboBox comboBox = new JComboBox();
+		mnNewMenu.add(comboBox);
 		
 		JPanel panel = new JPanel();
 		scrollPane.setViewportView(panel);

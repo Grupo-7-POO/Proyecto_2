@@ -15,6 +15,7 @@ import javax.swing.SpringLayout;
 import javax.swing.JTextField;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JComboBox;
 
 public class MenuEstudiante {
 
@@ -62,14 +63,14 @@ public class MenuEstudiante {
 		JMenu mnNewMenu = new JMenu("Learning Paths Inscritos");
 		panel.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Learning Path");
-		mnNewMenu.add(mntmNewMenuItem);
+		JComboBox comboBox = new JComboBox();
+		mnNewMenu.add(comboBox);
 		
 		JMenu mnNewMenu_1 = new JMenu("Todos los Learning Paths");
 		panel.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Learning Path");
-		mnNewMenu_1.add(mntmNewMenuItem_1);
+		JComboBox comboBox_1 = new JComboBox();
+		mnNewMenu_1.add(comboBox_1);
 	}
 
 }
