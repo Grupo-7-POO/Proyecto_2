@@ -15,6 +15,8 @@ import java.awt.FlowLayout;
 import javax.swing.SpringLayout;
 import javax.swing.JTextPane;
 import java.awt.Color;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class ActividadRecursoEducativo extends JFrame {
 
@@ -57,6 +59,9 @@ public class ActividadRecursoEducativo extends JFrame {
 		btnNewButton.setBackground(new Color(0, 0, 255));
 		contentPane.add(btnNewButton, BorderLayout.SOUTH);
 		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		contentPane.add(verticalStrut, BorderLayout.EAST);
+		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		SpringLayout sl_panel = new SpringLayout();
@@ -76,5 +81,8 @@ public class ActividadRecursoEducativo extends JFrame {
 		sl_panel.putConstraint(SpringLayout.SOUTH, lblNewLabel_1, 68, SpringLayout.SOUTH, txtpnDescripcin);
 		sl_panel.putConstraint(SpringLayout.EAST, lblNewLabel_1, 120, SpringLayout.WEST, panel);
 		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Dificultad: ");
+		contentPane.add(lblNewLabel_2, BorderLayout.EAST);
 	}
 }
