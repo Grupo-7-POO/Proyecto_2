@@ -21,6 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JTextPane;
+import java.awt.Color;
 
 public class VisitadorLearningPath {
 
@@ -95,6 +96,7 @@ public class VisitadorLearningPath {
 		panel.add(lblNewLabel, BorderLayout.NORTH);
 		
 		JButton btnNewButton = new JButton("Entregar Actividad");
+		btnNewButton.setBackground(new Color(0, 0, 255));
 		panel.add(btnNewButton, BorderLayout.SOUTH);
 		
 		JButton btnNewButton_1 = new JButton("Calificar Actividad");

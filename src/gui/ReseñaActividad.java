@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JSlider;
 import javax.swing.JTextPane;
+import javax.swing.JButton;
+import java.awt.Color;
 
 public class ReseñaActividad extends JFrame {
 
@@ -59,7 +61,11 @@ public class ReseñaActividad extends JFrame {
 		
 		JTextPane txtpnEspacioParaEscribir = new JTextPane();
 		txtpnEspacioParaEscribir.setText("Espacio para escribir reseña");
-		contentPane.add(txtpnEspacioParaEscribir, BorderLayout.SOUTH);
+		contentPane.add(txtpnEspacioParaEscribir, BorderLayout.WEST);
+		
+		JButton btnNewButton = new JButton("Subir reseña");
+		btnNewButton.setBackground(new Color(0, 0, 255));
+		contentPane.add(btnNewButton, BorderLayout.SOUTH);
 	}
 
 }
