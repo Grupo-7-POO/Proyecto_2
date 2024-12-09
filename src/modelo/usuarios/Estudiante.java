@@ -5,42 +5,42 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import modelo.LearningPath;
-import modelo.Reseña;
+import modelo.Resenia;
 import modelo.actividades.Actividad;
 
 public class Estudiante extends Usuario {
-    
-    private LearningPath lPInscrito;
+
+    private LearningPath learningPathInscrito;
     private Actividad actividadActual;
-    private List<LearningPath> lPCompletados;
+    private List<LearningPath> learningPathsCompletados;
     private List<Actividad> actividadesCompletadas;
     private double progreso;
-    private List<Reseña> reseñasCreadas;
+    private List<Resenia> reseniasCreadas;
 
     public Estudiante(String nombre, String email, String login, String contrasena) {
         super(nombre, email, login, contrasena);
-        this.lPInscrito = null;
+        this.learningPathInscrito = null;
         this.actividadActual = null;
-        this.lPCompletados = new LinkedList<LearningPath>();
-        this.actividadesCompletadas = new LinkedList<Actividad>();
+        this.learningPathsCompletados = new LinkedList<>();
+        this.actividadesCompletadas = new LinkedList<>();
         this.progreso = 0;
-        this.reseñasCreadas = new LinkedList<Reseña>();
+        this.reseniasCreadas = new LinkedList<>();
     }
 
     public LearningPath getLearningPathInscrito() {
-        return lPInscrito;
+        return learningPathInscrito;
     }
 
     public Actividad getActividadActual() {
         return actividadActual;
     }
 
-    public void setActividadActual( Actividad actividad ){
+    public void setActividadActual(Actividad actividad) {
         this.actividadActual = actividad;
     }
 
     public List<LearningPath> getLearningPathsCompletados() {
-        return lPCompletados;
+        return learningPathsCompletados;
     }
 
     public List<Actividad> getActividadesCompletadas() {
@@ -48,40 +48,34 @@ public class Estudiante extends Usuario {
     }
 
     public double getProgreso() {
-
-        LearningPath lPActual = getLearningPathInscrito();
-        List<Actividad> actividadesRealizadas = getActividadesCompletadas();
-        int conteo = 0;
-        double progresoCalculado;
-
-        if ( lPActual != null )
-        {
-            List<Actividad> actividadesLP = lPActual.getActividades();
-            for ( Actividad actividad : actividadesLP )
-            {
-                if ( actividadesRealizadas.contains(actividad) == true ) { conteo ++;}
-            }
-
-            progresoCalculado = conteo/actividadesLP.size();
+        if (learningPathInscrito != null) {
+            List<Actividad> actividadesLP = learningPathInscrito.getActividades();
+            long conteo = actividadesLP.stream()
+                                       .filter(actividadesCompletadas::contains)
+                                       .count();
+            this.progreso = (double) conteo / actividadesLP.size();
+        } else {
+            this.progreso = 0;
         }
-        else { progresoCalculado = 0; }
-        this.progreso = progresoCalculado;
         return progreso;
     }
 
-    public List<Reseña> getReseñasCreadas() {
-        return reseñasCreadas;
+    public List<Resenia> getReseniasCreadas() {
+        return reseniasCreadas;
     }
 
     public void inscribirLearningPath(LearningPath LP) {
-        this.lPInscrito = LP;
+        if (this.learningPathInscrito != null) {
+            throw new IllegalStateException("Ya estás inscrito en un Learning Path.");
+        }
+        this.learningPathInscrito = LP;
         this.progreso = 0;
     }
 
     public String terminarLearningPath() {
-        if (this.progreso == 100) {
-            this.lPCompletados.add(lPInscrito);
-            this.lPInscrito = null;
+        if (this.progreso == 1.0) {
+            this.learningPathsCompletados.add(learningPathInscrito);
+            this.learningPathInscrito = null;
             this.progreso = 0;
             return "Learning Path completado";
         } else {
@@ -89,16 +83,14 @@ public class Estudiante extends Usuario {
         }
     }
 
-    public String crearReseña(String comentario, double rating, LearningPath learningPath )  
-    {
-        if ( this.lPCompletados.contains(learningPath) ) 
-        {
+    public String crearResenia(String comentario, double rating, LearningPath learningPath) {
+        if (this.learningPathsCompletados.contains(learningPath)) {
             String login = getLogin();
-            Reseña nuevaReseña = new Reseña(comentario, rating, login);
-            this.reseñasCreadas.add(nuevaReseña);
-            return "Reseña creada con éxito";
+            Resenia nuevaResenia = new Resenia(comentario, rating, login);
+            this.reseniasCreadas.add(nuevaResenia);
+            return "Resenia creada con éxito";
         } else {
-            return "No se ha completado la actividad";
+            return "No se ha completado el Learning Path";
         }
     }
 }
