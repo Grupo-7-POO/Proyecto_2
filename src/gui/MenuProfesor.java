@@ -101,7 +101,7 @@ public class MenuProfesor extends JFrame implements ActionListener {
 		rdbtnNewRadioButton_4.addActionListener(this);
 		
 		comboBox = new JComboBox<String>();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Encuesta ", "Examen ", "Quiz", "Recurso Educativo", "Tarea"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"", "Encuesta ", "Examen ", "Quiz", "Recurso Educativo", "Tarea"}));
 		comboBox.setBounds(139, 88, 127, 22);
 		comboBox.addActionListener( this );
 		contentPane.add(comboBox);
@@ -115,11 +115,11 @@ public class MenuProfesor extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if ( e.getSource() == rdbtnNewRadioButton ) // Crear Learning Path
 		{
 			comboBox.setVisible(false);
-			System.out.println("Crear Learning Path");
+			CrearLearningPath crearLearningPath = new CrearLearningPath( usuarioActual );
+			crearLearningPath.setVisible(true);
 		}
 		else if ( e.getSource() == rdbtnNewRadioButton_1  ) // Editar Learning Path
 		{

@@ -63,6 +63,11 @@ public class EstadoGlobal
 	{
 		usuarios.put(usuarioCreado.getLogin(), usuarioCreado);
 	}
+	
+	public static void aniadirLearningPath ( LearningPath learningPath )
+	{
+		learningPaths.put(learningPath.getTitulo(), learningPath);
+	}
 
 	public static Usuario getUsuario( String login )
 	{
@@ -234,7 +239,7 @@ public class EstadoGlobal
 				else { System.out.println("Actividad no encontrada"); }
 			}
 		}
-		LearningPath learningPathCreado = profesor.crearLearningPath(titulo, descripcion, nivelDificultad, duracion, actividades); // FALTA AÑADIR LEARNING PATH A BASE DE DATOS GENERAL
+		LearningPath learningPathCreado = profesor.crearLearningPath(titulo, descripcion, nivelDificultad, duracion, actividades); 
 		learningPaths.put( learningPathCreado.getTitulo() , learningPathCreado);
 	}
 	public static LearningPath escogerLearningPath( Profesor profesor)
