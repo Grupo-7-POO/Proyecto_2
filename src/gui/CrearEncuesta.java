@@ -338,7 +338,7 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 					Encuesta encuestaNueva = GeneradorActividades.generarEncuesta(textField.getText(), textField_1.getText(), textField_2.getText(), 
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasEncuesta);
 					
-					usuarioActual.añadirActividadCreada(encuestaNueva);
+					usuarioActual.aniadirActividadCreada(encuestaNueva);
 					dispose();
 				} 
 				catch (ParseException e1) 

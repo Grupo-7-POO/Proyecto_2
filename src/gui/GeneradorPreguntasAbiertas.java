@@ -86,7 +86,6 @@ public class GeneradorPreguntasAbiertas extends JDialog implements ActionListene
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if ( e.getSource() == btnNewButton )
 		{
 			if ( textField.getText().isEmpty() || textField_1.getText().isEmpty() )

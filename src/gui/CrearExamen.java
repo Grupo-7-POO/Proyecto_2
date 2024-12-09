@@ -337,7 +337,7 @@ public class CrearExamen extends JFrame implements ActionListener {
 					Examen examenNuevo = GeneradorActividades.generarExamen(textField.getText(), textField_1.getText(), textField_2.getText(), 
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasExamen);
 					
-					usuarioActual.añadirActividadCreada( examenNuevo );
+					usuarioActual.aniadirActividadCreada( examenNuevo );
 					dispose();
 				} 
 				catch (ParseException e1) 

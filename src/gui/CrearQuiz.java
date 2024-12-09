@@ -338,7 +338,7 @@ public class CrearQuiz extends JFrame implements ActionListener {
 					Quiz quizNuevo = GeneradorActividades.generarQuiz(textField.getText(), textField_1.getText(), textField_2.getText(), 
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasQuiz);
 					
-					usuarioActual.añadirActividadCreada( quizNuevo );
+					usuarioActual.aniadirActividadCreada( quizNuevo );
 					dispose();
 				} 
 				catch (ParseException e1) 

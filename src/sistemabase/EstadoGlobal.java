@@ -38,6 +38,21 @@ public class EstadoGlobal {
         return false;
     }
 
+	public static Usuario getUsuario( String login )
+	{
+		return usuarios.get( login );
+	}
+
+	public static void aniadirUsuario( Usuario usuario )
+	{
+		usuarios.put(usuario.getLogin(), usuario);
+	}
+
+	public static void aniadirLearningPath( LearningPath learningPath )
+	{
+		learningPaths.put( learningPath.getTitulo(), learningPath ); 	
+	}
+
     // Función principal para cargar datos del sistema
     public static void cargarSistemaGlobal() {
 		System.out.println("Cargando sistema...");

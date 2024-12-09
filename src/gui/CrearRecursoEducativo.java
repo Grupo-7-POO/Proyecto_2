@@ -321,7 +321,7 @@ public class CrearRecursoEducativo extends JFrame implements ActionListener
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, 
 					textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText());
 					
-					usuarioActual.añadirActividadCreada( recursoEducativoNuevo );
+					usuarioActual.aniadirActividadCreada( recursoEducativoNuevo );
 					dispose();
 				} 
 				catch (ParseException e1) 

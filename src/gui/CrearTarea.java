@@ -291,7 +291,7 @@ public class CrearTarea extends JFrame implements ActionListener
 					Tarea tareaNueva = GeneradorActividades.generarTarea(textField.getText(), textField_1.getText(), textField_2.getText(), 
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, textField_7.getText(), "No Entregado");
 					
-					usuarioActual.añadirActividadCreada( tareaNueva );
+					usuarioActual.aniadirActividadCreada( tareaNueva );
 					dispose();
 				} 
 				catch (ParseException e1) 
