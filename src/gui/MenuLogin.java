@@ -118,7 +118,7 @@ public class MenuLogin extends JFrame implements ActionListener{
 					else if ( usuario instanceof Estudiante)
 					{
 						Estudiante estudiante = (Estudiante) usuario;
-						MenuEstudiante menuEstudiante = new MenuEstudiante();
+						MenuEstudiante menuEstudiante = new MenuEstudiante( estudiante );
 						menuEstudiante.setVisible(true);
 						dispose();
 	   				}

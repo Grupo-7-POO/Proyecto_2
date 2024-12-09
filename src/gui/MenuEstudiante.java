@@ -6,8 +6,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+
+import modelo.LearningPath;
+import modelo.actividades.Actividad;
+import modelo.usuarios.Estudiante;
+import sistemabase.EstadoGlobal;
+import sistemabase.GeneradorActividades;
+
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,8 +28,14 @@ import javax.swing.JComboBox;
 
 public class MenuEstudiante extends JFrame implements ActionListener {
 
-	private JFrame frame;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Estudiante usuarioActual;
+	private JComboBox<LearningPath> comboBox;
+	private JComboBox<LearningPath> comboBox_1;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -28,8 +43,8 @@ public class MenuEstudiante extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuEstudiante window = new MenuEstudiante();
-					window.frame.setVisible(true);
+					//MenuEstudiante window = new MenuEstudiante();
+					//window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,36 +55,46 @@ public class MenuEstudiante extends JFrame implements ActionListener {
 	/**
 	 * Create the application.
 	 */
-	public MenuEstudiante() {
+	public MenuEstudiante( Estudiante estudiante) {
+		this.usuarioActual = estudiante;
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private void initialize() 
+	{
+		
+		LearningPath[] learningPaths = EstadoGlobal.getLearningPaths().values().toArray( new LearningPath[EstadoGlobal.getLearningPaths().values().size()] );
+		LearningPath learningPathsInscrito = usuarioActual.getLearningPathInscrito();
+				
+				EstadoGlobal.getLearningPaths().values().toArray( new LearningPath[EstadoGlobal.getLearningPaths().values().size()] );
+
+
+		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("Menú Estudiante");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
+		getContentPane().add(lblNewLabel, BorderLayout.NORTH);
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JMenu mnNewMenu = new JMenu("Learning Paths Inscritos");
 		panel.add(mnNewMenu);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox<LearningPath>(); // inscritos
+		comboBox.setModel(new DefaultComboBoxModel<LearningPath>(new LearningPath[] {learningPathsInscrito}));
 		mnNewMenu.add(comboBox);
 		
 		JMenu mnNewMenu_1 = new JMenu("Todos los Learning Paths");
 		panel.add(mnNewMenu_1);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1 = new JComboBox<LearningPath>();
+		comboBox_1.setModel(new DefaultComboBoxModel<LearningPath>( learningPaths ));// todos
 		mnNewMenu_1.add(comboBox_1);
 	}
 
