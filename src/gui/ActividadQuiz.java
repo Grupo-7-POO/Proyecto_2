@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Color;
+import javax.swing.JRadioButton;
 
 public class ActividadQuiz extends JFrame {
 
@@ -79,29 +80,25 @@ public class ActividadQuiz extends JFrame {
 		SpringLayout sl_panel_1 = new SpringLayout();
 		panel_1.setLayout(sl_panel_1);
 		
-		JButton btnNewButton_2 = new JButton("Res_1");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		sl_panel_1.putConstraint(SpringLayout.NORTH, btnNewButton_2, 10, SpringLayout.NORTH, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.WEST, btnNewButton_2, 10, SpringLayout.WEST, panel_1);
-		panel_1.add(btnNewButton_2);
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Res 1");
+		sl_panel_1.putConstraint(SpringLayout.NORTH, rdbtnNewRadioButton, 10, SpringLayout.NORTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.WEST, rdbtnNewRadioButton, 10, SpringLayout.WEST, panel_1);
+		panel_1.add(rdbtnNewRadioButton);
 		
-		JButton btnNewButton_3 = new JButton("Res_2");
-		sl_panel_1.putConstraint(SpringLayout.NORTH, btnNewButton_3, 6, SpringLayout.SOUTH, btnNewButton_2);
-		sl_panel_1.putConstraint(SpringLayout.WEST, btnNewButton_3, 0, SpringLayout.WEST, btnNewButton_2);
-		panel_1.add(btnNewButton_3);
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Res 2");
+		sl_panel_1.putConstraint(SpringLayout.NORTH, rdbtnNewRadioButton_1, 6, SpringLayout.SOUTH, rdbtnNewRadioButton);
+		sl_panel_1.putConstraint(SpringLayout.WEST, rdbtnNewRadioButton_1, 0, SpringLayout.WEST, rdbtnNewRadioButton);
+		panel_1.add(rdbtnNewRadioButton_1);
 		
-		JButton btnNewButton_4 = new JButton("Res_3");
-		sl_panel_1.putConstraint(SpringLayout.NORTH, btnNewButton_4, 6, SpringLayout.SOUTH, btnNewButton_3);
-		sl_panel_1.putConstraint(SpringLayout.WEST, btnNewButton_4, 0, SpringLayout.WEST, btnNewButton_2);
-		panel_1.add(btnNewButton_4);
+		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Res 3");
+		sl_panel_1.putConstraint(SpringLayout.NORTH, rdbtnNewRadioButton_2, 6, SpringLayout.SOUTH, rdbtnNewRadioButton_1);
+		sl_panel_1.putConstraint(SpringLayout.WEST, rdbtnNewRadioButton_2, 0, SpringLayout.WEST, rdbtnNewRadioButton);
+		panel_1.add(rdbtnNewRadioButton_2);
 		
-		JButton btnNewButton_5 = new JButton("Res_4");
-		sl_panel_1.putConstraint(SpringLayout.NORTH, btnNewButton_5, 6, SpringLayout.SOUTH, btnNewButton_4);
-		sl_panel_1.putConstraint(SpringLayout.WEST, btnNewButton_5, 0, SpringLayout.WEST, btnNewButton_2);
-		panel_1.add(btnNewButton_5);
+		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("Res 4");
+		sl_panel_1.putConstraint(SpringLayout.NORTH, rdbtnNewRadioButton_3, 6, SpringLayout.SOUTH, rdbtnNewRadioButton_2);
+		sl_panel_1.putConstraint(SpringLayout.WEST, rdbtnNewRadioButton_3, 10, SpringLayout.WEST, panel_1);
+		panel_1.add(rdbtnNewRadioButton_3);
 		
 		JTextPane txtpnPregunta = new JTextPane();
 		txtpnPregunta.setBackground(new Color(192, 192, 192));
