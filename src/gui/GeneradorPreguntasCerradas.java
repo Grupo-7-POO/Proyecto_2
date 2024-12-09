@@ -204,6 +204,7 @@ public class GeneradorPreguntasCerradas extends JDialog implements ActionListene
 					}
 		            PreguntaCerrada preguntaNueva = GeneradorPreguntas.generarPreguntaCerrada(textField.getText(), textField_1.getText(), opciones);
 		            this.pregunta = preguntaNueva;
+					dispose();
 				}
 			}
 		}

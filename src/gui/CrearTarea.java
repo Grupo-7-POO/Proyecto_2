@@ -292,8 +292,6 @@ public class CrearTarea extends JFrame implements ActionListener
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, textField_7.getText(), "No Entregado");
 					
 					usuarioActual.añadirActividadCreada( tareaNueva );
-					MenuProfesor menu = new MenuProfesor( usuarioActual );
-					menu.setVisible(true);
 					dispose();
 				} 
 				catch (ParseException e1) 

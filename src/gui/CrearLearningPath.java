@@ -137,7 +137,7 @@ public class CrearLearningPath extends JFrame implements ActionListener {
 		panel.add(scrollPane);
 		
 		listaActividades = new JList<Actividad>( actividades );
-		scrollPane.setViewportView(listaActividades);
+		scrollPane.setViewportView(listaActividades);     
 		listaActividades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
 		
 		JLabel lblNewLabel_9 = new JLabel("Archivo de Actividades: ");
@@ -188,7 +188,8 @@ public class CrearLearningPath extends JFrame implements ActionListener {
 		
 		if ( e.getSource() == btnNewButton )
 		{
-			modelo1.addElement( actividadesLearningPath.getSelectedValue() );
+			modelo1.addElement( listaActividades.getSelectedValue() );
+			actividadesLearningPath.setModel(modelo1);
 		}
 		
 		if ( e.getSource() == btnNewButton_1 )
@@ -208,9 +209,6 @@ public class CrearLearningPath extends JFrame implements ActionListener {
 				
 				LearningPath learningPathCreado = usuarioActual.crearLearningPath(textField.getText(), textField_1.getText(), (String)comboBox.getSelectedItem(), duracionEstimada, actividades); 
 				EstadoGlobal.aniadirLearningPath(learningPathCreado);
-				
-				MenuProfesor menu = new MenuProfesor( usuarioActual );
-				menu.setVisible(true);
 				dispose();
 			}
 		}

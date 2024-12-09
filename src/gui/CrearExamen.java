@@ -338,8 +338,6 @@ public class CrearExamen extends JFrame implements ActionListener {
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasExamen);
 					
 					usuarioActual.añadirActividadCreada( examenNuevo );
-					MenuProfesor menu = new MenuProfesor( usuarioActual );
-					menu.setVisible(true);
 					dispose();
 				} 
 				catch (ParseException e1) 

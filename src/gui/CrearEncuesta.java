@@ -339,8 +339,6 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasEncuesta);
 					
 					usuarioActual.añadirActividadCreada(encuestaNueva);
-					MenuProfesor menu = new MenuProfesor( usuarioActual );
-					menu.setVisible(true);
 					dispose();
 				} 
 				catch (ParseException e1) 

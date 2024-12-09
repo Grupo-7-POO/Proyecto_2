@@ -322,8 +322,6 @@ public class CrearRecursoEducativo extends JFrame implements ActionListener
 					textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText());
 					
 					usuarioActual.añadirActividadCreada( recursoEducativoNuevo );
-					MenuProfesor menu = new MenuProfesor( usuarioActual );
-					menu.setVisible(true);
 					dispose();
 				} 
 				catch (ParseException e1) 

@@ -339,8 +339,6 @@ public class CrearQuiz extends JFrame implements ActionListener {
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasQuiz);
 					
 					usuarioActual.añadirActividadCreada( quizNuevo );
-					MenuProfesor menu = new MenuProfesor( usuarioActual );
-					menu.setVisible(true);
 					dispose();
 				} 
 				catch (ParseException e1) 
