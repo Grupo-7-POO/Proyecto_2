@@ -58,6 +58,16 @@ public class EstadoGlobal
 		}
 		else { return false;}
 	}
+	
+	public static void aniadirUsuario(Usuario usuarioCreado)
+	{
+		usuarios.put(usuarioCreado.getLogin(), usuarioCreado);
+	}
+
+	public static Usuario getUsuario( String login )
+	{
+		return usuarios.get(login);
+	}
 
 	// MAIN DE LA APLICACION
 
@@ -414,12 +424,8 @@ public class EstadoGlobal
 		String date = escaner.nextLine(); // convertir a date
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
 		Date fechaLimite = null;
-		try {
-			fechaLimite = formatter.parse(date);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		try { fechaLimite = formatter.parse(date); } 
+		catch (ParseException e) { e.printStackTrace(); }
 
 		System.out.println("Escoja las actividades que son Pre Requisitos");
 
