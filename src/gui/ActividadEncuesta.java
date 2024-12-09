@@ -56,8 +56,15 @@ public class ActividadEncuesta extends JFrame {
 		btnNewButton.setBackground(new Color(0, 0, 255));
 		contentPane.add(btnNewButton, BorderLayout.SOUTH);
 		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.EAST);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
 		JButton btnNewButton_1 = new JButton("Calificar Encuesta");
-		contentPane.add(btnNewButton_1, BorderLayout.EAST);
+		panel_2.add(btnNewButton_1, BorderLayout.CENTER);
+		
+		JLabel lblNewLabel_1 = new JLabel("Dificultad:");
+		panel_2.add(lblNewLabel_1, BorderLayout.SOUTH);
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.WEST);

@@ -22,11 +22,12 @@ import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JTextPane;
 import java.awt.Color;
+import javax.swing.JComboBox;
+import javax.swing.JProgressBar;
 
 public class VisitadorLearningPath {
 
 	private JFrame frame;
-	private JTextField txtVisualizadorLearningPath;
 
 	/**
 	 * Launch the application.
@@ -56,58 +57,28 @@ public class VisitadorLearningPath {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 632, 491);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		txtVisualizadorLearningPath = new JTextField();
-		txtVisualizadorLearningPath.setHorizontalAlignment(SwingConstants.CENTER);
-		txtVisualizadorLearningPath.setText("Visualizador Learning Path");
-		txtVisualizadorLearningPath.setColumns(10);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(txtVisualizadorLearningPath, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
-				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(txtVisualizadorLearningPath, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE))
-		);
-		
-		JMenu mnNewMenu = new JMenu("Actividades");
-		scrollPane.setRowHeaderView(mnNewMenu);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Actividad");
-		mnNewMenu.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Actividad");
-		mnNewMenu.add(mntmNewMenuItem);
-		
-		JPanel panel = new JPanel();
-		scrollPane.setViewportView(panel);
-		panel.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel("Actividad_x");
+		JLabel lblNewLabel = new JLabel("Visualizador Learning Path");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel, BorderLayout.NORTH);
+		frame.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
 		
-		JButton btnNewButton = new JButton("Entregar Actividad");
-		btnNewButton.setBackground(new Color(0, 0, 255));
-		panel.add(btnNewButton, BorderLayout.SOUTH);
+		JLabel lblNewLabel_1 = new JLabel("Dificultad");
+		frame.getContentPane().add(lblNewLabel_1, BorderLayout.EAST);
 		
-		JButton btnNewButton_1 = new JButton("Calificar Actividad");
-		panel.add(btnNewButton_1, BorderLayout.EAST);
+		JComboBox comboBox = new JComboBox();
+		frame.getContentPane().add(comboBox, BorderLayout.WEST);
 		
 		JTextPane txtpnDescripcin = new JTextPane();
+		txtpnDescripcin.setBackground(new Color(192, 192, 192));
 		txtpnDescripcin.setText("Descripción:");
-		panel.add(txtpnDescripcin, BorderLayout.CENTER);
+		frame.getContentPane().add(txtpnDescripcin, BorderLayout.CENTER);
 		
-		JButton btnNewButton_2 = new JButton("Calificar Learning Path");
-		scrollPane.setColumnHeaderView(btnNewButton_2);
-		frame.getContentPane().setLayout(groupLayout);
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setIndeterminate(true);
+		progressBar.setStringPainted(true);
+		frame.getContentPane().add(progressBar, BorderLayout.SOUTH);
 	}
 }
