@@ -53,7 +53,7 @@ public class EstadoGlobal
 		if ( validarUsuario(login) )
 		{
 			Usuario usuarioactual = usuarios.get(login);
-			if (usuarioactual.getPassword() == password){ return true; }
+			if (usuarioactual.getPassword().equals(password)){ return true; }
 			else { return false;}
 		}
 		else { return false;}

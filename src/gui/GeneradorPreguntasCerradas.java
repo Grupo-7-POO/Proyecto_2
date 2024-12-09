@@ -172,7 +172,11 @@ public class GeneradorPreguntasCerradas extends JDialog implements ActionListene
 
         return null;
     }
-        
+	
+	public PreguntaCerrada getPregunta()
+	{
+		return this.pregunta;
+	}   
 
 	@Override
 	public void actionPerformed(ActionEvent e) 

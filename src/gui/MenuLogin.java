@@ -3,6 +3,7 @@ package gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -104,14 +105,13 @@ public class MenuLogin extends JFrame implements ActionListener{
 			else 
 			{
 				if ( EstadoGlobal.validarLogin(login, password) )
-				{
-					// Implementacion para mostrar menu si es profesor o estudiante
-					
+				{					
 					Usuario usuario = (Usuario) EstadoGlobal.getUsuario( login );
 					if (  usuario instanceof Profesor ) 
 					{
 						Profesor profesor = (Profesor) usuario; 
-						//menuProfesor( profesor );
+						MenuProfesor menuProfesor = new MenuProfesor( profesor );
+						menuProfesor.setVisible(true);
 						dispose();
 					}
 					else if ( usuario instanceof Estudiante)
@@ -121,7 +121,6 @@ public class MenuLogin extends JFrame implements ActionListener{
 						dispose();
 	   				}
 				}  
-				
 				else { JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE); }
 			}
 		}

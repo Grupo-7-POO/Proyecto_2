@@ -1,3 +1,5 @@
 /gui/
 /modelo/
 /sistemabase/
+/exceptions/
+/persistencia/

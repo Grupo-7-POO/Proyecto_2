@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import modelo.actividades.Actividad;
-import modelo.actividades.Encuesta;
-import modelo.preguntas.PreguntaAbierta;
+import modelo.actividades.Quiz;
+import modelo.preguntas.PreguntaCerrada;
 import modelo.usuarios.Profesor;
 import sistemabase.GeneradorActividades;
 
@@ -35,7 +35,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-public class CrearEncuesta extends JFrame implements ActionListener {
+public class CrearQuiz extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -52,10 +52,10 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 	private JButton btnNewButton_4;
 	private JList<Actividad> listaPrerequisitos;
 	private JList<Actividad> listaSeguimiento;
-	private JList<PreguntaAbierta> listaPreguntas;
+	private JList<PreguntaCerrada> listaPreguntas;
 	private DefaultListModel<Actividad> modelo1;
 	private DefaultListModel<Actividad> modelo2;
-	private DefaultListModel<PreguntaAbierta> modelo3;
+	private DefaultListModel<PreguntaCerrada> modelo3;
 	private JScrollPane scrollPane_1;
 	private JButton btnNewButton_2_1;
 	private JButton btnNewButton_3_1;
@@ -82,11 +82,11 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public CrearEncuesta( Profesor profesor ) 
+	public CrearQuiz( Profesor profesor ) 
 	{
 		this.usuarioActual = profesor;
 		setFont(new Font("Algerian", Font.BOLD, 12));
-		setTitle("Crear Encuesta");
+		setTitle("Crear Quiz");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
 		contentPane = new JPanel();
@@ -153,7 +153,7 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 		btnNewButton.setBounds(10, 343, 142, 23);
 		contentPane.add(btnNewButton);
 		
-		btnNewButton_1 = new JButton("Generar Encuesta");
+		btnNewButton_1 = new JButton("Generar Quiz");
 		btnNewButton_1.setBounds(10, 377, 142, 23);
 		contentPane.add(btnNewButton_1);
 		btnNewButton_1.addActionListener(this);
@@ -232,9 +232,9 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 		scrollPane_2.setBounds(10, 247, 188, 89);
 		panel.add(scrollPane_2);
 		
-		listaPreguntas = new JList<PreguntaAbierta>();
+		listaPreguntas = new JList<PreguntaCerrada>();
 		scrollPane_2.setViewportView(listaPreguntas);
-		modelo3 = new DefaultListModel<PreguntaAbierta>();
+		modelo3 = new DefaultListModel<PreguntaCerrada>();
 		
 		btnNewButton_2_1 = new JButton("Borrar");
 		btnNewButton_2_1.setBounds(10, 347, 89, 23);
@@ -287,7 +287,7 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 		
 		if ( e.getSource() == btnNewButton ) // Boton Generar Preguntas
 		{
-			GeneradorPreguntasAbiertas pregunta = new GeneradorPreguntasAbiertas();
+			GeneradorPreguntasCerradas pregunta = new GeneradorPreguntasCerradas();
 			pregunta.setVisible(true);
 			modelo3.addElement( pregunta.getPregunta() );
 			System.out.println( pregunta.getPregunta() );
@@ -313,7 +313,7 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 				Date fechaLimite = null;
 				List<Actividad> actividadesPre = new LinkedList<Actividad>();
-				List<PreguntaAbierta> preguntasEncuesta = new LinkedList<PreguntaAbierta>();
+				List<PreguntaCerrada> preguntasQuiz = new LinkedList<PreguntaCerrada>();
 				Actividad actividadSeguimiento = null;
 				try 
 				{
@@ -327,18 +327,18 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 					
 					for ( int i = 0; i < listaPreguntas.getModel().getSize(); i++)
 					{
-						preguntasEncuesta.add(listaPreguntas.getModel().getElementAt(i));
+						preguntasQuiz.add(listaPreguntas.getModel().getElementAt(i));
 					}
 					fechaLimite = formatter.parse( txtDdmmyyyy.getText() );
 					double duracionEstimada = Double.parseDouble(textField_3.getText());
 					
-					//Encuesta encuestaNueva = GeneradorActividades.generarEncuesta(nombre, descripcion, objetivo, 
-					//nivelDificultad, duracion, actividadesPre, actividadSeguimiento, fechaLimite, preguntasEncuesta);
+					// Quiz quizNuevo = GeneradorActividades.generarQuiz(nombre, descripcion, objetivo, nivelDificultad, duracion, actividadesPre, actividadSeguimiento, fechaLimite, preguntasQuiz);
+
 					
-					Encuesta encuestaNueva = GeneradorActividades.generarEncuesta(textField.getText(), textField_1.getText(), textField_2.getText(), 
-					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasEncuesta);
+					Quiz quizNuevo = GeneradorActividades.generarQuiz(textField.getText(), textField_1.getText(), textField_2.getText(), 
+					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasQuiz);
 					
-					usuarioActual.añadirActividadCreada(encuestaNueva);
+					usuarioActual.añadirActividadCreada( quizNuevo );
 					MenuProfesor menu = new MenuProfesor( usuarioActual );
 					menu.setVisible(true);
 					dispose();
