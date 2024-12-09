@@ -83,19 +83,30 @@ public class MenuEstudiante extends JFrame implements ActionListener {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JMenu mnNewMenu = new JMenu("Learning Paths Inscritos");
-		panel.add(mnNewMenu);
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_1 = new JLabel("Learning Paths Inscritos");
+		panel_1.add(lblNewLabel_1, BorderLayout.NORTH);
+		
+		
+		JPanel panel_2 = new JPanel();
+		panel.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_2 = new JLabel("Todos Los Learning Paths");
+		panel_2.add(lblNewLabel_2, BorderLayout.NORTH);
+		
 		
 		comboBox = new JComboBox<LearningPath>(); // inscritos
 		comboBox.setModel(new DefaultComboBoxModel<LearningPath>(new LearningPath[] {learningPathsInscrito}));
-		mnNewMenu.add(comboBox);
+		panel_1.add(comboBox, BorderLayout.CENTER);
 		
-		JMenu mnNewMenu_1 = new JMenu("Todos los Learning Paths");
-		panel.add(mnNewMenu_1);
-		
+
 		comboBox_1 = new JComboBox<LearningPath>();
 		comboBox_1.setModel(new DefaultComboBoxModel<LearningPath>( learningPaths ));// todos
-		mnNewMenu_1.add(comboBox_1);
+		panel_2.add(comboBox_1, BorderLayout.CENTER);
 	}
 
 	@Override
