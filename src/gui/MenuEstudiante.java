@@ -117,7 +117,6 @@ public class MenuEstudiante extends JFrame implements ActionListener {
 		{
 			
 		}
-		
 	}
 
 }
