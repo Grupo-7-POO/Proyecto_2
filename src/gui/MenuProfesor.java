@@ -165,7 +165,6 @@ public class MenuProfesor extends JFrame implements ActionListener {
 			case 5: 
 					CrearTarea crearTarea = new CrearTarea( usuarioActual );
 					crearTarea.setVisible(true);
-					//new CrearTarea();
 					break;
 			default:
 					break;
