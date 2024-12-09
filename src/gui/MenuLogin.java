@@ -126,7 +126,6 @@ public class MenuLogin extends JFrame implements ActionListener{
 				else { JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE); }
 			}
 		}
-		
 		if (e.getSource() == btnCrearUsuario )
 		{
 			CrearUsuario nuevoUsuario = new CrearUsuario();
