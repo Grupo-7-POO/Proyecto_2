@@ -222,7 +222,7 @@ public class PersistenciaSistema {
                         String titulo = partes[0];
                         String descripcion = partes[1];
                         String nivelDificultad = partes[2];
-                        int duracion = Integer.parseInt(partes[3]);
+                        int duracion = ( int ) Double.parseDouble(partes[3]);
     
                         // Obtener actividades
                         List<Actividad> actividades = new LinkedList<>();

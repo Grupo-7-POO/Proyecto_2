@@ -11,8 +11,8 @@ import modelo.preguntas.*;
 import persistencia.*;
 
 public class EstadoGlobal {
-    private static Map<String, Usuario> usuarios = PersistenciaSistema.cargarUsuarios();
-    private static Map<String, LearningPath> learningPaths = PersistenciaSistema.cargarLearningPaths();
+    private static Map<String, Usuario> usuarios;
+    private static Map<String, LearningPath> learningPaths;
     private static Scanner escaner = new Scanner(System.in);
 
     // Getters para usuarios y learningPaths
