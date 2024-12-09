@@ -10,6 +10,7 @@ import modelo.actividades.Actividad;
 import modelo.actividades.Encuesta;
 import modelo.preguntas.PreguntaAbierta;
 import modelo.usuarios.Profesor;
+import sistemabase.EstadoGlobal;
 import sistemabase.GeneradorActividades;
 
 import javax.swing.JLabel;
@@ -87,7 +88,6 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 		this.usuarioActual = profesor;
 		setFont(new Font("Algerian", Font.BOLD, 12));
 		setTitle("Crear Encuesta");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -339,6 +339,7 @@ public class CrearEncuesta extends JFrame implements ActionListener {
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasEncuesta);
 					
 					usuarioActual.aniadirActividadCreada(encuestaNueva);
+					EstadoGlobal.guardarSistemaGlobal();
 					dispose();
 				} 
 				catch (ParseException e1) 

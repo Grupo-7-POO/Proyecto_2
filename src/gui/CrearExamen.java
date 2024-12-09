@@ -10,6 +10,7 @@ import modelo.actividades.Actividad;
 import modelo.actividades.Examen;
 import modelo.preguntas.PreguntaAbierta;
 import modelo.usuarios.Profesor;
+import sistemabase.EstadoGlobal;
 import sistemabase.GeneradorActividades;
 
 import javax.swing.JLabel;
@@ -87,7 +88,6 @@ public class CrearExamen extends JFrame implements ActionListener {
 		this.usuarioActual = profesor;
 		setFont(new Font("Algerian", Font.BOLD, 12));
 		setTitle("Crear Examen");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -338,6 +338,7 @@ public class CrearExamen extends JFrame implements ActionListener {
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, preguntasExamen);
 					
 					usuarioActual.aniadirActividadCreada( examenNuevo );
+					EstadoGlobal.guardarSistemaGlobal();
 					dispose();
 				} 
 				catch (ParseException e1) 

@@ -17,7 +17,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JComboBox;
 
-public class MenuEstudiante {
+public class MenuEstudiante extends JFrame implements ActionListener {
 
 	private JFrame frame;
 
@@ -71,6 +71,11 @@ public class MenuEstudiante {
 		
 		JComboBox comboBox_1 = new JComboBox();
 		mnNewMenu_1.add(comboBox_1);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
 	}
 
 }

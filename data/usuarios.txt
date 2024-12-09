@@ -1,2 +1,4 @@
 p;prueba;prueba@gmail.com;111111;Profesor
+estudiante;Estudiante;estudiante@uniandes.edu.co;123;Estudiante
+1;1;1;1;Profesor
 s.rodriguez112345;Sofia Rodriguez;s.rodriguez112345@uniandes.edu.co;123456;Profesor

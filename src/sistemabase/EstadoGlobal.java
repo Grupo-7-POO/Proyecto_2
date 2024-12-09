@@ -61,6 +61,13 @@ public class EstadoGlobal {
 		learningPaths = PersistenciaSistema.cargarLearningPaths();
 		System.out.println("Sistema cargado correctamente.");
 	}
+
+	public static void guardarSistemaGlobal()
+	{
+		PersistenciaSistema.guardarUsuarios(usuarios);
+		PersistenciaSistema.guardarLearningPaths(learningPaths);
+		PersistenciaSistema.guardarActividades();
+	}
 	
 
     // Menú de inicio de sesión

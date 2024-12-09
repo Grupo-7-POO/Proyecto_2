@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import modelo.actividades.Actividad;
 import modelo.actividades.RecursoEducativo;
 import modelo.usuarios.Profesor;
+import sistemabase.EstadoGlobal;
 import sistemabase.GeneradorActividades;
 
 import javax.swing.JLabel;
@@ -86,7 +87,6 @@ public class CrearRecursoEducativo extends JFrame implements ActionListener
 		this.usuarioActual = profesor;
 		setFont(new Font("Algerian", Font.BOLD, 12));
 		setTitle("Crear Recurso Educativo");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -322,6 +322,7 @@ public class CrearRecursoEducativo extends JFrame implements ActionListener
 					textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText());
 					
 					usuarioActual.aniadirActividadCreada( recursoEducativoNuevo );
+					EstadoGlobal.guardarSistemaGlobal();
 					dispose();
 				} 
 				catch (ParseException e1) 

@@ -72,7 +72,6 @@ public class CrearLearningPath extends JFrame implements ActionListener {
 		this.usuarioActual = profesor;
 		setFont(new Font("Algerian", Font.BOLD, 12));
 		setTitle("Crear Learning Path");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -209,6 +208,7 @@ public class CrearLearningPath extends JFrame implements ActionListener {
 				
 				LearningPath learningPathCreado = usuarioActual.crearLearningPath(textField.getText(), textField_1.getText(), (String)comboBox.getSelectedItem(), duracionEstimada, actividades); 
 				EstadoGlobal.aniadirLearningPath(learningPathCreado);
+				EstadoGlobal.guardarSistemaGlobal();
 				dispose();
 			}
 		}

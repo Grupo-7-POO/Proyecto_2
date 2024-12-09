@@ -157,6 +157,7 @@ public class CrearUsuario extends JDialog implements ActionListener
 				}
 				else { JOptionPane.showMessageDialog(null, "Faltan campos por llenar", "Error", JOptionPane.ERROR_MESSAGE); }
 			} 
+			EstadoGlobal.guardarSistemaGlobal();
 			dispose();
 		}
 		

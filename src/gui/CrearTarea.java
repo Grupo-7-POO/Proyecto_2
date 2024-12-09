@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import modelo.actividades.Actividad;
 import modelo.actividades.Tarea;
 import modelo.usuarios.Profesor;
+import sistemabase.EstadoGlobal;
 import sistemabase.GeneradorActividades;
 
 import javax.swing.JLabel;
@@ -83,7 +84,6 @@ public class CrearTarea extends JFrame implements ActionListener
 		this.usuarioActual = profesor;
 		setFont(new Font("Algerian", Font.BOLD, 12));
 		setTitle("Crear Tarea");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -292,6 +292,7 @@ public class CrearTarea extends JFrame implements ActionListener
 					(String)comboBox.getSelectedItem(), duracionEstimada, actividadesPre, actividadSeguimiento, fechaLimite, textField_7.getText(), "No Entregado");
 					
 					usuarioActual.aniadirActividadCreada( tareaNueva );
+					EstadoGlobal.guardarSistemaGlobal();
 					dispose();
 				} 
 				catch (ParseException e1) 
