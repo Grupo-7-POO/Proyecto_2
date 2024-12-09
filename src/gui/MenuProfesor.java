@@ -151,15 +151,20 @@ public class MenuProfesor extends JFrame implements ActionListener {
 					crearEncuesta.setVisible(true);
 					break;
 			case 2: 
-					//new CrearExamen();
+					CrearExamen crearExamen = new CrearExamen( usuarioActual );
+					crearExamen.setVisible(true);
 					break;
 			case 3: 
-					//new CrearQuiz();
+					CrearQuiz crearQuiz = new CrearQuiz( usuarioActual );
+					crearQuiz.setVisible(true);
 					break;	
 			case 4: 
-					//new CrearRecursoEducativo();
+					CrearRecursoEducativo crearRecursoEducativo = new CrearRecursoEducativo( usuarioActual );
+					crearRecursoEducativo.setVisible(true);
 					break;
 			case 5: 
+					CrearTarea crearTarea = new CrearTarea( usuarioActual );
+					crearTarea.setVisible(true);
 					//new CrearTarea();
 					break;
 			default:
