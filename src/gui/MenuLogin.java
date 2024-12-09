@@ -37,6 +37,7 @@ public class MenuLogin extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					EstadoGlobal.cargarSistemaGlobal();
 					MenuLogin frame = new MenuLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
