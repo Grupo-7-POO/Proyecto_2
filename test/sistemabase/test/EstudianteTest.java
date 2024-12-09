@@ -102,15 +102,15 @@ class EstudianteTest {
         estudiante.getActividadesCompletadas().addAll(learningPath.getActividades());
         estudiante.terminarLearningPath();
 
-        // Crear una reseña
+        // Crear una resenia
         String resultado = estudiante.crearResenia("Excelente contenido", 5.0, learningPath);
         assertEquals("Resenia creada con éxito", resultado);
         assertEquals(1, estudiante.getReseniasCreadas().size());
 
         Resenia resenia = estudiante.getReseniasCreadas().get(0);
-        assertNotNull(resenia, "La reseña no debe ser nula");
+        assertNotNull(resenia, "La resenia no debe ser nula");
 
-        // Editar la reseña
+        // Editar la resenia
         resenia.editarComentario("Comentario actualizado");
         resenia.editarRating(4.5);
 

@@ -88,7 +88,7 @@ public class Estudiante extends Usuario {
             String login = getLogin();
             Resenia nuevaResenia = new Resenia(comentario, rating, login);
             this.reseniasCreadas.add(nuevaResenia);
-            return "Reseña creada con éxito";
+            return "Resenia creada con éxito";
         } else {
             return "No se ha completado el Learning Path";
         }
