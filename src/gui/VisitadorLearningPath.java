@@ -51,7 +51,6 @@ public class VisitadorLearningPath {
 	public VisitadorLearningPath() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */

@@ -68,9 +68,6 @@ public class MenuEstudiante extends JFrame implements ActionListener {
 		
 		LearningPath[] learningPaths = EstadoGlobal.getLearningPaths().values().toArray( new LearningPath[EstadoGlobal.getLearningPaths().values().size()] );
 		LearningPath learningPathsInscrito = usuarioActual.getLearningPathInscrito();
-				
-				EstadoGlobal.getLearningPaths().values().toArray( new LearningPath[EstadoGlobal.getLearningPaths().values().size()] );
-
 
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,7 +107,16 @@ public class MenuEstudiante extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
+		if ( e.getSource() == comboBox )
+		{
+			
+		}
+		if ( e.getSource() == comboBox_1 )
+		{
+			
+		}
 		
 	}
 
